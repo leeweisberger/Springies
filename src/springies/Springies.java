@@ -47,6 +47,7 @@ public class Springies extends JGEngine
         WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.1f));
         addBall();
         addWalls();
+        
     }
 
     public void addBall ()

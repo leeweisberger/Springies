@@ -1,0 +1,19 @@
+  Superclass Masses:
+    add to initialize object with a mass, x and y coordinates, collision id
+    hit() to detect collisions with walls/floor/ceiling
+  	
+  	Subclass Moving Mass:
+  	  add() to add xvelocity and yvelocity
+  	  move() to update x and y coordinate
+
+
+
+  Superclass Spring 
+	  add() to initialize the object with a mass, x and y coordinate, springiness, a rest length, and an amplitude (for regular springs, amplitude=0)
+	  Need to change movement of masses when stretching/compressing (shorter than or longer than rest length)  
+	  
+	  SubClass Muscles:
+	    Need to move in harmonic motion depending on amplitude
+	  
+	    
+	     
