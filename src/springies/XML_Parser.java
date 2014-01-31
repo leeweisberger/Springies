@@ -94,12 +94,13 @@ public class XML_Parser {
 						}
 						else if(tempNode.getNodeName().equals("spring")){
 							s[i]=node.getNodeValue();
+							//System.out.print(i);
 						}
 
 					}
 
 					
-					if(s[0]!=null)springlist.add(s);
+					if(s[3]!=null)springlist.add(s);
 
 				}
 

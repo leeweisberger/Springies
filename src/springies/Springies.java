@@ -22,7 +22,7 @@ public class Springies extends JGEngine
     public Springies ()
     {
         // set the window size
-        int height = 480;
+        int height = 800;
         double aspect = 16.0 / 9.0;
         initEngineComponent((int) (height * aspect), height);
     }
@@ -53,7 +53,7 @@ public class Springies extends JGEngine
         WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.1f));
        
         addMasses();
-       // addSprings();
+        addSprings();
         addWalls();
         
     }
@@ -97,10 +97,16 @@ public class Springies extends JGEngine
     public void addSprings(){
     	XML_Parser p = new XML_Parser();
     	p.parse();
-    	ArrayList<String[]> springslist=p.springs;    	
-    	for(String[] spring:springslist){  		
-    		new Spring(m.get(spring[0]), m.get(spring[1]), Double.parseDouble(spring[2]), Double.parseDouble(spring[3]));
+    	ArrayList<String[]> springslist=p.springs;  
+    	
+    	for(String[] spring:springslist){  
+    		System.out.println(spring[0]);
+    		System.out.println("a" + m.get(spring[0]));
+    		System.out.println("b" + m.get(spring[1]));
+    		Spring y = new Spring(m.get(spring[0]), m.get(spring[1]), Double.parseDouble(spring[2]), Double.parseDouble(spring[3]));
+    		
     	}
+    	
     }
 
     private void addWalls ()
@@ -131,7 +137,7 @@ public class Springies extends JGEngine
         // update game objects
         WorldManager.getWorld().step(1f, 1);
         moveObjects();
-        checkCollision(1 + 2, 1);
+        //checkCollision(1 + 2, 1);
     }
 
     @Override
