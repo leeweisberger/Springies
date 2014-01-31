@@ -13,8 +13,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class XML_Parser {
-	
-	public static void main(String[] args) {
+	ArrayList<String[]> masses;
+	ArrayList<String[]> springs;
+	public void parse() {
 		ArrayList<String[]> masslist = new ArrayList<String[]>();
 		ArrayList<String[]> springlist = new ArrayList<String[]>();
 		try {
@@ -26,7 +27,7 @@ public class XML_Parser {
 
 			Document doc = dBuilder.parse(file);
 
-			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+			//System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
 			if (doc.hasChildNodes()) {
 
@@ -37,26 +38,25 @@ public class XML_Parser {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		for(String[] x: springlist){
-			for(String y:x){
-				System.out.println(y);
-			}
-		}
+		
+		masses=masslist;
+		springs=springlist;
+		
 
 	}
 
-	private static void printNote(NodeList nodeList, ArrayList<String[]> masslist,ArrayList<String[]> springlist) {
-		System.out.println(nodeList.getLength());
+	public static void printNote(NodeList nodeList, ArrayList<String[]> masslist,ArrayList<String[]> springlist) {
+		//System.out.println(nodeList.getLength());
 		for (int count = 0; count < nodeList.getLength(); count++) {
 		
 			Node tempNode = nodeList.item(count);
-			System.out.println(count + " / " + nodeList.getLength());
+			//System.out.println(count + " / " + nodeList.getLength());
 			
 			// make sure it's element node.
 			
 			if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
 				// get node name and value
-				System.out.println("\nNode Name =" + tempNode.getNodeName() + " [OPEN]");
+				//System.out.println("\nNode Name =" + tempNode.getNodeName() + " [OPEN]");
 				
 				//System.out.println("Node Value =" + tempNode.getTextContent());
 
@@ -70,8 +70,8 @@ public class XML_Parser {
 					for (int i = 0; i < nodeMap.getLength(); i++) {
 						
 						Node node = nodeMap.item(i);
-						System.out.println("attr name : " + node.getNodeName());
-						System.out.println("attr value : " + node.getNodeValue());
+					//	System.out.println("attr name : " + node.getNodeName());
+						//System.out.println("attr value : " + node.getNodeValue());
 						
 						if(tempNode.getNodeName().equals("mass")){
 							m[i]=node.getNodeValue();
@@ -94,7 +94,7 @@ public class XML_Parser {
 
 				}
 
-				System.out.println("Node Name =" + tempNode.getNodeName() + " [CLOSE]");
+				//System.out.println("Node Name =" + tempNode.getNodeName() + " [CLOSE]");
 				
 			}
 
@@ -102,5 +102,6 @@ public class XML_Parser {
 		
 
 	}
+	
 
 }

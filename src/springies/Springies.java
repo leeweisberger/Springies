@@ -1,5 +1,7 @@
 package springies;
 
+import java.util.ArrayList;
+
 import jboxGlue.PhysicalObject;
 import jboxGlue.PhysicalObjectCircle;
 import jboxGlue.PhysicalObjectRect;
@@ -7,6 +9,7 @@ import jboxGlue.WorldManager;
 import jgame.JGColor;
 import jgame.JGObject;
 import jgame.platform.JGEngine;
+
 import org.jbox2d.common.Vec2;
 
 
@@ -53,29 +56,36 @@ public class Springies extends JGEngine
 
     public void addBall ()
     {
+    	XML_Parser p = new XML_Parser();
+    	p.parse();
+    	ArrayList<String[]> masseslist=p.masses;
+    	for(String[] mass:masseslist){
+    		new Mass(mass[0],Integer.parseInt(mass[1]),Integer.parseInt(mass[2]));
+    	}
         // add a bouncy ball
         // NOTE: you could make this into a separate class, but I'm lazy
-        PhysicalObject ball = new PhysicalObjectCircle("ball", 1, JGColor.blue, 10, 5) {
-            @Override
-            public void hit (JGObject other)
-            {
-                // we hit something! bounce off it!
-                Vec2 velocity = myBody.getLinearVelocity();
-                // is it a tall wall?
-                final double DAMPING_FACTOR = 0.8;
-                boolean isSide = other.getBBox().height > other.getBBox().width;
-                if (isSide) {
-                    velocity.x *= -DAMPING_FACTOR;
-                }
-                else {
-                    velocity.y *= -DAMPING_FACTOR;
-                }
-                // apply the change
-                myBody.setLinearVelocity(velocity);
-            }
-        };
-        ball.setPos(displayWidth() / 2, displayHeight() / 2);
-        ball.setForce(8000, -10000);
+    	
+//        PhysicalObject ball = new PhysicalObjectCircle("ball", 1, JGColor.blue, 10, 5) {
+//            @Override
+//            public void hit (JGObject other)
+//            {
+//                // we hit something! bounce off it!
+//                Vec2 velocity = myBody.getLinearVelocity();
+//                // is it a tall wall?
+//                final double DAMPING_FACTOR = 0.8;
+//                boolean isSide = other.getBBox().height > other.getBBox().width;
+//                if (isSide) {
+//                    velocity.x *= -DAMPING_FACTOR;
+//                }
+//                else {
+//                    velocity.y *= -DAMPING_FACTOR;
+//                }
+//                // apply the change
+//                myBody.setLinearVelocity(velocity);
+//            }
+//        };
+//        ball.setPos(displayWidth() / 2, displayHeight() / 2);
+//        ball.setForce(8000, -10000);
     }
 
     private void addWalls ()

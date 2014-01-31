@@ -11,5 +11,15 @@ import jgame.platform.JGEngine;
 
 public class Mass {
 	
+	public Mass(String id, int x, int y){
+		 PhysicalObject ball = new PhysicalObjectCircle("ball", 1, JGColor.blue, 10, 5); 
+		 ball.setPos(x, y);
+		
+	}
+	
+	public void hit(){
+		
+	}
+	
 	
 }
