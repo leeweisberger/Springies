@@ -1,6 +1,7 @@
 package springies;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import jboxGlue.PhysicalObject;
 import jboxGlue.PhysicalObjectCircle;
@@ -15,7 +16,9 @@ import org.jbox2d.common.Vec2;
 
 @SuppressWarnings("serial")
 public class Springies extends JGEngine
+
 {
+	private HashMap<String,Mass> m = new HashMap<String,Mass>();
     public Springies ()
     {
         // set the window size
@@ -49,18 +52,22 @@ public class Springies extends JGEngine
         WorldManager.initWorld(this);
         WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.1f));
        
-        addBall();
+        addMasses();
+       // addSprings();
         addWalls();
         
     }
-
-    public void addBall ()
+    
+    public void addMasses ()
     {
     	XML_Parser p = new XML_Parser();
     	p.parse();
-    	ArrayList<String[]> masseslist=p.masses;
-    	for(String[] mass:masseslist){
-    		new Mass(mass[0],Integer.parseInt(mass[1]),Integer.parseInt(mass[2]));
+    	HashMap<String,Integer[]> masseslist = new HashMap<String,Integer[]>();
+    	masseslist=p.masses;
+    	for(String mass:masseslist.keySet()){
+    		Mass temp =new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1]);
+    		m.put(mass,temp);
+    		
     	}
         // add a bouncy ball
         // NOTE: you could make this into a separate class, but I'm lazy
@@ -86,6 +93,14 @@ public class Springies extends JGEngine
 //        };
 //        ball.setPos(displayWidth() / 2, displayHeight() / 2);
 //        ball.setForce(8000, -10000);
+    }
+    public void addSprings(){
+    	XML_Parser p = new XML_Parser();
+    	p.parse();
+    	ArrayList<String[]> springslist=p.springs;    	
+    	for(String[] spring:springslist){  		
+    		new Spring(m.get(spring[0]), m.get(spring[1]), Double.parseDouble(spring[2]), Double.parseDouble(spring[3]));
+    	}
     }
 
     private void addWalls ()
