@@ -47,6 +47,7 @@ public abstract class PhysicalObject extends JGObject
         myBody.setUserData(this); // for following body back to JGObject
         myBody.setMassFromShapes();
         myBody.m_world = WorldManager.getWorld();
+        
     }
 
     public Body getBody ()
