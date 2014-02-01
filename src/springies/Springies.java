@@ -53,7 +53,7 @@ public class Springies extends JGEngine
         WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.1f));
        
         addMasses();
-        addSprings();
+       addSprings();
         addWalls();
         
     }
@@ -64,10 +64,8 @@ public class Springies extends JGEngine
     	p.parse();
     	HashMap<String,Integer[]> masseslist = new HashMap<String,Integer[]>();
     	masseslist=p.masses;
-    	for(String mass:masseslist.keySet()){
-    		Mass temp =new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1]);
-    		m.put(mass,temp);
-    		
+    	for(String mass:masseslist.keySet()){    		
+    		m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1]));	
     	}
         // add a bouncy ball
         // NOTE: you could make this into a separate class, but I'm lazy
@@ -100,11 +98,9 @@ public class Springies extends JGEngine
     	ArrayList<String[]> springslist=p.springs;  
     	
     	for(String[] spring:springslist){  
-    		System.out.println(spring[0]);
-    		System.out.println("a" + m.get(spring[0]));
-    		System.out.println("b" + m.get(spring[1]));
-    		Spring y = new Spring(m.get(spring[0]), m.get(spring[1]), Double.parseDouble(spring[2]), Double.parseDouble(spring[3]));
-    		
+    		//System.out.println(spring[0]);
+    		new Spring(m.get(spring[0]), m.get(spring[1]), Double.parseDouble(spring[3]), Double.parseDouble(spring[2]));
+    		//System.out.println("name: " + m.get(spring[0]).x + "end");
     	}
     	
     }

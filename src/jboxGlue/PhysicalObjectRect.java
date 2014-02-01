@@ -66,7 +66,11 @@ public class PhysicalObjectRect extends PhysicalObject
         createBody(shape);
         setBBox(-(int) width / 2, -(int) height / 2, (int) width, (int) height);
     }
-
+    public void setAngle(double ang){
+    	Math.toRadians(ang);
+    	
+    	this.myRotation=(float) ang;
+    }
     @Override
     public void paintShape ()
     {
@@ -80,6 +84,7 @@ public class PhysicalObjectRect extends PhysicalObject
         // draw a rotated polygon
         myEngine.setColor(myColor);
         double cos = Math.cos(myRotation);
+        
         double sin = Math.sin(myRotation);
         double halfWidth = myWidth / 2;
         double halfHeight = myHeight / 2;
@@ -93,4 +98,5 @@ public class PhysicalObjectRect extends PhysicalObject
         myPolyy[3] = (int) (y + halfWidth * sin + halfHeight * cos);
         myEngine.drawPolygon(myPolyx, myPolyy, null, 4, true, true);
     }
+    
 }
