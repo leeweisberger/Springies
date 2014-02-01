@@ -136,7 +136,7 @@ public class Springies extends JGEngine
 		// update game objects
 		WorldManager.getWorld().step(1f, 1);
 		moveObjects();
-		//checkCollision(1 + 2, 1);
+		checkCollision(1 + 2, 1);
 	}
 
 	@Override
