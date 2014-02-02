@@ -24,7 +24,7 @@ public class Spring extends PhysicalObjectRect{
 		//System.out.println(x);
 		myM1=m1;
 		myM2=m2;
-		System.out.println(m1.getID() + " : " + m2.getID());
+		//System.out.println(m1.getID() + " : " + m2.getID());
 		springLength = rlength;
 		kValue = springiness;
 		//System.out.println(myM1.getName());
