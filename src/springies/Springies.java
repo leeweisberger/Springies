@@ -20,6 +20,7 @@ public class Springies extends JGEngine
 {
 	PhysicalObject[] wallarray = new PhysicalObjectRect[4];
 	private HashMap<String,Mass> m = new HashMap<String,Mass>();
+	
 	public Springies ()
 	{
 		// set the window size
@@ -40,14 +41,27 @@ public class Springies extends JGEngine
 				null,// background colour -> use default colour black
 				null); // standard font -> use default font
 	}
-	
+
 	public Vec2 setGrav() {
-//		Get read in values from XML
+		//		Get read in values from XML
 		double gravityDirectionRadians = Math.toRadians(90);
-		System.out.println((float)(1 * Math.sin(gravityDirectionRadians)));
-		System.out.println((float)(1 * Math.cos(gravityDirectionRadians)));
+//		System.out.println((float)(1 * Math.sin(gravityDirectionRadians)));
+//		System.out.println((float)(1 * Math.cos(gravityDirectionRadians)));
 		Vec2 gravityVector = new Vec2((float)(20 * Math.cos(gravityDirectionRadians)),(float)(20 * Math.sin(gravityDirectionRadians)));
 		return gravityVector;
+	}
+
+	public double[] centerOfMass(){
+		double totalx = 0;
+		double totaly = 0;
+		double totalMass = 0;
+		for (String l: m.keySet()){
+			totalMass += m.get(l).getMass();
+			totalx += (m.get(l).x * m.get(l).getMass());
+			totaly += (m.get(l).y * m.get(l).getMass());
+		}
+		double[] myCenter = {(totalx /(totalMass)), (totaly /(totalMass))};
+		return myCenter;
 	}
 
 	@Override
@@ -60,78 +74,76 @@ public class Springies extends JGEngine
 		// so gravity is up in world coords and down in game coords
 		// so set all directions (e.g., forces, velocities) in world coords
 		WorldManager.initWorld(this);
-//		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.2f));
+		//		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.2f));
 		addWalls();
 
 		addMasses();
 		addSprings();
-//		addFixedMassTest();
+		//		addFixedMassTest();
 		//addMassesTest();
-//		addMusclesTest();
+		//		addMusclesTest();
 		//addSpringsTest();
-		
+
 
 	}
-	
-	public void addMassesTest(){
-		XML_Parser p = new XML_Parser();
-		p.parse();
-		HashMap<String,Integer[]> masseslist = new HashMap<String,Integer[]>();
-		masseslist=p.masses;
-//		m.put("m1", new Mass("m1",masseslist.get("m1")[0],masseslist.get("m1")[1]));
-//		m.put("m2", new Mass("m2",masseslist.get("m2")[0],masseslist.get("m2")[1]));
-		Mass first = new Mass("m1",500,450,wallarray);
-		Mass second = new Mass("m2",600,450,wallarray);
-//		Mass third = new Mass("m3",800,800);
-//		Mass fourth = new Mass("m4",800,100);
-		m.put("m1", first);
-		m.put("m2", second);
-//		m.put("m3", third);
-//		m.put("m4", fourth);
-		
-	}
+
+//	public void addMassesTest(){
+//		XML_Parser p = new XML_Parser();
+//		p.parse();
+//		HashMap<String,Integer[]> masseslist = new HashMap<String,Integer[]>();
+//		masseslist=p.masses;
+//		//		m.put("m1", new Mass("m1",masseslist.get("m1")[0],masseslist.get("m1")[1]));
+//		//		m.put("m2", new Mass("m2",masseslist.get("m2")[0],masseslist.get("m2")[1]));
+//		Mass first = new Mass("m1",500,450,wallarray);
+//		Mass second = new Mass("m2",600,450,wallarray);
+//		//		Mass third = new Mass("m3",800,800);
+//		//		Mass fourth = new Mass("m4",800,100);
+//		m.put("m1", first);
+//		m.put("m2", second);
+//		//		m.put("m3", third);
+//		//		m.put("m4", fourth);
+//
+//	}
 
 	public void addMasses ()
-	
 	{
 		XML_Parser p = new XML_Parser();
 		p.parse();
 		HashMap<String,Integer[]> masseslist = new HashMap<String,Integer[]>();
 		masseslist=p.masses;
 		for(String mass:masseslist.keySet()){   
-			m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1],wallarray));	
+			m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1],wallarray,this));	
 		}
-		
 	}
-	
+
 	public void addSpringsTest(){
 		PhysicalObject springone = new Spring(m.get("m1"),m.get("m2"),600,1);
-//		PhysicalObject springtwo = new Spring(m.get("m2"),m.get("m3"),600,10);
-//		PhysicalObject springthree = new Spring(m.get("m3"),m.get("m4"),600,10);
-//		PhysicalObject springfour = new Spring(m.get("m4"),m.get("m1"),600,10);
+		//		PhysicalObject springtwo = new Spring(m.get("m2"),m.get("m3"),600,10);
+		//		PhysicalObject springthree = new Spring(m.get("m3"),m.get("m4"),600,10);
+		//		PhysicalObject springfour = new Spring(m.get("m4"),m.get("m1"),600,10);
 	}
-	
+
 	public void addSprings(){
 		XML_Parser p = new XML_Parser();
 		p.parse();
 		ArrayList<String[]> springslist=p.springs;  
 		for(String[] spring:springslist){  
-			
+
 			Mass m1 = m.get(spring[0]);
 			//System.out.println(spring[0]);
 			//System.out.println("asdf " + m.get(spring[0]).getName());
 			Mass m2 = m.get(spring[1]);
 			//System.out.println("1: " + m1.getName().substring(0, m1.getName().length()-1));
 			//System.out.println("2: " + m2.getName());
-//			System.out.println(Double.parseDouble(spring[3]));
-//			System.out.println(Double.parseDouble(spring[2]));
-//			System.out.println(spring[0]);
-//			System.out.println(spring[1]);
+			//			System.out.println(Double.parseDouble(spring[3]));
+			//			System.out.println(Double.parseDouble(spring[2]));
+			//			System.out.println(spring[0]);
+			//			System.out.println(spring[1]);
 			PhysicalObject sp = new Spring(m1, m2, Double.parseDouble(spring[3]), Double.parseDouble(spring[2]));
 		}
 
 	}
-	
+
 	public void addMuscles(){
 		XML_Parser p = new XML_Parser();
 		p.parse();
@@ -139,11 +151,11 @@ public class Springies extends JGEngine
 		for(String[] muscle: muscleslist){
 			Mass m1 = m.get(muscle[0]);
 			Mass m2 = m.get(muscle[1]);
-//			Need to add overloading to different classes to account for different inputs from XML
-//			PhysicalObject muscleObj = new Muscle(m.get(muscle[0]), m.get(muscle[1]), Double.parseDouble(muscle[3]), Double.parseDouble(muscle[2]), 1.0);
+			//			Need to add overloading to different classes to account for different inputs from XML
+			//			PhysicalObject muscleObj = new Muscle(m.get(muscle[0]), m.get(muscle[1]), Double.parseDouble(muscle[3]), Double.parseDouble(muscle[2]), 1.0);
 		}
 	}
-	
+
 	public void addMusclesTest(){
 		PhysicalObject muscleone = new Muscle(m.get("m1"),m.get("m2"),100,1,10);
 	}
@@ -156,7 +168,7 @@ public class Springies extends JGEngine
 	{
 		// add walls to bounce off of
 		// NOTE: immovable objects must have no mass
-		
+
 		final double WALL_MARGIN = 10;
 		final double WALL_THICKNESS = 10;
 		final double WALL_WIDTH = displayWidth() - WALL_MARGIN * 2 + WALL_THICKNESS;
@@ -181,7 +193,7 @@ public class Springies extends JGEngine
 				WALL_THICKNESS, WALL_HEIGHT);
 		wall.setPos(displayWidth() - WALL_MARGIN, displayHeight() / 2);
 		wallarray[3]=wall;
-		
+
 	}
 
 	@Override
