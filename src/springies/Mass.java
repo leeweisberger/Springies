@@ -36,6 +36,7 @@ public class Mass extends FixedMass{
         x = position.x;
         y = position.y;
         myRotation = -myBody.getAngle();
+        viscosity();
 	}
 	
 	@Override
@@ -53,18 +54,17 @@ public class Mass extends FixedMass{
 		
 	}
 	
-//	public void viscosity(){
-//		final double VISCOSITY = .8;
-//		Vec2 velocity = myBody.getLinearVelocity();	
-//		System.out.println("bef: " + velocity.y);
-//		velocity.x*=VISCOSITY;
-//		velocity.y *= VISCOSITY;
-//		
-//		System.out.println("aft: " + velocity.y);
-//		myBody.setLinearVelocity(velocity);
-//		
-//		
-//	}
+	public void viscosity(){
+		final double VISCOSITY = .8;
+		Vec2 velocity = myBody.getLinearVelocity();	
+		if(velocity.x>0) setForce(-VISCOSITY, 0);
+		if(velocity.x<0) setForce(VISCOSITY, 0);
+		if(velocity.y>0) setForce(0,-VISCOSITY);
+		if(velocity.y<0) setForce(0, VISCOSITY);
+		
+		
+		
+	}
 //	public void gravity(){
 //		final double GRAVITY = 20;
 //		Vec2 velocity = myBody.getLinearVelocity();	
