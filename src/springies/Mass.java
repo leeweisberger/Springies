@@ -11,37 +11,22 @@ import jgame.JGObject;
 import jgame.platform.JGEngine;
 import java.math.*;
 
-public class Mass extends PhysicalObjectCircle{
 
+public class Mass extends PhysicalObjectCircle{
+	private String myID;
 	public Mass(String id, int xpos, int ypos){
-		super(id, 1, JGColor.red,5,5);
+		super(id, 1, JGColor.red,5,1);
 		setPos(xpos, ypos);
 		x=xpos;
 		y=ypos;
-		
-
+		myID = id;
 
 
 	}
-	 @Override
-	    public void move ()
-	    {
-		 	
-	        // if the JGame object was deleted, remove the physical object too
-	        if (myBody.m_world != WorldManager.getWorld()) {
-	            remove();
-	            return;
-	        }
-	        
-	        // copy the position and rotation from the JBox world to the JGame world
-	        Vec2 position = myBody.getPosition();
-	        x = position.x;
-	        y = position.y;
-	        //viscosity();
-	        myRotation = -myBody.getAngle();
-	    }
+	public String getID(){
+		return myID;
+	}
 
-	
 	
 
 	@Override
@@ -52,7 +37,6 @@ public class Mass extends PhysicalObjectCircle{
 		boolean isSide = other.getBBox().height > other.getBBox().width;
 		if (isSide) 
 			velocity.x *= -DAMPING_FACTOR;
-		
 		else 
 			velocity.y *= -DAMPING_FACTOR;
 		

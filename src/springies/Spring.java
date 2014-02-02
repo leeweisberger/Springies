@@ -9,8 +9,8 @@ import jgame.JGColor;
 import jgame.JGObject;
 import jgame.platform.JGEngine;
 import org.jbox2d.common.Vec2;
+
 public class Spring extends PhysicalObjectRect{
-	private PhysicalObject mySpring;
 	private Mass myM1;
 	private Mass myM2;
 	private double kValue;
@@ -18,13 +18,8 @@ public class Spring extends PhysicalObjectRect{
 
 	public Spring(Mass m1, Mass m2, double rlength, double springiness){
 
-		super(m1.toString()+m2.toString(), 3, JGColor.green, 1, rlength);
-		float f = (float) 0;
-		//		System.out.println();
-		x=m1.x;
-		y=m1.y;
-
-		setPos((m1.x + m2.x), (m1.y+m2.x));
+		super(m1.toString()+m2.toString(), 2, JGColor.green, 1, rlength);
+//		setPos((m1.x + m2.x), (m1.y+m2.x));
 		//		setForce((m1.x + m2.x)/2, (m1.y+m2.x)/2);
 		//System.out.println(x);
 		myM1=m1;
@@ -33,48 +28,47 @@ public class Spring extends PhysicalObjectRect{
 		kValue = springiness;
 //		paint();
 	}
-
-
+//	public ArrayList<Mass> getConnectedto(){
+//}
+	
 	@Override
 	public void move(){
 		attachMasses();
 	}
 	
-	private void attachMasses(){
-		double mx = myM1.getLastX() - myM2.getLastX();
-		System.out.println("mx = " + mx);
-		double my = myM1.getLastY() - myM2.getLastY();
-		System.out.println("my = " + my);
-		double displacement = (getDistanceBetween(myM1,myM2)) - springLength;
-		double force = -1 * (kValue * displacement);
-		double xvector = force * Math.sin(getAngleBetween(myM1,myM2));
-		double yvector = force * Math.cos(getAngleBetween(myM1,myM2));
-//		System.out.println(xvector);
-//		System.out.println(yvector);
-		myM1.setForce(xvector,yvector);
-		myM2.setForce(-xvector,-yvector);
+	protected void attachMasses(){
+		double displacement = (springLength - getDistanceBetween(myM1,myM2));
+		double force = (kValue * displacement);
+		double angle = getAngleBetween(myM1,myM2);
+		double xvector = Math.sin(angle) * force;
+		double yvector = Math.cos(angle) * force;
+		myM1.setForce(-xvector,-yvector);
+		myM2.setForce(xvector,yvector);
 	}
 
-	private double getDistanceBetween(Mass start, Mass end){
-		double first = (start.x - end.x) * (start.x-end.x);
-		double second = (start.y-end.y) * (start.y-end.y);
-		return (Math.sqrt((first + second)));
+	protected double getDistanceBetween(Mass start, Mass end){
+		Vec2 startpos = start.getBody().getPosition();
+		Vec2 endpos = end.getBody().getPosition();
+		return Math.sqrt(Math.pow(endpos.x - startpos.x, 2) + Math.pow(endpos.y - startpos.y,2));
 	}
 	
-	private double getAngleBetween(Mass start, Mass end){
-		float angle = (float) (Math.atan2(end.x - start.x, end.y - start.y));
-	    if(angle < 0){
-	        angle += (Math.PI / 2.0);
-	    }
-	    return angle;
+	protected double getAngleBetween(Mass start, Mass end){
+		Vec2 startpos = start.getBody().getPosition();
+		Vec2 endpos = end.getBody().getPosition();
+		return (Math.atan2(endpos.x - startpos.x, endpos.y - startpos.y));
+	}
+	
+	protected double getLength(){
+		return springLength;
 	}
 
+	protected void setLength(double length){
+		springLength = length;
+	}
 	
 	@Override
-	public void paint(){
-		double[] myX = {myM1.x,myM2.x};
-		double[] myY = {myM1.y,myM2.y};
-		JGColor[] myColors = {JGColor.green,JGColor.blue};
-		myEngine.drawPolygon(myX, myY, myColors, 2, false, false);
+	public void paintShape(){
+		myEngine.setColor(JGColor.blue);
+		myEngine.drawLine(myM1.x, myM1.y, myM2.x, myM2.y);
 	}
 }
