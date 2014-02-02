@@ -13,9 +13,7 @@ public class Muscle extends Spring {
 	@Override
 	public void move(){
 		attachMasses();
-		this.setLength(myRestLength * myAmplitude);
-		Math.cos(time * 2* Math.PI / 60);
-		time++;
+		this.setLength((myRestLength * myAmplitude * Math.sin(30 + (Math.PI / 2))));
 	}
 	
 }

@@ -50,12 +50,13 @@ public class Springies extends JGEngine
 		// so gravity is up in world coords and down in game coords
 		// so set all directions (e.g., forces, velocities) in world coords
 		WorldManager.initWorld(this);
-//		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.1f));
+		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.1f));
 
 //		addMasses();
 //		addSprings();
+		addFixedMassTest();
 		addMassesTest();
-		addMusclesTest();
+//		addMusclesTest();
 //		addSpringsTest();
 		addWalls();
 
@@ -68,8 +69,8 @@ public class Springies extends JGEngine
 		masseslist=p.masses;
 //		m.put("m1", new Mass("m1",masseslist.get("m1")[0],masseslist.get("m1")[1]));
 //		m.put("m2", new Mass("m2",masseslist.get("m2")[0],masseslist.get("m2")[1]));
-		Mass first = new Mass("m1",400,450);
-		Mass second = new Mass("m2",500,450);
+		Mass first = new Mass("m1",500,450);
+		Mass second = new Mass("m2",600,450);
 //		Mass third = new Mass("m3",800,800);
 //		Mass fourth = new Mass("m4",800,100);
 		m.put("m1", first);
@@ -89,30 +90,6 @@ public class Springies extends JGEngine
 		for(String mass:masseslist.keySet()){   
 			m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1]));	
 		}
-		// add a bouncy ball
-		// NOTE: you could make this into a separate class, but I'm lazy
-
-		//        PhysicalObject ball = new PhysicalObjectCircle("ball", 1, JGColor.blue, 10, 5) {
-		//            @Override
-		//            public void hit (JGObject other)
-		//            {
-		//                // we hit something! bounce off it!
-		//                Vec2 velocity = myBody.getLinearVelocity();
-		//                // is it a tall wall?
-		//                final double DAMPING_FACTOR = 0.8;
-		//                boolean isSide = other.getBBox().height > other.getBBox().width;
-		//                if (isSide) {
-		//                    velocity.x *= -DAMPING_FACTOR;
-		//                }
-		//                else {
-		//                    velocity.y *= -DAMPING_FACTOR;
-		//                }
-		//                // apply the change
-		//                myBody.setLinearVelocity(velocity);
-		//            }
-		//        };
-		//        ball.setPos(displayWidth() / 2, displayHeight() / 2);
-		//        ball.setForce(8000, -10000);
 		
 	}
 	
@@ -153,7 +130,11 @@ public class Springies extends JGEngine
 	}
 	
 	public void addMusclesTest(){
-		PhysicalObject muscleone = new Muscle(m.get("m1"),m.get("m2"),50,1,10);
+		PhysicalObject muscleone = new Muscle(m.get("m1"),m.get("m2"),100,1,10);
+	}
+
+	public void addFixedMassTest(){
+		FixedMass first = new FixedMass("m1",400,450);
 	}
 
 	private void addWalls ()
@@ -184,8 +165,7 @@ public class Springies extends JGEngine
 		// update game objects
 		WorldManager.getWorld().step(1f, 1);
 		moveObjects();
-
-		checkCollision(2, 1);
+		checkCollision(2,1);
 
 	}
 

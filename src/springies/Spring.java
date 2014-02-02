@@ -37,6 +37,7 @@ public class Spring extends PhysicalObjectRect{
 	}
 	
 	protected void attachMasses(){
+//		System.out.println()
 		double displacement = (springLength - getDistanceBetween(myM1,myM2));
 		double force = (kValue * displacement);
 		double angle = getAngleBetween(myM1,myM2);

@@ -12,23 +12,32 @@ import jgame.platform.JGEngine;
 import java.math.*;
 
 
-public class Mass extends PhysicalObjectCircle{
+public class Mass extends FixedMass{
 	private String myID;
 	public Mass(String id, int xpos, int ypos){
-		super(id, 1, JGColor.red,5,1);
+		
+		super(id, xpos,ypos);
 		setPos(xpos, ypos);
 		x=xpos;
 		y=ypos;
 		myID = id;
-
-
 	}
 	public String getID(){
 		return myID;
 	}
-
+	@Override
+	public void move(){
+		if (myBody.m_world != WorldManager.getWorld()) {
+            remove();
+            return;
+        }
+        // copy the position and rotation from the JBox world to the JGame world
+        Vec2 position = myBody.getPosition();
+        x = position.x;
+        y = position.y;
+        myRotation = -myBody.getAngle();
+	}
 	
-
 	@Override
 	public void hit (JGObject other) {
 		// we hit something! bounce off it!
@@ -43,7 +52,7 @@ public class Mass extends PhysicalObjectCircle{
 		myBody.setLinearVelocity(velocity);
 		
 	}
-
+	
 //	public void viscosity(){
 //		final double VISCOSITY = .8;
 //		Vec2 velocity = myBody.getLinearVelocity();	
