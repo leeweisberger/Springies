@@ -47,6 +47,7 @@ public class Mass extends PhysicalObjectCircle{
         myRotation = -myBody.getAngle();
         viscosity();
         wallRepulsion();
+        gravity();
         
 	}
 	
@@ -74,14 +75,10 @@ public class Mass extends PhysicalObjectCircle{
 		if(velocity.y<0) setForce(0, VISCOSITY);
 		
 	}
-//	public void gravity(){
-//		final double GRAVITY = 20;
-//		Vec2 velocity = myBody.getLinearVelocity();	
-//		if(velocity.y<=0){
-//			System.out.println("down");
-//			setForce(0, 10);
-//		}
-//	}
+	public void gravity(){
+		final double GRAVITY = 20;
+		setForce(0,20);
+	}
 	
 	public void wallRepulsion(){
 		double WALLREPULSION=40;
