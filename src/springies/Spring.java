@@ -18,14 +18,16 @@ public class Spring extends PhysicalObjectRect{
 
 	public Spring(Mass m1, Mass m2, double rlength, double springiness){
 
-		super(m1.toString()+m2.toString(), 2, JGColor.green, 1, rlength);
-//		setPos((m1.x + m2.x), (m1.y+m2.x));
+		super(m1.toString()+m2.toString(), 3, JGColor.green, 1, rlength);
+		setPos((m1.x + m2.x), (m1.y+m2.x));
 		//		setForce((m1.x + m2.x)/2, (m1.y+m2.x)/2);
 		//System.out.println(x);
 		myM1=m1;
 		myM2=m2;
+		System.out.println(m1.getID() + " : " + m2.getID());
 		springLength = rlength;
 		kValue = springiness;
+		//System.out.println(myM1.getName());
 //		paint();
 	}
 //	public ArrayList<Mass> getConnectedto(){

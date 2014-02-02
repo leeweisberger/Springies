@@ -26,6 +26,22 @@ public class Mass extends PhysicalObjectCircle{
 	protected String getID(){
 		return myID;
 	}
+<<<<<<< HEAD
+=======
+	@Override
+	public void move(){
+		if (myBody.m_world != WorldManager.getWorld()) {
+            remove();
+            return;
+        }
+        // copy the position and rotation from the JBox world to the JGame world
+        Vec2 position = myBody.getPosition();
+        x = position.x;
+        y = position.y;
+        myRotation = -myBody.getAngle();
+        viscosity();
+	}
+>>>>>>> 77e3aa37dc9f6ac866fdfb83e23ef33720239835
 	
 	@Override
 	public void hit (JGObject other) {
@@ -42,18 +58,17 @@ public class Mass extends PhysicalObjectCircle{
 		
 	}
 	
-//	public void viscosity(){
-//		final double VISCOSITY = .8;
-//		Vec2 velocity = myBody.getLinearVelocity();	
-//		System.out.println("bef: " + velocity.y);
-//		velocity.x*=VISCOSITY;
-//		velocity.y *= VISCOSITY;
-//		
-//		System.out.println("aft: " + velocity.y);
-//		myBody.setLinearVelocity(velocity);
-//		
-//		
-//	}
+	public void viscosity(){
+		final double VISCOSITY = .8;
+		Vec2 velocity = myBody.getLinearVelocity();	
+		if(velocity.x>0) setForce(-VISCOSITY, 0);
+		if(velocity.x<0) setForce(VISCOSITY, 0);
+		if(velocity.y>0) setForce(0,-VISCOSITY);
+		if(velocity.y<0) setForce(0, VISCOSITY);
+		
+		
+		
+	}
 //	public void gravity(){
 //		final double GRAVITY = 20;
 //		Vec2 velocity = myBody.getLinearVelocity();	
