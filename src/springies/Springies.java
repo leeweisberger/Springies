@@ -53,8 +53,19 @@ public class Springies extends JGEngine
 		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.1f));
 
 		addMasses();
+//		addMassesTest();
 		addSprings();
 		addWalls();
+
+	}
+	
+	public void addMassesTest(){
+		XML_Parser p = new XML_Parser();
+		p.parse();
+		HashMap<String,Integer[]> masseslist = new HashMap<String,Integer[]>();
+		masseslist=p.masses;
+		m.put("m1", new Mass("m1",masseslist.get("m1")[0],masseslist.get("m1")[1]));
+		m.put("m2", new Mass("m2",masseslist.get("m2")[0],masseslist.get("m2")[1]));
 
 	}
 
@@ -64,7 +75,8 @@ public class Springies extends JGEngine
 		p.parse();
 		HashMap<String,Integer[]> masseslist = new HashMap<String,Integer[]>();
 		masseslist=p.masses;
-		for(String mass:masseslist.keySet()){    		
+		for(String mass:masseslist.keySet()){   
+			System.out.println(mass);
 			m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1]));	
 		}
 		// add a bouncy ball
@@ -100,8 +112,9 @@ public class Springies extends JGEngine
 			//System.out.println(spring[0]);
 			Mass m1 = m.get(spring[0]);
 			Mass m2 = m.get(spring[1]);
+			System.out.println(spring[3]);
+			System.out.println(spring[2]);
 			new Spring(m.get(spring[0]), m.get(spring[1]), Double.parseDouble(spring[3]), Double.parseDouble(spring[2]));
-			
 //			s.setPos((m1.getLastX() + m2.getLastY())/2, (m1.getLastY() + m2.getLastY())/2);
 			//System.out.println("name: " + m.get(spring[0]).x + "end");
 		}
@@ -136,7 +149,7 @@ public class Springies extends JGEngine
 		// update game objects
 		WorldManager.getWorld().step(1f, 1);
 		moveObjects();
-		//checkCollision(1 + 2, 1);
+//		checkCollision(1 + 2, 1);
 	}
 
 	@Override
