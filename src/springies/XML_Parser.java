@@ -23,7 +23,7 @@ public class XML_Parser {
 		try {
 
 
-			File file = new File("ball.xml");
+			File file = new File("example.xml");
 //			File file = new File("test.xml");
 
 

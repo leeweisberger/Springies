@@ -45,9 +45,9 @@ public class Mass extends PhysicalObjectCircle{
         x = position.x;
         y = position.y;
         myRotation = -myBody.getAngle();
-        viscosity();
+        //viscosity();
         wallRepulsion();
-        gravity();
+        //gravity();
         
 	}
 	

@@ -99,6 +99,7 @@ public class Springies extends JGEngine
 		HashMap<String,Integer[]> masseslist = new HashMap<String,Integer[]>();
 		masseslist=p.masses;
 		for(String mass:masseslist.keySet()){   
+			System.out.println(mass);
 			m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1],wallarray));	
 		}
 		
