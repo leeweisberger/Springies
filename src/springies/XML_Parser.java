@@ -22,7 +22,7 @@ public class XML_Parser {
 		ArrayList<String[]> musclelist = new ArrayList<String[]>();
 		try {
 
-			File file = new File("example.xml");
+			File file = new File("ball.xml");
 //			File file = new File("test.xml");
 
 			DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()

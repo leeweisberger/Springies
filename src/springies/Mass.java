@@ -80,23 +80,36 @@ public class Mass extends FixedMass{
 //	}
 	
 	public void wallRepulsion(){
-//		for(PhysicalObject wall:mywallarray){
-//			System.out.println(getDistanceBetween(this,wall));
-//		}
-		int WALLREPULSION = 40;
-		double dist = getDistanceBetween(this,mywallarray[1]);
-		double force = WALLREPULSION/(dist*dist);
-		setForce(0, -force);
-		System.out.println("force: " + force);
+		double WALLREPULSION=40;
+		for(int i=0;i<mywallarray.length;i++){
+			double dist = getDistanceBetween(this,mywallarray[i],i);
+			double force = WALLREPULSION/(dist*dist);
+			if(i==0)
+				setForce(0, force);						
+			else if(i==1)
+				setForce(0,-force);
+			else if(i==2)
+				setForce(force,0);
+			
+			else if(i==3)
+				setForce(-force,0);							
+		}
+				
 	}
-	protected double getDistanceBetween(PhysicalObject start, PhysicalObject end){
-		
-		double wally = end.getBody().getPosition().y-15;
-		double massy = start.getBody().getPosition().y;
-		
-		System.out.println(wally-massy);
-		if((wally-massy)<1)return 1;
-		return wally-massy;
+	protected double getDistanceBetween(PhysicalObject start, PhysicalObject end,int whichwall){
+		double wallpos=0;
+		double masspos=0;
+		if(whichwall==1) 
+			wallpos = end.getBody().getPosition().y-15;
+		else if(whichwall==0)wallpos = end.getBody().getPosition().y+15;
+		if(whichwall<2)masspos = start.getBody().getPosition().y;
+		if(whichwall==2)wallpos = end.getBody().getPosition().x+15;
+		if(whichwall==3)wallpos = end.getBody().getPosition().x-15;
+		if(whichwall>1)masspos = start.getBody().getPosition().x;
+		//System.out.println(wally-massy);
+		double diff = Math.abs(wallpos-masspos);
+		if((diff)<1)return 1;
+		return diff;
 	}
 
 
