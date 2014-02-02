@@ -12,30 +12,19 @@ import jgame.platform.JGEngine;
 import java.math.*;
 
 
-public class Mass extends FixedMass{
+public class Mass extends PhysicalObjectCircle{
 	private String myID;
+	private static JGColor myColor = JGColor.blue;
 	public Mass(String id, int xpos, int ypos){
-		
-		super(id, xpos,ypos);
+		super(id, 1, myColor,5,1);
 		setPos(xpos, ypos);
 		x=xpos;
 		y=ypos;
 		myID = id;
 	}
-	public String getID(){
+	
+	protected String getID(){
 		return myID;
-	}
-	@Override
-	public void move(){
-		if (myBody.m_world != WorldManager.getWorld()) {
-            remove();
-            return;
-        }
-        // copy the position and rotation from the JBox world to the JGame world
-        Vec2 position = myBody.getPosition();
-        x = position.x;
-        y = position.y;
-        myRotation = -myBody.getAngle();
 	}
 	
 	@Override
