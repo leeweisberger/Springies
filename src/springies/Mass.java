@@ -40,8 +40,8 @@ public class Mass extends PhysicalObjectCircle{
         x = position.x;
         y = position.y;
         myRotation = -myBody.getAngle();
-        viscosity();
-        wallRepulsion();
+//        viscosity();
+//        wallRepulsion();
         
 	}
 	
@@ -88,6 +88,7 @@ public class Mass extends PhysicalObjectCircle{
 		setForce(0, -force);
 		System.out.println("force: " + force);
 	}
+	
 	protected double getDistanceBetween(PhysicalObject start, PhysicalObject end){
 		
 		double wally = end.getBody().getPosition().y-15;
