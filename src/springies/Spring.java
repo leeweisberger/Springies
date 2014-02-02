@@ -20,17 +20,12 @@ public class Spring extends PhysicalObjectRect{
 		x=m1.x;
 		y=m1.y;
 		//		setPos((m1.x),(m2.y));
-		setPos((m1.x + m2.x)/2, (m1.y+m2.x)/2);
+		setPos((m1.x + m2.x), (m1.y+m2.x));
 		//		setForce((m1.x + m2.x)/2, (m1.y+m2.x)/2);
 		//System.out.println(x);
 		myM1=m1;
 		myM2=m2;
 		paint();
-	}
-
-	public void move(){
-		//System.out.println(myM1.y);
-		//System.out.println(x);
 	}
 	
 	@Override

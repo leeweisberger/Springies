@@ -2,6 +2,7 @@ package springies;
 
 import jboxGlue.PhysicalObject;
 import jboxGlue.PhysicalObjectCircle;
+import jboxGlue.WorldManager;
 
 import org.jbox2d.common.Vec2;
 
@@ -16,38 +17,62 @@ public class Mass extends PhysicalObjectCircle{
 		setPos(xpos, ypos);
 		x=xpos;
 		y=ypos;
-
+		
 
 
 	}
+	 @Override
+	    public void move ()
+	    {
+		 	
+	        // if the JGame object was deleted, remove the physical object too
+	        if (myBody.m_world != WorldManager.getWorld()) {
+	            remove();
+	            return;
+	        }
+	        
+	        // copy the position and rotation from the JBox world to the JGame world
+	        Vec2 position = myBody.getPosition();
+	        x = position.x;
+	        y = position.y;
+	        //viscosity();
+	        myRotation = -myBody.getAngle();
+	    }
 	@Override
 	public void hit (JGObject other)
 	{
 		// we hit something! bounce off it!
 		Vec2 velocity = myBody.getLinearVelocity();
-		// is it a tall wall?
-		final double DAMPING_FACTOR = .4;
+		final double DAMPING_FACTOR = .7;
 		boolean isSide = other.getBBox().height > other.getBBox().width;
-		if (isSide) {
+		if (isSide) 
 			velocity.x *= -DAMPING_FACTOR;
-		}
-		else {
+		
+		else 
 			velocity.y *= -DAMPING_FACTOR;
-		}
-		// apply the change
+		
 		myBody.setLinearVelocity(velocity);
+		
 	}
-
-
-
-
-
-
-
-
-
-
-
-
+//	public void viscosity(){
+//		final double VISCOSITY = .8;
+//		Vec2 velocity = myBody.getLinearVelocity();	
+//		System.out.println("bef: " + velocity.y);
+//		velocity.x*=VISCOSITY;
+//		velocity.y *= VISCOSITY;
+//		
+//		System.out.println("aft: " + velocity.y);
+//		myBody.setLinearVelocity(velocity);
+//		
+//		
+//	}
+//	public void gravity(){
+//		final double GRAVITY = 20;
+//		Vec2 velocity = myBody.getLinearVelocity();	
+//		if(velocity.y<=0){
+//			System.out.println("down");
+//			setForce(0, 10);
+//		}
+//	}
 
 }

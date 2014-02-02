@@ -22,7 +22,7 @@ public class Springies extends JGEngine
 	public Springies ()
 	{
 		// set the window size
-		int height = 800;
+		int height = 1000;
 		double aspect = 16.0 / 9.0;
 		initEngineComponent((int) (height * aspect), height);
 	}
@@ -91,6 +91,7 @@ public class Springies extends JGEngine
 		//        };
 		//        ball.setPos(displayWidth() / 2, displayHeight() / 2);
 		//        ball.setForce(8000, -10000);
+		
 	}
 	public void addSprings(){
 		XML_Parser p = new XML_Parser();
@@ -101,9 +102,7 @@ public class Springies extends JGEngine
 			Mass m1 = m.get(spring[0]);
 			Mass m2 = m.get(spring[1]);
 			new Spring(m.get(spring[0]), m.get(spring[1]), Double.parseDouble(spring[3]), Double.parseDouble(spring[2]));
-			
-//			s.setPos((m1.getLastX() + m2.getLastY())/2, (m1.getLastY() + m2.getLastY())/2);
-			//System.out.println("name: " + m.get(spring[0]).x + "end");
+
 		}
 
 	}
@@ -136,7 +135,7 @@ public class Springies extends JGEngine
 		// update game objects
 		WorldManager.getWorld().step(1f, 1);
 		moveObjects();
-		checkCollision(1 + 2, 1);
+		checkCollision(2, 1);
 	}
 
 	@Override
