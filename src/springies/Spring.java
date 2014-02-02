@@ -26,7 +26,6 @@ public class Spring extends PhysicalObjectRect{
 		setPos((m1.x + m2.x), (m1.y+m2.x));
 		//		setForce((m1.x + m2.x)/2, (m1.y+m2.x)/2);
 		//System.out.println(x);
-		
 		myM1=m1;
 		myM2=m2;
 		springLength = rlength;
@@ -50,8 +49,8 @@ public class Spring extends PhysicalObjectRect{
 		double yvector = force * Math.cos(getAngleBetween(myM1,myM2));
 //		System.out.println(xvector);
 //		System.out.println(yvector);
-		myM1.setForce(-xvector,-yvector);
-		myM2.setForce(xvector,yvector);
+		myM1.setForce(xvector,yvector);
+		myM2.setForce(-xvector,-yvector);
 	}
 
 	private double getDistanceBetween(Mass start, Mass end){
