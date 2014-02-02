@@ -26,8 +26,6 @@ public class Mass extends PhysicalObjectCircle{
 	protected String getID(){
 		return myID;
 	}
-<<<<<<< HEAD
-=======
 	@Override
 	public void move(){
 		if (myBody.m_world != WorldManager.getWorld()) {
@@ -41,7 +39,6 @@ public class Mass extends PhysicalObjectCircle{
         myRotation = -myBody.getAngle();
         viscosity();
 	}
->>>>>>> 77e3aa37dc9f6ac866fdfb83e23ef33720239835
 	
 	@Override
 	public void hit (JGObject other) {
@@ -65,8 +62,6 @@ public class Mass extends PhysicalObjectCircle{
 		if(velocity.x<0) setForce(VISCOSITY, 0);
 		if(velocity.y>0) setForce(0,-VISCOSITY);
 		if(velocity.y<0) setForce(0, VISCOSITY);
-		
-		
 		
 	}
 //	public void gravity(){
