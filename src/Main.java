@@ -32,7 +32,7 @@ public class Main
             @Override
             public void actionPerformed (ActionEvent arg0) {
                 sp.addMasses();
-                //sp.addSprings();
+                sp.addSprings();
             }
         });
         // container that will work with user's OS

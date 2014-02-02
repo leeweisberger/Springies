@@ -9,6 +9,7 @@ import org.jbox2d.common.Vec2;
 import jgame.JGColor;
 import jgame.JGObject;
 import jgame.platform.JGEngine;
+import java.math.*;
 
 public class Mass extends PhysicalObjectCircle{
 
@@ -18,6 +19,7 @@ public class Mass extends PhysicalObjectCircle{
 		x=xpos;
 		y=ypos;
 		
+
 
 
 	}
@@ -38,9 +40,12 @@ public class Mass extends PhysicalObjectCircle{
 	        //viscosity();
 	        myRotation = -myBody.getAngle();
 	    }
+
+	
+	
+
 	@Override
-	public void hit (JGObject other)
-	{
+	public void hit (JGObject other) {
 		// we hit something! bounce off it!
 		Vec2 velocity = myBody.getLinearVelocity();
 		final double DAMPING_FACTOR = .7;
@@ -54,6 +59,7 @@ public class Mass extends PhysicalObjectCircle{
 		myBody.setLinearVelocity(velocity);
 		
 	}
+
 //	public void viscosity(){
 //		final double VISCOSITY = .8;
 //		Vec2 velocity = myBody.getLinearVelocity();	
@@ -74,5 +80,6 @@ public class Mass extends PhysicalObjectCircle{
 //			setForce(0, 10);
 //		}
 //	}
+
 
 }

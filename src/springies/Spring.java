@@ -1,16 +1,20 @@
 package springies;
 
+import java.util.Vector;
+
 import jboxGlue.PhysicalObject;
 import jboxGlue.PhysicalObjectCircle;
 import jboxGlue.PhysicalObjectRect;
 import jgame.JGColor;
 import jgame.JGObject;
 import jgame.platform.JGEngine;
-
+import org.jbox2d.common.Vec2;
 public class Spring extends PhysicalObjectRect{
 	private PhysicalObject mySpring;
 	private Mass myM1;
 	private Mass myM2;
+	private double kValue;
+	private double springLength;
 
 	public Spring(Mass m1, Mass m2, double rlength, double springiness){
 
@@ -19,14 +23,56 @@ public class Spring extends PhysicalObjectRect{
 		//		System.out.println();
 		x=m1.x;
 		y=m1.y;
+<<<<<<< HEAD
 		//		setPos((m1.x),(m2.y));
+=======
+>>>>>>> 0e62c9a94a5fa45675b128e1ba9f4cdcb79964b2
 		setPos((m1.x + m2.x), (m1.y+m2.x));
 		//		setForce((m1.x + m2.x)/2, (m1.y+m2.x)/2);
 		//System.out.println(x);
 		myM1=m1;
 		myM2=m2;
-		paint();
+		springLength = rlength;
+		kValue = springiness;
+//		paint();
 	}
+<<<<<<< HEAD
+=======
+
+	@Override
+	public void move(){
+		attachMasses();
+	}
+	
+	private void attachMasses(){
+		double mx = myM1.getLastX() - myM2.getLastX();
+		System.out.println("mx = " + mx);
+		double my = myM1.getLastY() - myM2.getLastY();
+		System.out.println("my = " + my);
+		double displacement = (getDistanceBetween(myM1,myM2)) - springLength;
+		double force = -1 * (kValue * displacement);
+		double xvector = force * Math.sin(getAngleBetween(myM1,myM2));
+		double yvector = force * Math.cos(getAngleBetween(myM1,myM2));
+//		System.out.println(xvector);
+//		System.out.println(yvector);
+		myM1.setForce(xvector,yvector);
+		myM2.setForce(-xvector,-yvector);
+	}
+
+	private double getDistanceBetween(Mass start, Mass end){
+		double first = (start.x - end.x) * (start.x-end.x);
+		double second = (start.y-end.y) * (start.y-end.y);
+		return (Math.sqrt((first + second)));
+	}
+	
+	private double getAngleBetween(Mass start, Mass end){
+		float angle = (float) (Math.atan2(end.x - start.x, end.y - start.y));
+	    if(angle < 0){
+	        angle += (Math.PI / 2.0);
+	    }
+	    return angle;
+	}
+>>>>>>> 0e62c9a94a5fa45675b128e1ba9f4cdcb79964b2
 	
 	@Override
 	public void paint(){
