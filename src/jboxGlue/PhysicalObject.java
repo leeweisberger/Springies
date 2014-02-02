@@ -130,4 +130,5 @@ public abstract class PhysicalObject extends JGObject
     }
 
     protected abstract void paintShape ();
+
 }

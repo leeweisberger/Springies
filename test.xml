@@ -4,12 +4,9 @@
 
     <nodes>
         <mass id="m1" x="300" y="450"/>
-        <mass id="m2" x="250" y="500"/>
-        <mass id="m3" x="350" y="500"/>
+        <mass id="m2" x="300" y="464"/>
     </nodes>
     <links>
         <spring a="m1" b="m2" restlength="14.0" constant="0.005"/>
-        <spring a="m2" b="m3" restlength="14.0" constant="0.005"/>
-        <spring a="m1" b="m3" restlength="14.0" constant="0.005"/>
     </links>
 </model>

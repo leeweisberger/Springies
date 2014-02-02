@@ -10,18 +10,18 @@ import jgame.JGObject;
 import jgame.platform.JGEngine;
 import java.math.*;
 
-class Mass extends PhysicalObjectCircle{
-	
+public class Mass extends PhysicalObjectCircle{
+
 	public Mass(String id, int xpos, int ypos){
 		super(id, 1, JGColor.red,5,5);
 		setPos(xpos, ypos);
 		x=xpos;
 		y=ypos;
+		
 	}
 	
 	@Override
-	public void hit (JGObject other)
-	{
+	public void hit (JGObject other) {
 		// we hit something! bounce off it!
 		Vec2 velocity = myBody.getLinearVelocity();
 		// is it a tall wall?
@@ -36,5 +36,5 @@ class Mass extends PhysicalObjectCircle{
 		// apply the change
 		myBody.setLinearVelocity(velocity);
 	}
-	
+
 }

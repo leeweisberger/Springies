@@ -15,9 +15,11 @@ import org.w3c.dom.NodeList;
 public class XML_Parser {
 	HashMap<String,Integer[]> masses;
 	ArrayList<String[]> springs;
+	//ArrayList<String[]> muscles;
 	public void parse() {
 		HashMap<String,Integer[]> masslist = new HashMap<String,Integer[]>();
 		ArrayList<String[]> springlist = new ArrayList<String[]>();
+		//ArrayList<String[]> musclelist = new ArrayList<String[]>();
 		try {
 
 //			File file = new File("ball.xml");
@@ -32,7 +34,7 @@ public class XML_Parser {
 
 			if (doc.hasChildNodes()) {
 
-				printNote(doc.getChildNodes(),masslist,springlist);
+				printNote(doc.getChildNodes(),masslist,springlist/*,musclelist*/);
 
 			}
 
@@ -46,7 +48,7 @@ public class XML_Parser {
 
 	}
 
-	public static void printNote(NodeList nodeList, HashMap<String,Integer[]> masslist,ArrayList<String[]> springlist) {
+	public static void printNote(NodeList nodeList, HashMap<String,Integer[]> masslist,ArrayList<String[]> springlist/*, ArrayList<String[]> musclelist*/) {
 		//System.out.println(nodeList.getLength());
 		String name ="";
 		for (int count = 0; count < nodeList.getLength(); count++) {
@@ -58,9 +60,7 @@ public class XML_Parser {
 
 			if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
 				// get node name and value
-				//System.out.println("\nNode Name =" + tempNode.getNodeName() + " [OPEN]");
 
-				//System.out.println("Node Value =" + tempNode.getTextContent());
 
 				if (tempNode.hasAttributes()) {
 
@@ -69,12 +69,9 @@ public class XML_Parser {
 
 				
 					String[] s = new String[4];
+					//String[] m = new String[5];
 					for (int i = 0; i < nodeMap.getLength(); i++) {
-
 						Node node = nodeMap.item(i);
-						//	System.out.println("attr name : " + node.getNodeName());
-						//System.out.println("attr value : " + node.getNodeValue());
-
 						if(tempNode.getNodeName().equals("mass")){
 							
 							if(node.getNodeName().equals("id")){
@@ -95,20 +92,24 @@ public class XML_Parser {
 						}
 						else if(tempNode.getNodeName().equals("spring")){
 							s[i]=node.getNodeValue();
-							//System.out.print(i);
 						}
+						/*else if(tempNode.getNodeName().equals("muscle")){
+							m[i]=node.getNodeName();
+							System.out.println(node.getNodeName());
+						}*/
 
 					}
 
-					
-					if(s[3]!=null)springlist.add(s);
-
+					if(s[3]==null)s[3]="1";
+					//if(m[4]==null)m[4]="1";
+					if(s[2]!=null)springlist.add(s);
+					//if(m[2]!=null)musclelist.add(m);
 				}
 
 
 				if (tempNode.hasChildNodes()) {
 					// loop again if has child nodes
-					printNote(tempNode.getChildNodes(),masslist,springlist);
+					printNote(tempNode.getChildNodes(),masslist,springlist/*,musclelist*/);
 
 				}
 
