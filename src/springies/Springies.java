@@ -50,14 +50,14 @@ public class Springies extends JGEngine
 		// so gravity is up in world coords and down in game coords
 		// so set all directions (e.g., forces, velocities) in world coords
 		WorldManager.initWorld(this);
-		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.1f));
+		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.2f));
 
-//		addMasses();
-//		addSprings();
-		addFixedMassTest();
-		addMassesTest();
+		addMasses();
+		addSprings();
+		//addFixedMassTest();
+		//addMassesTest();
 //		addMusclesTest();
-//		addSpringsTest();
+		//addSpringsTest();
 		addWalls();
 
 	}
@@ -105,14 +105,18 @@ public class Springies extends JGEngine
 		p.parse();
 		ArrayList<String[]> springslist=p.springs;  
 		for(String[] spring:springslist){  
-			//System.out.println(spring[0]);
+			
 			Mass m1 = m.get(spring[0]);
+			//System.out.println(spring[0]);
+			//System.out.println("asdf " + m.get(spring[0]).getName());
 			Mass m2 = m.get(spring[1]);
+			//System.out.println("1: " + m1.getName().substring(0, m1.getName().length()-1));
+			//System.out.println("2: " + m2.getName());
 //			System.out.println(Double.parseDouble(spring[3]));
 //			System.out.println(Double.parseDouble(spring[2]));
 //			System.out.println(spring[0]);
 //			System.out.println(spring[1]);
-			PhysicalObject springone = new Spring(m.get(spring[0]), m.get(spring[1]), Double.parseDouble(spring[3]), Double.parseDouble(spring[2]));
+			PhysicalObject sp = new Spring(m1, m2, Double.parseDouble(spring[3]), Double.parseDouble(spring[2]));
 		}
 
 	}
