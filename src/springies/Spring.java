@@ -23,10 +23,7 @@ public class Spring extends PhysicalObjectRect{
 		//		System.out.println();
 		x=m1.x;
 		y=m1.y;
-<<<<<<< HEAD
-		//		setPos((m1.x),(m2.y));
-=======
->>>>>>> 0e62c9a94a5fa45675b128e1ba9f4cdcb79964b2
+
 		setPos((m1.x + m2.x), (m1.y+m2.x));
 		//		setForce((m1.x + m2.x)/2, (m1.y+m2.x)/2);
 		//System.out.println(x);
@@ -36,8 +33,7 @@ public class Spring extends PhysicalObjectRect{
 		kValue = springiness;
 //		paint();
 	}
-<<<<<<< HEAD
-=======
+
 
 	@Override
 	public void move(){
@@ -72,7 +68,7 @@ public class Spring extends PhysicalObjectRect{
 	    }
 	    return angle;
 	}
->>>>>>> 0e62c9a94a5fa45675b128e1ba9f4cdcb79964b2
+
 	
 	@Override
 	public void paint(){
