@@ -13,19 +13,25 @@ import jgame.platform.JGEngine;
 import java.math.*;
 
 
-public class Mass extends FixedMass{
+public class Mass extends PhysicalObjectCircle{
 	private String myID;
+	private static JGColor myColor = JGColor.blue;
 	private PhysicalObject[] mywallarray;
 	public Mass(String id, int xpos, int ypos,PhysicalObject[] wallarray){
-		
-		super(id, xpos,ypos);
+		super(id, 1, myColor, 5,1);
 		setPos(xpos, ypos);
 		x=xpos;
 		y=ypos;
 		myID = id;
 		mywallarray=wallarray;
+		
 	}
-	public String getID(){
+	
+	public Mass(String id, int xpos, int ypos){
+		super(id, 1, myColor, 5,1);
+	}
+	
+	protected String getID(){
 		return myID;
 	}
 	@Override
@@ -66,8 +72,6 @@ public class Mass extends FixedMass{
 		if(velocity.x<0) setForce(VISCOSITY, 0);
 		if(velocity.y>0) setForce(0,-VISCOSITY);
 		if(velocity.y<0) setForce(0, VISCOSITY);
-		
-		
 		
 	}
 //	public void gravity(){

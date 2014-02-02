@@ -40,6 +40,15 @@ public class Springies extends JGEngine
 				null,// background colour -> use default colour black
 				null); // standard font -> use default font
 	}
+	
+	public Vec2 setGrav() {
+//		Get read in values from XML
+		double gravityDirectionRadians = Math.toRadians(90);
+		System.out.println((float)(1 * Math.sin(gravityDirectionRadians)));
+		System.out.println((float)(1 * Math.cos(gravityDirectionRadians)));
+		Vec2 gravityVector = new Vec2((float)(20 * Math.cos(gravityDirectionRadians)),(float)(20 * Math.sin(gravityDirectionRadians)));
+		return gravityVector;
+	}
 
 	@Override
 	public void initGame ()
@@ -53,6 +62,7 @@ public class Springies extends JGEngine
 		WorldManager.initWorld(this);
 		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.2f));
 		addWalls();
+
 		addMasses();
 		addSprings();
 		//addFixedMassTest();
