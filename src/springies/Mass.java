@@ -9,18 +9,21 @@ import org.jbox2d.common.Vec2;
 import jgame.JGColor;
 import jgame.JGObject;
 import jgame.platform.JGEngine;
+
 import java.math.*;
 
 
 public class Mass extends FixedMass{
 	private String myID;
-	public Mass(String id, int xpos, int ypos){
+	private PhysicalObject[] mywallarray;
+	public Mass(String id, int xpos, int ypos,PhysicalObject[] wallarray){
 		
 		super(id, xpos,ypos);
 		setPos(xpos, ypos);
 		x=xpos;
 		y=ypos;
 		myID = id;
+		mywallarray=wallarray;
 	}
 	public String getID(){
 		return myID;
@@ -37,6 +40,8 @@ public class Mass extends FixedMass{
         y = position.y;
         myRotation = -myBody.getAngle();
         viscosity();
+        wallRepulsion();
+        
 	}
 	
 	@Override
@@ -73,6 +78,26 @@ public class Mass extends FixedMass{
 //			setForce(0, 10);
 //		}
 //	}
+	
+	public void wallRepulsion(){
+//		for(PhysicalObject wall:mywallarray){
+//			System.out.println(getDistanceBetween(this,wall));
+//		}
+		int WALLREPULSION = 40;
+		double dist = getDistanceBetween(this,mywallarray[1]);
+		double force = WALLREPULSION/(dist*dist);
+		setForce(0, -force);
+		System.out.println("force: " + force);
+	}
+	protected double getDistanceBetween(PhysicalObject start, PhysicalObject end){
+		
+		double wally = end.getBody().getPosition().y-15;
+		double massy = start.getBody().getPosition().y;
+		
+		System.out.println(wally-massy);
+		if((wally-massy)<1)return 1;
+		return wally-massy;
+	}
 
 
 }

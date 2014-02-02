@@ -18,6 +18,7 @@ import org.jbox2d.common.Vec2;
 public class Springies extends JGEngine
 
 {
+	PhysicalObject[] wallarray = new PhysicalObjectRect[4];
 	private HashMap<String,Mass> m = new HashMap<String,Mass>();
 	public Springies ()
 	{
@@ -51,14 +52,14 @@ public class Springies extends JGEngine
 		// so set all directions (e.g., forces, velocities) in world coords
 		WorldManager.initWorld(this);
 		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.2f));
-
+		addWalls();
 		addMasses();
 		addSprings();
 		//addFixedMassTest();
 		//addMassesTest();
 //		addMusclesTest();
 		//addSpringsTest();
-		addWalls();
+		
 
 	}
 	
@@ -69,8 +70,8 @@ public class Springies extends JGEngine
 		masseslist=p.masses;
 //		m.put("m1", new Mass("m1",masseslist.get("m1")[0],masseslist.get("m1")[1]));
 //		m.put("m2", new Mass("m2",masseslist.get("m2")[0],masseslist.get("m2")[1]));
-		Mass first = new Mass("m1",500,450);
-		Mass second = new Mass("m2",600,450);
+		Mass first = new Mass("m1",500,450,wallarray);
+		Mass second = new Mass("m2",600,450,wallarray);
 //		Mass third = new Mass("m3",800,800);
 //		Mass fourth = new Mass("m4",800,100);
 		m.put("m1", first);
@@ -88,7 +89,7 @@ public class Springies extends JGEngine
 		HashMap<String,Integer[]> masseslist = new HashMap<String,Integer[]>();
 		masseslist=p.masses;
 		for(String mass:masseslist.keySet()){   
-			m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1]));	
+			m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1],wallarray));	
 		}
 		
 	}
@@ -145,22 +146,32 @@ public class Springies extends JGEngine
 	{
 		// add walls to bounce off of
 		// NOTE: immovable objects must have no mass
+		
 		final double WALL_MARGIN = 10;
 		final double WALL_THICKNESS = 10;
 		final double WALL_WIDTH = displayWidth() - WALL_MARGIN * 2 + WALL_THICKNESS;
 		final double WALL_HEIGHT = displayHeight() - WALL_MARGIN * 2 + WALL_THICKNESS;
+		//top wall
 		PhysicalObject wall = new PhysicalObjectRect("wall", 2, JGColor.green,
 				WALL_WIDTH, WALL_THICKNESS);
 		wall.setPos(displayWidth() / 2, WALL_MARGIN);
+		wallarray[0]=wall;
+		//bottom wall
 		wall = new PhysicalObjectRect("wall", 2, JGColor.green,
 				WALL_WIDTH, WALL_THICKNESS);
 		wall.setPos(displayWidth() / 2, displayHeight() - WALL_MARGIN);
+		wallarray[1]=wall;
+		//left wall
 		wall = new PhysicalObjectRect("wall", 2, JGColor.green,
 				WALL_THICKNESS, WALL_HEIGHT);
 		wall.setPos(WALL_MARGIN, displayHeight() / 2);
+		wallarray[2]=wall;
+		//right wall
 		wall = new PhysicalObjectRect("wall", 2, JGColor.green,
 				WALL_THICKNESS, WALL_HEIGHT);
 		wall.setPos(displayWidth() - WALL_MARGIN, displayHeight() / 2);
+		wallarray[3]=wall;
+		
 	}
 
 	@Override
