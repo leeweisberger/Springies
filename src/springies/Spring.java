@@ -18,7 +18,7 @@ public class Spring extends PhysicalObjectRect{
 
 	public Spring(Mass m1, Mass m2, double rlength, double springiness){
 
-		super(m1.toString()+m2.toString(), 3, JGColor.green, 1, rlength);
+		super(m1.toString()+m2.toString(), 3, JGColor.red, 1, rlength);
 		setPos((m1.x + m2.x), (m1.y+m2.x));
 		//		setForce((m1.x + m2.x)/2, (m1.y+m2.x)/2);
 		//System.out.println(x);

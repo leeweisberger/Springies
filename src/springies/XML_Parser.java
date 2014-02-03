@@ -23,7 +23,7 @@ public class XML_Parser {
 		try {
 
 
-			File file = new File("lamp.xml");
+			File file = new File("ball.xml");
 //			File file = new File("test.xml");
 //			File file = new File("example.xml");
 
@@ -44,6 +44,10 @@ public class XML_Parser {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		//System.out.println(springlist.size());
+//		for(String[] s:musclelist){
+//			System.out.println(s[4]);
+//		}
 		muscles = musclelist;
 		masses=masslist;
 		springs=springlist;
@@ -75,8 +79,8 @@ public class XML_Parser {
 					String[] m = new String[5];
 					for (int i = 0; i < nodeMap.getLength(); i++) {
 						Node node = nodeMap.item(i);
-						if(tempNode.getNodeName().equals("mass")){
-							
+						if(tempNode.getNodeName().equals("mass") || tempNode.getNodeName().equals("fixed")){
+							//System.out.println(tempNode.getNodeName());
 							if(node.getNodeName().equals("id")){
 								name=node.getNodeValue();
 								masslist.put(name, new Double[5]);
@@ -112,10 +116,12 @@ public class XML_Parser {
 						}
 						else if(tempNode.getNodeName().equals("spring")){
 							s[i]=node.getNodeValue();
+							
 						}
 						else if(tempNode.getNodeName().equals("muscle")){
-							m[i]=node.getNodeName();
-							System.out.println(node.getNodeName());
+							m[i]=node.getNodeValue();
+							//System.out.println(i + " " + node.getNodeName() + " : " + node.getNodeValue());
+							//System.out.println(node.getNodeName());
 						}
 						
 						
