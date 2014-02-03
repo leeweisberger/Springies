@@ -20,7 +20,10 @@ public class Springies extends JGEngine
 {
 	PhysicalObject[] wallarray = new PhysicalObjectRect[4];
 	private HashMap<String,Mass> m = new HashMap<String,Mass>();
-	
+	String[] grav;
+	String[] centermass;
+	String viscosity;
+	ArrayList<String[]> walls = new ArrayList<String[]>();
 	public Springies ()
 	{
 		// set the window size
@@ -74,12 +77,14 @@ public class Springies extends JGEngine
 		// so gravity is up in world coords and down in game coords
 		// so set all directions (e.g., forces, velocities) in world coords
 		WorldManager.initWorld(this);
-//		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.05f));
+		//		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.2f));
+		XML_Parser p = new XML_Parser();
+		p.parse();
 		addWalls();
-
-		addMasses();
-		addSprings();
-		addMuscles();
+		getEnvironment(p);
+		addMasses(p);
+		addSprings(p);
+//		addMuscles(p);
 		//		addFixedMassTest();
 		//addMassesTest();
 		//		addMusclesTest();
@@ -105,11 +110,18 @@ public class Springies extends JGEngine
 //		//		m.put("m4", fourth);
 //
 //	}
-
-	public void addMasses ()
+	public void getEnvironment(XML_Parser p){
+		
+		ArrayList<String[]> walllist = p.walls;
+		grav = p.mygrav;
+		centermass = p.mycentermass;
+		viscosity = p.myviscosity;	
+		walls = p.walls;
+		
+	}
+	public void addMasses (XML_Parser p)
 	{
-		XML_Parser p = new XML_Parser();
-		p.parse();
+		
 		HashMap<String,Double[]> masseslist = new HashMap<String,Double[]>();
 		masseslist=p.masses;
 		for(String mass:masseslist.keySet()){   
@@ -132,9 +144,8 @@ public class Springies extends JGEngine
 		//		PhysicalObject springfour = new Spring(m.get("m4"),m.get("m1"),600,10);
 	}
 
-	public void addSprings(){
-		XML_Parser p = new XML_Parser();
-		p.parse();
+	public void addSprings(XML_Parser p){
+		
 		ArrayList<String[]> springslist=p.springs;  
 		for(String[] spring:springslist){  
 
@@ -147,9 +158,8 @@ public class Springies extends JGEngine
 
 	}
 
-	public void addMuscles(){
-		XML_Parser p = new XML_Parser();
-		p.parse();
+	public void addMuscles(XML_Parser p){
+		
 		ArrayList<String[]> muscleslist=p.muscles;
 		for(String[] muscle: muscleslist){
 			//System.out.println(m.get(muscle[1]));

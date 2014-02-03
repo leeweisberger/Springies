@@ -16,27 +16,41 @@ public class XML_Parser {
 	HashMap<String,Double[]> masses;
 	ArrayList<String[]> springs;
 	ArrayList<String[]> muscles;
+	ArrayList<String[]> walls = new ArrayList<String[]>();
+	String[] mygrav;
+	String[] mycentermass;
+	static String myviscosity;
 	public void parse() {
 		HashMap<String,Double[]> masslist = new HashMap<String,Double[]>();
 		ArrayList<String[]> springlist = new ArrayList<String[]>();
 		ArrayList<String[]> musclelist = new ArrayList<String[]>();
+		
+		ArrayList<String[]> walllist = new ArrayList<String[]>();
+		String[] grav = new String[2];
+		String[] centermass = new String[2];
+	
 		try {
 
 			File file = new File("example.xml");
 //			File file = new File("test.xml");
-//			File file = new File("test.xml");
-
+//			File file = new File("example.xml");
+			File file2 = new File("environment.xml");
 
 			DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
 					.newDocumentBuilder();
 
 			Document doc = dBuilder.parse(file);
-
+			Document doc2 = dBuilder.parse(file2);
 			//System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
 			if (doc.hasChildNodes()) {
 
 				printNote(doc.getChildNodes(),masslist,springlist,musclelist);
+
+			}
+			if (doc2.hasChildNodes()) {
+
+				printNote2(doc2.getChildNodes(),walllist,grav,centermass);
 
 			}
 
@@ -50,6 +64,12 @@ public class XML_Parser {
 		muscles = musclelist;
 		masses=masslist;
 		springs=springlist;
+		walls = walllist;
+		
+		mygrav=grav;
+		mycentermass=centermass;
+		
+	
 
 
 	}
@@ -141,6 +161,74 @@ public class XML_Parser {
 				if (tempNode.hasChildNodes()) {
 					// loop again if has child nodes
 					printNote(tempNode.getChildNodes(),masslist,springlist,musclelist);
+
+				}
+
+				//System.out.println("Node Name =" + tempNode.getNodeName() + " [CLOSE]");
+
+			}
+
+		}
+
+
+	}
+	public static void printNote2(NodeList nodeList, ArrayList<String[]> walllist, String[] grav, String[] centermass) {
+		//System.out.println(nodeList.getLength());
+		String name ="";
+		for (int count = 0; count < nodeList.getLength(); count++) {
+
+			Node tempNode = nodeList.item(count);
+			//System.out.println(count + " / " + nodeList.getLength());
+
+			// make sure it's element node.
+
+			if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
+				// get node name and value
+
+
+				if (tempNode.hasAttributes()) {
+
+					// get attributes names and values
+					NamedNodeMap nodeMap = tempNode.getAttributes();
+
+				
+				
+					String[] wall = new String[3];
+					for (int i = 0; i < nodeMap.getLength(); i++) {
+						Node node = nodeMap.item(i);
+						if(tempNode.getNodeName().equals("gravity") ){							
+							grav[i] = node.getNodeValue();
+						}
+						else if(tempNode.getNodeName().equals("viscosity") ){							
+							 myviscosity = node.getNodeValue();
+							 System.out.println(myviscosity);
+						}
+						else if(tempNode.getNodeName().equals("centermass") ){							
+							centermass[i] = node.getNodeValue();
+						}
+						else if(tempNode.getNodeName().equals("wall") ){							
+							wall[i] = node.getNodeValue();
+						}
+						
+						
+						
+					}
+					
+					
+
+//					if(s[3]==null)s[3]="1";
+//					if(m[4]==null)m[4]="1";
+//					if(s[2]!=null)springlist.add(s);
+//					if(m[2]!=null)musclelist.add(m);
+					if(wall[0]!=null)walllist.add(wall);
+					
+				}
+				
+
+
+				if (tempNode.hasChildNodes()) {
+					// loop again if has child nodes
+					printNote2(tempNode.getChildNodes(),walllist, grav, centermass);
 
 				}
 

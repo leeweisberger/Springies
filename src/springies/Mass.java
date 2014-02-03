@@ -11,6 +11,7 @@ import jgame.JGObject;
 import jgame.platform.JGEngine;
 
 import java.math.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -19,6 +20,9 @@ public class Mass extends PhysicalObjectCircle{
 	private static JGColor myColor = JGColor.red;
 	private PhysicalObject[] mywallarray;
 	private double myMass;
+	private boolean isFixed;
+	
+
 	Springies s;
 
 
@@ -59,13 +63,19 @@ public class Mass extends PhysicalObjectCircle{
 		Vec2 position = myBody.getPosition();
 		x = position.x;
 		y = position.y;
+		
 		myRotation = -myBody.getAngle();
-		viscosity();
-		//		wallRepulsion();
-		//		gravity();
-		centerOfMass();
-		System.out.println(" njasndjs :     " + s.centerOfMass()[0] + " " + s.centerOfMass()[1]);
-
+		//viscosity();
+		//wallRepulsion();
+		if(!isFixed){
+			gravity();
+		}
+		//centerOfMass();
+		//		System.out.println(" njasndjs :     " + s.centerOfMass()[0] + " " + s.centerOfMass()[1]);
+	}
+	
+	public void setIsFixed(boolean fixed){
+		isFixed = fixed;
 	}
 
 	@Override
@@ -84,7 +94,7 @@ public class Mass extends PhysicalObjectCircle{
 	}
 
 	public void viscosity(){
-		final double VISCOSITY = 2;
+		final double VISCOSITY = Double.parseDouble(s.viscosity);
 		Vec2 velocity = myBody.getLinearVelocity();	
 		if(velocity.x>0) setForce(-VISCOSITY, 0);
 		if(velocity.x<0) setForce(VISCOSITY, 0);
@@ -93,8 +103,15 @@ public class Mass extends PhysicalObjectCircle{
 
 	}
 	public void gravity(){
-		final double GRAVITY = 10;
-		setForce(0,GRAVITY);
+	    double GRAVITY = Integer.parseInt(s.grav[1]);
+		double ANGLE = Integer.parseInt(s.grav[0]);
+		ANGLE = toRadians(ANGLE);
+		//System.out.println(GRAVITY);		
+		setForce(GRAVITY*Math.cos(ANGLE),GRAVITY*Math.sin(ANGLE));
+	}
+	
+	public double toRadians(double ANGLE){
+		return ANGLE * (Math.PI/180);
 	}
 
 	public void centerOfMass(){
@@ -103,8 +120,9 @@ public class Mass extends PhysicalObjectCircle{
 		double centerY = center[1];
 		double xDist = this.x - centerX;
 		double yDist = this.y - centerY;
-		double xForce = 10000/(xDist*xDist);
-		double yForce = 10000/(yDist*yDist); 
+		//System.out.println("asdf " + s.centermass[1]);
+		double xForce = Integer.parseInt(s.centermass[1])/(Math.pow(xDist, Double.parseDouble(s.centermass[0])));
+		double yForce = Integer.parseInt(s.centermass[1])/(Math.pow(yDist, Double.parseDouble(s.centermass[0])));
 		if (Math.abs(xDist) < 10){
 			xForce = 0;
 		}
@@ -127,21 +145,35 @@ public class Mass extends PhysicalObjectCircle{
 
 	public void wallRepulsion(){
 		//		System.out.println("hi");
-		double WALLREPULSION=100;
 		for(int i=0;i<mywallarray.length;i++){
 			double dist = getDistanceBetween(this,mywallarray[i],i);
-			//			System.out.println(dist);
-			double force = WALLREPULSION/(dist*dist);
-			//			System.out.println(force);
-			//			System.out.println(i);
-			if(i==0)
-				setForce(0, force);						
-			else if(i==1)
-				setForce(0,-force);
-			else if(i==2)
-				setForce(force,0);
-			else if(i==3)
-				setForce(-force,0);							
+			//ceiling
+			if(i==0){
+				int mag = Integer.parseInt(s.walls.get(0)[2]);
+				double scale = Math.pow(dist, Double.parseDouble(s.walls.get(0)[0]));
+				
+				setForce(0, mag/scale);	
+			}
+			//floor
+			else if(i==1){
+				int mag = Integer.parseInt(s.walls.get(2)[2]);
+				double scale = Math.pow(dist, Double.parseDouble(s.walls.get(2)[0]));
+				
+				setForce(0, -mag/scale);	
+			}
+			//left
+			else if(i==2){
+				int mag = Integer.parseInt(s.walls.get(3)[2]);
+				double scale = Math.pow(dist, Double.parseDouble(s.walls.get(3)[0]));
+				
+				setForce(mag/scale,0);	
+			}
+			//right
+			else if(i==3){
+				int mag = Integer.parseInt(s.walls.get(1)[2]);
+				double scale = Math.pow(dist, Double.parseDouble(s.walls.get(1)[0]));
+				setForce(-mag/scale,0);	
+			}
 		}
 
 	}
