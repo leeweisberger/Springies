@@ -16,24 +16,25 @@ import java.util.HashMap;
 
 public class Mass extends PhysicalObjectCircle{
 	private String myID;
-	private static JGColor myColor = JGColor.blue;
+	private static JGColor myColor = JGColor.red;
 	private PhysicalObject[] mywallarray;
 	private double myMass;
 	Springies s;
 
 
 	public Mass(String id, double xpos, double ypos,double xvel,double yvel,double mass,PhysicalObject[] wallarray, Springies springy){
-		super(id, 1, myColor, 5,1);
+		super(id, 1, myColor, 5,mass);
 		x=(int)xpos;
 		y=(int)ypos;
 		setPos(x, y);
 		myID = id;
 		mywallarray=wallarray;
 		myMass = mass;
+		//System.out.println(ypos);
 		s=springy;
 	}
 
-	public Mass(String id, int xpos, int ypos){
+	public Mass(String id, double xpos, double ypos){
 		super(id, 1, myColor, 5,1);
 	}
 
@@ -47,6 +48,7 @@ public class Mass extends PhysicalObjectCircle{
 
 	@Override
 	public void move(){
+		//System.out.println(y);
 		//		System.out.println(x + " " + y);
 		if (myBody.m_world != WorldManager.getWorld()) {
 
@@ -82,7 +84,7 @@ public class Mass extends PhysicalObjectCircle{
 	}
 
 	public void viscosity(){
-		final double VISCOSITY = .8;
+		final double VISCOSITY = 2;
 		Vec2 velocity = myBody.getLinearVelocity();	
 		if(velocity.x>0) setForce(-VISCOSITY, 0);
 		if(velocity.x<0) setForce(VISCOSITY, 0);
@@ -91,8 +93,8 @@ public class Mass extends PhysicalObjectCircle{
 
 	}
 	public void gravity(){
-		final double GRAVITY = 20;
-		setForce(0,20);
+		final double GRAVITY = 10;
+		setForce(0,GRAVITY);
 	}
 
 	public void centerOfMass(){

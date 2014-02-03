@@ -22,10 +22,9 @@ public class XML_Parser {
 		ArrayList<String[]> musclelist = new ArrayList<String[]>();
 		try {
 
-//			File file = new File("daintywalker.xml");
-//			File file = new File("lamp.xml");
+			File file = new File("example.xml");
 //			File file = new File("test.xml");
-			File file = new File("test.xml");
+//			File file = new File("test.xml");
 
 
 			DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
@@ -44,6 +43,10 @@ public class XML_Parser {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		//System.out.println(springlist.size());
+//		for(String[] s:musclelist){
+//			System.out.println(s[4]);
+//		}
 		muscles = musclelist;
 		masses=masslist;
 		springs=springlist;
@@ -75,10 +78,15 @@ public class XML_Parser {
 					String[] m = new String[5];
 					for (int i = 0; i < nodeMap.getLength(); i++) {
 						Node node = nodeMap.item(i);
+<<<<<<< HEAD
 						if(tempNode.getNodeName().equals("mass")){
+=======
+						if(tempNode.getNodeName().equals("mass") || tempNode.getNodeName().equals("fixed")){
+							//System.out.println(tempNode.getNodeName());
+>>>>>>> e07885e5b6022b664a5fcd0dfbcb435ddd58e782
 							if(node.getNodeName().equals("id")){
 								name=node.getNodeValue();
-								masslist.put(name, new Double[5]);
+								masslist.put(name, new Double[6]);
 								
 							}
 							else if(node.getNodeName().equals("x")){
@@ -107,14 +115,21 @@ public class XML_Parser {
 								temp[4]=Double.parseDouble(node.getNodeValue());
 								masslist.put(name, temp);
 							}
+							if(tempNode.getNodeName().equals("fixed")){
+								Double[] temp = masslist.get(name);
+								temp[5]=7.0;
+								masslist.put(name, temp);
+							}
 							
 						}
 						else if(tempNode.getNodeName().equals("spring")){
 							s[i]=node.getNodeValue();
+							
 						}
 						else if(tempNode.getNodeName().equals("muscle")){
-							m[i]=node.getNodeName();
-							System.out.println(node.getNodeName());
+							m[i]=node.getNodeValue();
+							//System.out.println(i + " " + node.getNodeName() + " : " + node.getNodeValue());
+							//System.out.println(node.getNodeName());
 						}
 						
 						

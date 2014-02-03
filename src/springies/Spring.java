@@ -18,16 +18,17 @@ public class Spring extends PhysicalObjectRect{
 
 	public Spring(Mass m1, Mass m2, double rlength, double springiness){
 
-		super(m1.toString()+m2.toString(), 3, JGColor.green, 1, rlength);
+		super(m1.toString()+m2.toString(), 3, JGColor.red, 1, rlength);
 		setPos((m1.x + m2.x), (m1.y+m2.x));
 		//		setForce((m1.x + m2.x)/2, (m1.y+m2.x)/2);
 		//System.out.println(x);
 		myM1=m1;
 		myM2=m2;
+		//System.out.println(m1.getID());
+		//System.out.println(m2.getID());
 		//System.out.println(m1.getID() + " : " + m2.getID());
 		springLength = rlength;
 		kValue = springiness;
-		//System.out.println(myM1.getName());
 //		paint();
 	}
 //	public ArrayList<Mass> getConnectedto(){
@@ -43,15 +44,21 @@ public class Spring extends PhysicalObjectRect{
 		double displacement = (springLength - getDistanceBetween(myM1,myM2));
 		double force = (kValue * displacement);
 		double angle = getAngleBetween(myM1,myM2);
+		//System.out.println(force + "force");
 		double xvector = Math.sin(angle) * force;
 		double yvector = Math.cos(angle) * force;
 		myM1.setForce(-xvector,-yvector);
 		myM2.setForce(xvector,yvector);
+		//System.out.println("disp: " + getDistanceBetween(myM1,myM2));
 	}
 
 	protected double getDistanceBetween(Mass start, Mass end){
 		Vec2 startpos = start.getBody().getPosition();
 		Vec2 endpos = end.getBody().getPosition();
+		
+		System.out.println(start.getID() + " : " + end.getID() + " : " +Math.sqrt(Math.pow(endpos.x - startpos.x, 2) + Math.pow(endpos.y - startpos.y,2)));
+		System.out.println();
+	
 		return Math.sqrt(Math.pow(endpos.x - startpos.x, 2) + Math.pow(endpos.y - startpos.y,2));
 	}
 	

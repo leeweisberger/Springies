@@ -78,7 +78,8 @@ public class Springies extends JGEngine
 		addWalls();
 
 		addMasses();
-//		addSprings();
+		addSprings();
+		addMuscles();
 		//		addFixedMassTest();
 		//addMassesTest();
 		//		addMusclesTest();
@@ -111,11 +112,24 @@ public class Springies extends JGEngine
 		p.parse();
 		HashMap<String,Double[]> masseslist = new HashMap<String,Double[]>();
 		masseslist=p.masses;
+<<<<<<< HEAD
 		System.out.println(masseslist.size());
 		for(String mass:masseslist.keySet()){
 //			System.out.println("hi");
 			m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],wallarray,this));	
 
+=======
+		for(String mass:masseslist.keySet()){   
+			
+			if(masseslist.get(mass)[5]!=null){
+				
+				m.put(mass, new FixedMass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1]));
+			}
+			else{
+				m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],wallarray,this));	
+			}
+			
+>>>>>>> e07885e5b6022b664a5fcd0dfbcb435ddd58e782
 		}
 	}
 
@@ -133,15 +147,9 @@ public class Springies extends JGEngine
 		for(String[] spring:springslist){  
 
 			Mass m1 = m.get(spring[0]);
-			//System.out.println(spring[0]);
-			//System.out.println("asdf " + m.get(spring[0]).getName());
+			//System.out.println(m1);
 			Mass m2 = m.get(spring[1]);
-			//System.out.println("1: " + m1.getName().substring(0, m1.getName().length()-1));
-			//System.out.println("2: " + m2.getName());
-			//			System.out.println(Double.parseDouble(spring[3]));
-			//			System.out.println(Double.parseDouble(spring[2]));
-			//			System.out.println(spring[0]);
-			//			System.out.println(spring[1]);
+			
 			PhysicalObject sp = new Spring(m1, m2, Double.parseDouble(spring[3]), Double.parseDouble(spring[2]));
 		}
 
@@ -152,10 +160,11 @@ public class Springies extends JGEngine
 		p.parse();
 		ArrayList<String[]> muscleslist=p.muscles;
 		for(String[] muscle: muscleslist){
-			Mass m1 = m.get(muscle[0]);
-			Mass m2 = m.get(muscle[1]);
+			//System.out.println(m.get(muscle[1]));
+			Mass m1 = m.get(muscle[1]);
+			Mass m2 = m.get(muscle[2]);
 			//			Need to add overloading to different classes to account for different inputs from XML
-			//			PhysicalObject muscleObj = new Muscle(m.get(muscle[0]), m.get(muscle[1]), Double.parseDouble(muscle[3]), Double.parseDouble(muscle[2]), 1.0);
+			PhysicalObject muscleObj = new Muscle(m1, m2, Double.parseDouble(muscle[4]), Double.parseDouble(muscle[3]), Double.parseDouble(muscle[0]));
 		}
 	}
 
