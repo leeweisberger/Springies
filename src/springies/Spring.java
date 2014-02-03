@@ -56,8 +56,8 @@ public class Spring extends PhysicalObjectRect{
 		Vec2 startpos = start.getBody().getPosition();
 		Vec2 endpos = end.getBody().getPosition();
 		
-		System.out.println(start.getID() + " : " + end.getID() + " : " +Math.sqrt(Math.pow(endpos.x - startpos.x, 2) + Math.pow(endpos.y - startpos.y,2)));
-		System.out.println();
+		//System.out.println(start.getID() + " : " + end.getID() + " : " +Math.sqrt(Math.pow(endpos.x - startpos.x, 2) + Math.pow(endpos.y - startpos.y,2)));
+		//System.out.println();
 	
 		return Math.sqrt(Math.pow(endpos.x - startpos.x, 2) + Math.pow(endpos.y - startpos.y,2));
 	}

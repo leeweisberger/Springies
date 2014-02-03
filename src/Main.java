@@ -31,8 +31,8 @@ public class Main
         jb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent arg0) {
-                sp.addMasses();
-                sp.addSprings();
+                //sp.addMasses();
+               // sp.addSprings();
             }
         });
         // container that will work with user's OS
