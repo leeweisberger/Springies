@@ -29,6 +29,7 @@ public class Mass extends PhysicalObjectCircle{
 		x=(int)xpos;
 		y=(int)ypos;
 		setPos(x, y);
+		this.setSpeed(xvel, yvel);
 		myID = id;
 		mywallarray=wallarray;
 		myMass = mass;
@@ -63,10 +64,10 @@ public class Mass extends PhysicalObjectCircle{
 		y = position.y;
 		
 		myRotation = -myBody.getAngle();
-		//viscosity();
-		//wallRepulsion();
+		viscosity();
+		wallRepulsion();
 		gravity();
-		//centerOfMass();
+		centerOfMass();
 		//		System.out.println(" njasndjs :     " + s.centerOfMass()[0] + " " + s.centerOfMass()[1]);
 	}
 

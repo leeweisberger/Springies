@@ -50,14 +50,11 @@ public class Spring extends PhysicalObjectRect{
 		double xvector = Math.sin(angle) * force;
 		double yvector = Math.cos(angle) * force;
 		myM1.setForce(-xvector,-yvector);
-		myM2.setForce(xvector,yvector);
+		//myM2.setForce(-xvector,-yvector);
 		//System.out.println("disp: " + getDistanceBetween(myM1,myM2));
 	}
 
-	protected double getDistanceBetween(Mass start, Mass end){
-		Vec2 startpos = start.getBody().getPosition();
-		Vec2 endpos = end.getBody().getPosition();
-		
+	protected double getDistanceBetween(Mass start, Mass end){	
 		//System.out.println(start.getID() + " : " + end.getID() + " : " +Math.sqrt(Math.pow(endpos.x - startpos.x, 2) + Math.pow(endpos.y - startpos.y,2)));
 		//System.out.println();
 		//System.out.println(" " + start.getID() + "  " + end.getID() + " " + Math.sqrt(Math.pow(endpos.x - startpos.x, 2) + Math.pow(endpos.y - startpos.y,2)));

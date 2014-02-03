@@ -163,10 +163,12 @@ public class Springies extends JGEngine
 		ArrayList<String[]> muscleslist=p.muscles;
 		for(String[] muscle: muscleslist){
 			//System.out.println(m.get(muscle[1]));
-			Mass m1 = m.get(muscle[1]);
+			Mass m1 = m.get(muscle[0]);
+			
 			Mass m2 = m.get(muscle[2]);
 			//			Need to add overloading to different classes to account for different inputs from XML
-			PhysicalObject muscleObj = new Muscle(m1, m2, Double.parseDouble(muscle[4]), Double.parseDouble(muscle[3]), Double.parseDouble(muscle[0]));
+			
+			PhysicalObject muscleObj = new Muscle(m1, m2, Double.parseDouble(muscle[3]), Double.parseDouble(muscle[4]), Double.parseDouble(muscle[1]));
 		}
 	}
 
