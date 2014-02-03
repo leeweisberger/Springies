@@ -22,10 +22,10 @@ public class XML_Parser {
 		ArrayList<String[]> musclelist = new ArrayList<String[]>();
 		try {
 
-
-			File file = new File("lamp.xml");
+//			File file = new File("daintywalker.xml");
+//			File file = new File("lamp.xml");
 //			File file = new File("test.xml");
-//			File file = new File("example.xml");
+			File file = new File("test.xml");
 
 
 			DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
@@ -76,7 +76,6 @@ public class XML_Parser {
 					for (int i = 0; i < nodeMap.getLength(); i++) {
 						Node node = nodeMap.item(i);
 						if(tempNode.getNodeName().equals("mass")){
-							
 							if(node.getNodeName().equals("id")){
 								name=node.getNodeValue();
 								masslist.put(name, new Double[5]);

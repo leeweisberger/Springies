@@ -59,11 +59,10 @@ public class Mass extends PhysicalObjectCircle{
 		y = position.y;
 		myRotation = -myBody.getAngle();
 		viscosity();
-		wallRepulsion();
-		gravity();
+		//		wallRepulsion();
+		//		gravity();
 		centerOfMass();
-		//		System.out.println(" njasndjs :     " + s.centerOfMass()[0] + " " + s.centerOfMass()[1]);
-
+		System.out.println(" njasndjs :     " + s.centerOfMass()[0] + " " + s.centerOfMass()[1]);
 
 	}
 
@@ -97,12 +96,13 @@ public class Mass extends PhysicalObjectCircle{
 	}
 
 	public void centerOfMass(){
-		double centerX = s.centerOfMass()[0];
-		double centerY = s.centerOfMass()[1];
+		double[] center = s.centerOfMass();
+		double centerX = center[0];
+		double centerY = center[1];
 		double xDist = this.x - centerX;
 		double yDist = this.y - centerY;
-		double xForce = 100/(xDist*xDist);
-		double yForce = 100/(yDist*yDist);
+		double xForce = 10000/(xDist*xDist);
+		double yForce = 10000/(yDist*yDist); 
 		if (Math.abs(xDist) < 10){
 			xForce = 0;
 		}

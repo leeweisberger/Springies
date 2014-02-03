@@ -74,11 +74,11 @@ public class Springies extends JGEngine
 		// so gravity is up in world coords and down in game coords
 		// so set all directions (e.g., forces, velocities) in world coords
 		WorldManager.initWorld(this);
-		//		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.2f));
+//		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.05f));
 		addWalls();
 
 		addMasses();
-		addSprings();
+//		addSprings();
 		//		addFixedMassTest();
 		//addMassesTest();
 		//		addMusclesTest();
@@ -111,9 +111,9 @@ public class Springies extends JGEngine
 		p.parse();
 		HashMap<String,Double[]> masseslist = new HashMap<String,Double[]>();
 		masseslist=p.masses;
-		for(String mass:masseslist.keySet()){   
-			
-			
+		System.out.println(masseslist.size());
+		for(String mass:masseslist.keySet()){
+//			System.out.println("hi");
 			m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],wallarray,this));	
 
 		}
