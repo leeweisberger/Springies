@@ -78,12 +78,8 @@ public class XML_Parser {
 					String[] m = new String[5];
 					for (int i = 0; i < nodeMap.getLength(); i++) {
 						Node node = nodeMap.item(i);
-<<<<<<< HEAD
-						if(tempNode.getNodeName().equals("mass")){
-=======
 						if(tempNode.getNodeName().equals("mass") || tempNode.getNodeName().equals("fixed")){
 							//System.out.println(tempNode.getNodeName());
->>>>>>> e07885e5b6022b664a5fcd0dfbcb435ddd58e782
 							if(node.getNodeName().equals("id")){
 								name=node.getNodeValue();
 								masslist.put(name, new Double[6]);

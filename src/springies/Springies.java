@@ -112,13 +112,6 @@ public class Springies extends JGEngine
 		p.parse();
 		HashMap<String,Double[]> masseslist = new HashMap<String,Double[]>();
 		masseslist=p.masses;
-<<<<<<< HEAD
-		System.out.println(masseslist.size());
-		for(String mass:masseslist.keySet()){
-//			System.out.println("hi");
-			m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],wallarray,this));	
-
-=======
 		for(String mass:masseslist.keySet()){   
 			
 			if(masseslist.get(mass)[5]!=null){
@@ -129,7 +122,6 @@ public class Springies extends JGEngine
 				m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],wallarray,this));	
 			}
 			
->>>>>>> e07885e5b6022b664a5fcd0dfbcb435ddd58e782
 		}
 	}
 
