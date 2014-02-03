@@ -81,6 +81,7 @@ public class Springies extends JGEngine
 		getEnvironment(p);
 		addMasses(p);
 		addSprings(p);
+	}
 		
 	public void getEnvironment(XML_Parser p){
 		
