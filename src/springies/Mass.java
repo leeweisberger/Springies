@@ -20,6 +20,8 @@ public class Mass extends PhysicalObjectCircle{
 	private static JGColor myColor = JGColor.red;
 	private PhysicalObject[] mywallarray;
 	private double myMass;
+	private boolean isFixed;
+	
 
 	Springies s;
 
@@ -64,11 +66,19 @@ public class Mass extends PhysicalObjectCircle{
 		y = position.y;
 		
 		myRotation = -myBody.getAngle();
+
 		viscosity();
 		wallRepulsion();
-		gravity();
+		if(!isFixed){
+			gravity();
+		}
 		centerOfMass();
+
 		//		System.out.println(" njasndjs :     " + s.centerOfMass()[0] + " " + s.centerOfMass()[1]);
+	}
+	
+	public void setIsFixed(boolean fixed){
+		isFixed = fixed;
 	}
 
 	@Override
@@ -99,18 +109,18 @@ public class Mass extends PhysicalObjectCircle{
 	    double GRAVITY = Integer.parseInt(s.grav[1]);
 		double ANGLE = Integer.parseInt(s.grav[0]);
 		ANGLE = toRadians(ANGLE);
-		//System.out.println(GRAVITY);
-		//System.out.println(ANGLE);
-		
+		//System.out.println(GRAVITY);		
 		setForce(GRAVITY*Math.cos(ANGLE),GRAVITY*Math.sin(ANGLE));
 	}
+	
 	public double toRadians(double ANGLE){
 		return ANGLE * (Math.PI/180);
 	}
 
 	public void centerOfMass(){
-		double centerX = s.centerOfMass()[0];
-		double centerY = s.centerOfMass()[1];
+		double[] center = s.centerOfMass();
+		double centerX = center[0];
+		double centerY = center[1];
 		double xDist = this.x - centerX;
 		double yDist = this.y - centerY;
 		//System.out.println("asdf " + s.centermass[1]);

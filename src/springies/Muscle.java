@@ -17,7 +17,7 @@ public class Muscle extends Spring {
 	
 	@Override
 	public void move(){
-		attachMasses();
+		springForces();
 		setLength((myRestLength * myAmplitude  *100* Math.sin(30 + (Math.PI / 2))));
 	}	
 }

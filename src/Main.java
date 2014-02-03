@@ -17,12 +17,13 @@ public class Main
     // constants
     public static final Dimension SIZE = new Dimension(800, 600);
     public static final String TITLE = "Springies!";
-
+    
     /**
      * main --- where the program starts
      * 
      * @param args
      */
+    
     public static void main (String args[])
     {
         // view of user's content

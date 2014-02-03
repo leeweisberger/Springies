@@ -16,13 +16,13 @@ public class FixedMass extends Mass{
 		y=(int)ypos;
 		setPos(x, y);
 		myID = id;
-		
+		setIsFixed(true);
 		
 	}
 		
 	
 	@Override
-	public void move(){
+	public void setForce(double x, double y){
 		
 		//if(myID.equals("m1"))System.out.println(this.y);
 	}

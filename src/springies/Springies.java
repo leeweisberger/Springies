@@ -71,45 +71,17 @@ public class Springies extends JGEngine
 	public void initGame ()
 	{
 		setFrameRate(60, 2);
-		// NOTE:
-		//   world coordinates have y pointing down
-		//   game coordinates have y pointing up
-		// so gravity is up in world coords and down in game coords
-		// so set all directions (e.g., forces, velocities) in world coords
+
 		WorldManager.initWorld(this);
 		//		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.2f));
 		XML_Parser p = new XML_Parser();
 		p.parse();
-		addWalls();
+		Walls w = new Walls(displayWidth(), displayHeight());
+		wallarray=w.addWalls();
 		getEnvironment(p);
 		addMasses(p);
 		addSprings(p);
-		addMuscles(p);
-		//		addFixedMassTest();
-		//addMassesTest();
-		//		addMusclesTest();
-		//addSpringsTest();
-
-
-	}
-
-//	public void addMassesTest(){
-//		XML_Parser p = new XML_Parser();
-//		p.parse();
-//		HashMap<String,Integer[]> masseslist = new HashMap<String,Integer[]>();
-//		masseslist=p.masses;
-//		//		m.put("m1", new Mass("m1",masseslist.get("m1")[0],masseslist.get("m1")[1]));
-//		//		m.put("m2", new Mass("m2",masseslist.get("m2")[0],masseslist.get("m2")[1]));
-//		Mass first = new Mass("m1",500,450,wallarray);
-//		Mass second = new Mass("m2",600,450,wallarray);
-//		//		Mass third = new Mass("m3",800,800);
-//		//		Mass fourth = new Mass("m4",800,100);
-//		m.put("m1", first);
-//		m.put("m2", second);
-//		//		m.put("m3", third);
-//		//		m.put("m4", fourth);
-//
-//	}
+		
 	public void getEnvironment(XML_Parser p){
 		
 		ArrayList<String[]> walllist = p.walls;
@@ -137,37 +109,21 @@ public class Springies extends JGEngine
 		}
 	}
 
-	public void addSpringsTest(){
-		PhysicalObject springone = new Spring(m.get("m1"),m.get("m2"),600,1);
-		//		PhysicalObject springtwo = new Spring(m.get("m2"),m.get("m3"),600,10);
-		//		PhysicalObject springthree = new Spring(m.get("m3"),m.get("m4"),600,10);
-		//		PhysicalObject springfour = new Spring(m.get("m4"),m.get("m1"),600,10);
-	}
-
 	public void addSprings(XML_Parser p){
 		
 		ArrayList<String[]> springslist=p.springs;  
 		for(String[] spring:springslist){  
-
 			Mass m1 = m.get(spring[0]);
-			//System.out.println(m1);
-			Mass m2 = m.get(spring[1]);
-			
+			Mass m2 = m.get(spring[1]);			
 			PhysicalObject sp = new Spring(m1, m2, Double.parseDouble(spring[3]), Double.parseDouble(spring[2]));
 		}
-
 	}
 
-	public void addMuscles(XML_Parser p){
-		
+	public void addMuscles(XML_Parser p){		
 		ArrayList<String[]> muscleslist=p.muscles;
 		for(String[] muscle: muscleslist){
-			//System.out.println(m.get(muscle[1]));
-			Mass m1 = m.get(muscle[0]);
-			
+			Mass m1 = m.get(muscle[0]);			
 			Mass m2 = m.get(muscle[2]);
-			//			Need to add overloading to different classes to account for different inputs from XML
-			
 			PhysicalObject muscleObj = new Muscle(m1, m2, Double.parseDouble(muscle[3]), Double.parseDouble(muscle[4]), Double.parseDouble(muscle[1]));
 		}
 	}
@@ -178,38 +134,6 @@ public class Springies extends JGEngine
 
 	public void addFixedMassTest(){
 		FixedMass first = new FixedMass("m1",400,450);
-	}
-
-	private void addWalls ()
-	{
-		// add walls to bounce off of
-		// NOTE: immovable objects must have no mass
-
-		final double WALL_MARGIN = 10;
-		final double WALL_THICKNESS = 10;
-		final double WALL_WIDTH = displayWidth() - WALL_MARGIN * 2 + WALL_THICKNESS;
-		final double WALL_HEIGHT = displayHeight() - WALL_MARGIN * 2 + WALL_THICKNESS;
-		//top wall
-		PhysicalObject wall = new PhysicalObjectRect("wall", 2, JGColor.green,
-				WALL_WIDTH, WALL_THICKNESS);
-		wall.setPos(displayWidth() / 2, WALL_MARGIN);
-		wallarray[0]=wall;
-		//bottom wall
-		wall = new PhysicalObjectRect("wall", 2, JGColor.green,
-				WALL_WIDTH, WALL_THICKNESS);
-		wall.setPos(displayWidth() / 2, displayHeight() - WALL_MARGIN);
-		wallarray[1]=wall;
-		//left wall
-		wall = new PhysicalObjectRect("wall", 2, JGColor.green,
-				WALL_THICKNESS, WALL_HEIGHT);
-		wall.setPos(WALL_MARGIN, displayHeight() / 2);
-		wallarray[2]=wall;
-		//right wall
-		wall = new PhysicalObjectRect("wall", 2, JGColor.green,
-				WALL_THICKNESS, WALL_HEIGHT);
-		wall.setPos(displayWidth() - WALL_MARGIN, displayHeight() / 2);
-		wallarray[3]=wall;
-
 	}
 
 	@Override
@@ -225,7 +149,6 @@ public class Springies extends JGEngine
 	@Override
 	public void paintFrame ()
 	{
-		// nothing to do
-		// the objects paint themselves
+
 	}
 }
