@@ -13,18 +13,19 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class XML_Parser {
-	HashMap<String,Integer[]> masses;
+	HashMap<String,Double[]> masses;
 	ArrayList<String[]> springs;
 	ArrayList<String[]> muscles;
 	public void parse() {
-		HashMap<String,Integer[]> masslist = new HashMap<String,Integer[]>();
+		HashMap<String,Double[]> masslist = new HashMap<String,Double[]>();
 		ArrayList<String[]> springlist = new ArrayList<String[]>();
 		ArrayList<String[]> musclelist = new ArrayList<String[]>();
 		try {
 
 
-			File file = new File("example.xml");
+			File file = new File("lamp.xml");
 //			File file = new File("test.xml");
+//			File file = new File("example.xml");
 
 
 			DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
@@ -50,7 +51,7 @@ public class XML_Parser {
 
 	}
 
-	public static void printNote(NodeList nodeList, HashMap<String,Integer[]> masslist,ArrayList<String[]> springlist, ArrayList<String[]> musclelist) {
+	public static void printNote(NodeList nodeList, HashMap<String,Double[]> masslist,ArrayList<String[]> springlist, ArrayList<String[]> musclelist) {
 		//System.out.println(nodeList.getLength());
 		String name ="";
 		for (int count = 0; count < nodeList.getLength(); count++) {
@@ -78,19 +79,36 @@ public class XML_Parser {
 							
 							if(node.getNodeName().equals("id")){
 								name=node.getNodeValue();
-								masslist.put(name, new Integer[2]);
+								masslist.put(name, new Double[5]);
 								
 							}
 							else if(node.getNodeName().equals("x")){
-								Integer[] temp = masslist.get(name);
-								temp[0]=Integer.parseInt(node.getNodeValue());
+								Double[] temp = masslist.get(name);
+								temp[0]=Double.parseDouble(node.getNodeValue());
 								masslist.put(name, temp);
 							}
 							else if(node.getNodeName().equals("y")){
-								Integer[] temp = masslist.get(name);
-								temp[1]=Integer.parseInt(node.getNodeValue());
+								Double[] temp = masslist.get(name);
+								temp[1]=Double.parseDouble(node.getNodeValue());
+								temp[2]=0.0; temp[3]=0.0; temp[4]=1.0;
 								masslist.put(name, temp);
 							}
+							else if(node.getNodeName().equals("vx")){
+								Double[] temp = masslist.get(name);
+								temp[2]=Double.parseDouble(node.getNodeValue());
+								masslist.put(name, temp);
+							}
+							else if(node.getNodeName().equals("vy")){
+								Double[] temp = masslist.get(name);
+								temp[3]=Double.parseDouble(node.getNodeValue());
+								masslist.put(name, temp);
+							}
+							else if(node.getNodeName().equals("mass")){
+								Double[] temp = masslist.get(name);
+								temp[4]=Double.parseDouble(node.getNodeValue());
+								masslist.put(name, temp);
+							}
+							
 						}
 						else if(tempNode.getNodeName().equals("spring")){
 							s[i]=node.getNodeValue();
@@ -99,6 +117,7 @@ public class XML_Parser {
 							m[i]=node.getNodeName();
 							System.out.println(node.getNodeName());
 						}
+						
 						
 					}
 
