@@ -11,7 +11,7 @@ public class Muscle extends Spring {
 		//setColor(JGColor.red);
 		myAmplitude = amplitude;
 		myRestLength = originalRLength;
-		System.out.println(amplitude);
+		
 	}
 	
 	@Override

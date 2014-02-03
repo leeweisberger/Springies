@@ -114,9 +114,14 @@ public class Springies extends JGEngine
 		masseslist=p.masses;
 		for(String mass:masseslist.keySet()){   
 			
+			if(masseslist.get(mass)[5]!=null){
+				
+				m.put(mass, new FixedMass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1]));
+			}
+			else{
+				m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],wallarray,this));	
+			}
 			
-			m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],wallarray,this));	
-
 		}
 	}
 

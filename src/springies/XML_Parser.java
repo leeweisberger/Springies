@@ -23,7 +23,7 @@ public class XML_Parser {
 		try {
 
 
-			File file = new File("ball.xml");
+			File file = new File("example.xml");
 //			File file = new File("test.xml");
 //			File file = new File("example.xml");
 
@@ -83,7 +83,7 @@ public class XML_Parser {
 							//System.out.println(tempNode.getNodeName());
 							if(node.getNodeName().equals("id")){
 								name=node.getNodeValue();
-								masslist.put(name, new Double[5]);
+								masslist.put(name, new Double[6]);
 								
 							}
 							else if(node.getNodeName().equals("x")){
@@ -110,6 +110,11 @@ public class XML_Parser {
 							else if(node.getNodeName().equals("mass")){
 								Double[] temp = masslist.get(name);
 								temp[4]=Double.parseDouble(node.getNodeValue());
+								masslist.put(name, temp);
+							}
+							if(tempNode.getNodeName().equals("fixed")){
+								Double[] temp = masslist.get(name);
+								temp[5]=7.0;
 								masslist.put(name, temp);
 							}
 							
