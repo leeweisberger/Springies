@@ -61,15 +61,13 @@ public class Mass extends PhysicalObjectCircle{
 		Vec2 position = myBody.getPosition();
 		x = position.x;
 		y = position.y;
-		myRotation = -myBody.getAngle();
-		viscosity();
-		wallRepulsion();
-		gravity();
-		centerOfMass();
-		//		System.out.println(" njasndjs :     " + s.centerOfMass()[0] + " " + s.centerOfMass()[1]);
 		
-
-
+		myRotation = -myBody.getAngle();
+		//viscosity();
+		//wallRepulsion();
+		gravity();
+		//centerOfMass();
+		//		System.out.println(" njasndjs :     " + s.centerOfMass()[0] + " " + s.centerOfMass()[1]);
 	}
 
 	@Override
@@ -100,8 +98,8 @@ public class Mass extends PhysicalObjectCircle{
 	    double GRAVITY = Integer.parseInt(s.grav[1]);
 		double ANGLE = Integer.parseInt(s.grav[0]);
 		ANGLE = toRadians(ANGLE);
-		System.out.println(GRAVITY);
-		System.out.println(ANGLE);
+		//System.out.println(GRAVITY);
+		//System.out.println(ANGLE);
 		
 		setForce(GRAVITY*Math.cos(ANGLE),GRAVITY*Math.sin(ANGLE));
 	}
@@ -114,8 +112,9 @@ public class Mass extends PhysicalObjectCircle{
 		double centerY = s.centerOfMass()[1];
 		double xDist = this.x - centerX;
 		double yDist = this.y - centerY;
-		double xForce = 100/(xDist*xDist);
-		double yForce = 100/(yDist*yDist);
+		//System.out.println("asdf " + s.centermass[1]);
+		double xForce = Integer.parseInt(s.centermass[1])/(Math.pow(xDist, Double.parseDouble(s.centermass[0])));
+		double yForce = Integer.parseInt(s.centermass[1])/(Math.pow(yDist, Double.parseDouble(s.centermass[0])));
 		if (Math.abs(xDist) < 10){
 			xForce = 0;
 		}
@@ -158,8 +157,8 @@ public class Mass extends PhysicalObjectCircle{
 			else if(i==2){
 				int mag = Integer.parseInt(s.walls.get(3)[2]);
 				double scale = Math.pow(dist, Double.parseDouble(s.walls.get(3)[0]));
-				System.out.println("sclae " + mag/scale);
-				setForce(1,0);	
+				
+				setForce(mag/scale,0);	
 			}
 			//right
 			else if(i==3){

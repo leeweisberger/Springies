@@ -1,6 +1,9 @@
 package springies;
 
+import org.jbox2d.common.Vec2;
+
 import jboxGlue.PhysicalObjectCircle;
+import jboxGlue.WorldManager;
 import jgame.JGColor;
 
 public class FixedMass extends Mass{
@@ -20,7 +23,8 @@ public class FixedMass extends Mass{
 	
 	@Override
 	public void move(){
-		//System.out.println("fixed: " + myID);
+		
+		//if(myID.equals("m1"))System.out.println(this.y);
 	}
 	public String getID(){
 		return myID;

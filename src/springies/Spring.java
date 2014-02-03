@@ -42,7 +42,9 @@ public class Spring extends PhysicalObjectRect{
 	protected void attachMasses(){
 //		System.out.println()
 		double displacement = (springLength - getDistanceBetween(myM1,myM2));
-		double force = (kValue * displacement);
+		System.out.println(getDistanceBetween(myM1,myM2));
+		
+		double force = (kValue *  displacement);
 		double angle = getAngleBetween(myM1,myM2);
 		//System.out.println(force + "force");
 		double xvector = Math.sin(angle) * force;
@@ -58,8 +60,8 @@ public class Spring extends PhysicalObjectRect{
 		
 		//System.out.println(start.getID() + " : " + end.getID() + " : " +Math.sqrt(Math.pow(endpos.x - startpos.x, 2) + Math.pow(endpos.y - startpos.y,2)));
 		//System.out.println();
-	
-		return Math.sqrt(Math.pow(endpos.x - startpos.x, 2) + Math.pow(endpos.y - startpos.y,2));
+		//System.out.println(" " + start.getID() + "  " + end.getID() + " " + Math.sqrt(Math.pow(endpos.x - startpos.x, 2) + Math.pow(endpos.y - startpos.y,2)));
+		return Math.sqrt(Math.pow(end.x - start.x, 2) + Math.pow(end.y - start.y,2));
 	}
 	
 	protected double getAngleBetween(Mass start, Mass end){
