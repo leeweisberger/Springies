@@ -58,10 +58,15 @@ public class Mass extends PhysicalObjectCircle{
 		setJGamePosition();
 		doGravity();
 		doWallRepulsion();
-		viscosity();		
-		if(!isFixed){
-			gravity();
-		}
+		doViscosity();		
+		if(!isFixed)
+			doGravity();
+	}
+
+	private void doViscosity() {
+		Viscosity v = new Viscosity();
+		Vec2 velocity = myBody.getLinearVelocity();	
+		setForce(v.viscosity(velocity.x, velocity.y)[0],v.viscosity(velocity.x, velocity.y)[1]);
 	}
 
 	private void doGravity() {
@@ -115,25 +120,7 @@ public class Mass extends PhysicalObjectCircle{
 
 	}
 
-	public void viscosity(){
-		final double VISCOSITY = Double.parseDouble(Forces.viscosity);
-		Vec2 velocity = myBody.getLinearVelocity();	
-		if(velocity.x>0) setForce(-VISCOSITY, 0);
-		if(velocity.x<0) setForce(VISCOSITY, 0);
-		if(velocity.y>0) setForce(0,-VISCOSITY);
-		if(velocity.y<0) setForce(0, VISCOSITY);
 
-	}
-	public void gravity(){
-	    double GRAVITY = Integer.parseInt(Forces.grav[1]);
-		double ANGLE = Integer.parseInt(Forces.grav[0]);
-		ANGLE = toRadians(ANGLE);	
-		setForce(GRAVITY*Math.cos(ANGLE),GRAVITY*Math.sin(ANGLE));
-	}
-	
-	public double toRadians(double ANGLE){
-		return ANGLE * (Math.PI/180);
-	}
 
 	public void centerOfMass(){
 		double[] center = s.centerOfMass();

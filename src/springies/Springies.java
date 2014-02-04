@@ -126,7 +126,7 @@ public class Springies extends JGEngine
 		WorldManager.getWorld().step(1f, 1);
 		moveObjects();
 		checkCollision(2,1);		
-		if(this.getKey(KeyDown))
+		//if(this.getKey(KeyDown))
 	}
 
 	@Override
