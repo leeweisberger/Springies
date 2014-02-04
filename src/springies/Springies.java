@@ -36,6 +36,8 @@ public class Springies extends JGEngine
 	@Override
 	public void initCanvas ()
 	{
+		
+		
 		// I have no idea what tiles do...
 		setCanvasSettings(1, // width of the canvas in tiles
 				1, // height of the canvas in tiles
@@ -123,8 +125,8 @@ public class Springies extends JGEngine
 		// update game objects
 		WorldManager.getWorld().step(1f, 1);
 		moveObjects();
-		checkCollision(2,1);
-
+		checkCollision(2,1);		
+		if(this.getKey(KeyDown))
 	}
 
 	@Override

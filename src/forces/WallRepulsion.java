@@ -1,4 +1,4 @@
-package springies;
+package forces;
 
 import java.util.ArrayList;
 

@@ -6,6 +6,7 @@ import jboxGlue.WorldManager;
 
 import org.jbox2d.common.Vec2;
 
+import forces.WallRepulsion;
 import jgame.JGColor;
 import jgame.JGObject;
 import jgame.platform.JGEngine;
@@ -21,6 +22,7 @@ public class Mass extends PhysicalObjectCircle{
 	private PhysicalObject[] mywallarray;
 	private double myMass;
 	private boolean isFixed;
+	private int force;
 	Springies s;
 
 
@@ -47,12 +49,14 @@ public class Mass extends PhysicalObjectCircle{
 	protected double getMass(){
 		return myMass;
 	}
+	public void setForceKey(int key){
+		force=key;
+	}
 
 	@Override
 	public void move(){
 		setJGamePosition();
-		
-		myRotation = -myBody.getAngle();
+		doGravity();
 		doWallRepulsion();
 		viscosity();		
 		if(!isFixed){
@@ -60,15 +64,28 @@ public class Mass extends PhysicalObjectCircle{
 		}
 	}
 
+	private void doGravity() {
+		Gravity grav = new Gravity();
+		setForce(grav.gravity()[0]*Math.cos(grav.gravity()[1]),grav.gravity()[0]*Math.sin(grav.gravity()[1]));
+	}
+	
+//	private void toggleForces(){
+//		if (getKey(key_up) && y>0) 	{
+//			ydir=-1;yfacing=-1;xfacing=0;
+//		}
+//	}
+
 	private void setJGamePosition() {
 		if (myBody.m_world != WorldManager.getWorld()) {
 			remove();
 			return;
 		}
+		
 		// copy the position and rotation from the JBox world to the JGame world
 		Vec2 position = myBody.getPosition();
 		x = position.x;
 		y = position.y;
+		myRotation = -myBody.getAngle();
 	}
 
 	private void doWallRepulsion() {
