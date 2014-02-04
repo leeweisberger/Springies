@@ -201,12 +201,13 @@ public class XML_Parser {
 						}
 						else if(tempNode.getNodeName().equals("viscosity") ){							
 							 myviscosity = node.getNodeValue();
-							 System.out.println(myviscosity);
+							 //System.out.println(myviscosity);
 						}
 						else if(tempNode.getNodeName().equals("centermass") ){							
 							centermass[i] = node.getNodeValue();
 						}
-						else if(tempNode.getNodeName().equals("wall") ){							
+						else if(tempNode.getNodeName().equals("wall") ){
+							//System.out.println("wall " + node.getNodeName() + " " + node.getNodeValue());
 							wall[i] = node.getNodeValue();
 						}
 						

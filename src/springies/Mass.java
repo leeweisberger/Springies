@@ -21,9 +21,6 @@ public class Mass extends PhysicalObjectCircle{
 	private PhysicalObject[] mywallarray;
 	private double myMass;
 	private boolean isFixed;
-	
-
-	Forces f;
 	Springies s;
 
 
@@ -36,10 +33,7 @@ public class Mass extends PhysicalObjectCircle{
 		myID = id;
 		mywallarray=wallarray;
 		myMass = mass;
-		//System.out.println(ypos);
-		f = new Forces();
 		s = springy;
-		System.out.println("grave " + f.viscosity);
 	}
 
 	public Mass(String id, double xpos, double ypos){
@@ -69,15 +63,19 @@ public class Mass extends PhysicalObjectCircle{
 		y = position.y;
 		
 		myRotation = -myBody.getAngle();
-
-		viscosity();
-		wallRepulsion();
+		doWallRepulsion();
+		viscosity();		
 		if(!isFixed){
 			gravity();
 		}
-		//centerOfMass();
+	}
 
-		//		System.out.println(" njasndjs :     " + s.centerOfMass()[0] + " " + s.centerOfMass()[1]);
+	private void doWallRepulsion() {
+		WallRepulsion wr = new WallRepulsion(mywallarray, this.x, this.y, Forces.walls);
+		ArrayList<double[]> wallForces = wr.wallRepulsion();
+		for(double[] wallForce : wallForces){
+			setForce(wallForce[0],wallForce[1]);
+		}
 	}
 	
 	public void setIsFixed(boolean fixed){
@@ -100,7 +98,7 @@ public class Mass extends PhysicalObjectCircle{
 	}
 
 	public void viscosity(){
-		final double VISCOSITY = Double.parseDouble(f.viscosity);
+		final double VISCOSITY = Double.parseDouble(Forces.viscosity);
 		Vec2 velocity = myBody.getLinearVelocity();	
 		if(velocity.x>0) setForce(-VISCOSITY, 0);
 		if(velocity.x<0) setForce(VISCOSITY, 0);
@@ -150,40 +148,7 @@ public class Mass extends PhysicalObjectCircle{
 
 
 
-	public void wallRepulsion(){
-		//		System.out.println("hi");
-		for(int i=0;i<mywallarray.length;i++){
-			double dist = getDistanceBetween(this,mywallarray[i],i);
-			//ceiling
-			if(i==0){
-				int mag = Integer.parseInt(f.walls.get(0)[2]);
-				double scale = Math.pow(dist, Double.parseDouble(f.walls.get(0)[0]));
-				
-				setForce(0, mag/scale);	
-			}
-			//floor
-			else if(i==1){
-				int mag = Integer.parseInt(f.walls.get(2)[2]);
-				double scale = Math.pow(dist, Double.parseDouble(f.walls.get(2)[0]));
-				
-				setForce(0, -mag/scale);	
-			}
-			//left
-			else if(i==2){
-				int mag = Integer.parseInt(f.walls.get(3)[2]);
-				double scale = Math.pow(dist, Double.parseDouble(f.walls.get(3)[0]));
-				
-				setForce(mag/scale,0);	
-			}
-			//right
-			else if(i==3){
-				int mag = Integer.parseInt(f.walls.get(1)[2]);
-				double scale = Math.pow(dist, Double.parseDouble(f.walls.get(1)[0]));
-				setForce(-mag/scale,0);	
-			}
-		}
-
-	}
+	
 
 	protected double getDistanceBetween(Mass start, double[] centerOfMass){
 		Vec2 startpos = start.getBody().getPosition();
@@ -191,22 +156,6 @@ public class Mass extends PhysicalObjectCircle{
 	}
 
 
-	protected double getDistanceBetween(PhysicalObject start, PhysicalObject end,int whichwall){
-		double wallpos=0;
-		double masspos=0;
-		if(whichwall==1) 
-			wallpos = end.getBody().getPosition().y-15;
-		else if(whichwall==0)wallpos = end.getBody().getPosition().y+15;
-		if(whichwall<2)masspos = start.getBody().getPosition().y;
-		if(whichwall==2)wallpos = end.getBody().getPosition().x+15;
-		if(whichwall==3)wallpos = end.getBody().getPosition().x-15;
-		if(whichwall>1)masspos = start.getBody().getPosition().x;
-		//System.out.println(wally-massy);
-		double diff = Math.abs(wallpos-masspos);
-		if((diff)<1)return 1;
-		return diff;
-
-	}
 
 
 }
