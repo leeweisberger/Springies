@@ -23,10 +23,9 @@ public class Mass extends PhysicalObjectCircle{
 	private double myMass;
 	private boolean isFixed;
 	private int force;
-	Springies s;
 
 
-	public Mass(String id, double xpos, double ypos,double xvel,double yvel,double mass,PhysicalObject[] wallarray, Springies springy){
+	public Mass(String id, double xpos, double ypos,double xvel,double yvel,double mass,PhysicalObject[] wallarray){
 		super(id, 1, myColor, 5,mass);
 		x=(int)xpos;
 		y=(int)ypos;
@@ -35,7 +34,6 @@ public class Mass extends PhysicalObjectCircle{
 		myID = id;
 		mywallarray=wallarray;
 		myMass = mass;
-		s = springy;
 	}
 
 	public Mass(String id, double xpos, double ypos){
@@ -56,11 +54,16 @@ public class Mass extends PhysicalObjectCircle{
 	@Override
 	public void move(){
 		setJGamePosition();
-		doGravity();
 		doWallRepulsion();
-		doViscosity();		
+		doViscosity();	
+		doCenterOfMass();		
 		if(!isFixed)
 			doGravity();
+	}
+
+	private void doCenterOfMass() {
+		CenterOfMass c = new CenterOfMass();
+		setForce(c.centerOfMass(x, y)[0],c.centerOfMass(x, y)[1]);
 	}
 
 	private void doViscosity() {
@@ -117,36 +120,8 @@ public class Mass extends PhysicalObjectCircle{
 			velocity.y *= -DAMPING_FACTOR;
 
 		myBody.setLinearVelocity(velocity);
-
 	}
 
-
-
-	public void centerOfMass(){
-		double[] center = s.centerOfMass();
-		double centerX = center[0];
-		double centerY = center[1];
-		double xDist = this.x - centerX;
-		double yDist = this.y - centerY;
-		//System.out.println("asdf " + s.centermass[1]);
-		double xForce = Integer.parseInt(s.centermass[1])/(Math.pow(xDist, Double.parseDouble(s.centermass[0])));
-		double yForce = Integer.parseInt(s.centermass[1])/(Math.pow(yDist, Double.parseDouble(s.centermass[0])));
-		if (Math.abs(xDist) < 10){
-			xForce = 0;
-		}
-		if (Math.abs(yDist) < 10){
-			yForce = 0;
-		}
-		//		System.out.println(xForce + " " + yForce);
-		if(xDist > 0) setForce(-xForce,0);
-		if(xDist < 0) setForce(xForce,0);
-		if(yDist > 0) setForce(0,-yForce);
-		if(yDist < 0){
-			setForce(0,yForce);
-			//System.out.println(this.y);
-		}
-
-	}
 
 	protected double getDistanceBetween(Mass start, double[] centerOfMass){
 		Vec2 startpos = start.getBody().getPosition();

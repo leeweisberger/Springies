@@ -19,7 +19,7 @@ public class Springies extends JGEngine
 
 {
 	PhysicalObject[] wallarray = new PhysicalObjectRect[4];
-	private HashMap<String,Mass> m = new HashMap<String,Mass>();
+	static HashMap<String,Mass> m = new HashMap<String,Mass>();
 	private String[] m2;
 	static String[] grav;
 	static String[] centermass;
@@ -48,14 +48,7 @@ public class Springies extends JGEngine
 				null); // standard font -> use default font
 	}
 
-	public Vec2 setGrav() {
-		//		Get read in values from XML
-		double gravityDirectionRadians = Math.toRadians(90);
-//		System.out.println((float)(1 * Math.sin(gravityDirectionRadians)));
-//		System.out.println((float)(1 * Math.cos(gravityDirectionRadians)));
-		Vec2 gravityVector = new Vec2((float)(20 * Math.cos(gravityDirectionRadians)),(float)(20 * Math.sin(gravityDirectionRadians)));
-		return gravityVector;
-	}
+
 
 	public double[] centerOfMass(){
 		double totalx = 0;
@@ -95,7 +88,7 @@ public class Springies extends JGEngine
 				m.put(mass, new FixedMass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1]));
 			}
 			else{
-				m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],wallarray,this));	
+				m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],wallarray));	
 			}
 		}
 	}
