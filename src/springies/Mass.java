@@ -50,17 +50,7 @@ public class Mass extends PhysicalObjectCircle{
 
 	@Override
 	public void move(){
-		//System.out.println(y);
-		//		System.out.println(x + " " + y);
-		if (myBody.m_world != WorldManager.getWorld()) {
-
-			remove();
-			return;
-		}
-		// copy the position and rotation from the JBox world to the JGame world
-		Vec2 position = myBody.getPosition();
-		x = position.x;
-		y = position.y;
+		setJGamePosition();
 		
 		myRotation = -myBody.getAngle();
 		doWallRepulsion();
@@ -68,6 +58,17 @@ public class Mass extends PhysicalObjectCircle{
 		if(!isFixed){
 			gravity();
 		}
+	}
+
+	private void setJGamePosition() {
+		if (myBody.m_world != WorldManager.getWorld()) {
+			remove();
+			return;
+		}
+		// copy the position and rotation from the JBox world to the JGame world
+		Vec2 position = myBody.getPosition();
+		x = position.x;
+		y = position.y;
 	}
 
 	private void doWallRepulsion() {
@@ -107,11 +108,9 @@ public class Mass extends PhysicalObjectCircle{
 
 	}
 	public void gravity(){
-	    double GRAVITY = Integer.parseInt(f.grav[1]);
-		double ANGLE = Integer.parseInt(f.grav[0]);
-		
-		ANGLE = toRadians(ANGLE);
-		//System.out.println(GRAVITY);		
+	    double GRAVITY = Integer.parseInt(Forces.grav[1]);
+		double ANGLE = Integer.parseInt(Forces.grav[0]);
+		ANGLE = toRadians(ANGLE);	
 		setForce(GRAVITY*Math.cos(ANGLE),GRAVITY*Math.sin(ANGLE));
 	}
 	
@@ -144,11 +143,6 @@ public class Mass extends PhysicalObjectCircle{
 		}
 
 	}
-
-
-
-
-	
 
 	protected double getDistanceBetween(Mass start, double[] centerOfMass){
 		Vec2 startpos = start.getBody().getPosition();
