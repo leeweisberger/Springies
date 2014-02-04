@@ -23,6 +23,7 @@ public class Mass extends PhysicalObjectCircle{
 	private boolean isFixed;
 	
 
+	Forces f;
 	Springies s;
 
 
@@ -36,7 +37,9 @@ public class Mass extends PhysicalObjectCircle{
 		mywallarray=wallarray;
 		myMass = mass;
 		//System.out.println(ypos);
-		s=springy;
+		f = new Forces();
+		s = springy;
+		System.out.println("grave " + f.viscosity);
 	}
 
 	public Mass(String id, double xpos, double ypos){
@@ -72,7 +75,7 @@ public class Mass extends PhysicalObjectCircle{
 		if(!isFixed){
 			gravity();
 		}
-		centerOfMass();
+		//centerOfMass();
 
 		//		System.out.println(" njasndjs :     " + s.centerOfMass()[0] + " " + s.centerOfMass()[1]);
 	}
@@ -97,7 +100,7 @@ public class Mass extends PhysicalObjectCircle{
 	}
 
 	public void viscosity(){
-		final double VISCOSITY = Double.parseDouble(s.viscosity);
+		final double VISCOSITY = Double.parseDouble(f.viscosity);
 		Vec2 velocity = myBody.getLinearVelocity();	
 		if(velocity.x>0) setForce(-VISCOSITY, 0);
 		if(velocity.x<0) setForce(VISCOSITY, 0);
@@ -106,8 +109,9 @@ public class Mass extends PhysicalObjectCircle{
 
 	}
 	public void gravity(){
-	    double GRAVITY = Integer.parseInt(s.grav[1]);
-		double ANGLE = Integer.parseInt(s.grav[0]);
+	    double GRAVITY = Integer.parseInt(f.grav[1]);
+		double ANGLE = Integer.parseInt(f.grav[0]);
+		
 		ANGLE = toRadians(ANGLE);
 		//System.out.println(GRAVITY);		
 		setForce(GRAVITY*Math.cos(ANGLE),GRAVITY*Math.sin(ANGLE));
@@ -152,29 +156,29 @@ public class Mass extends PhysicalObjectCircle{
 			double dist = getDistanceBetween(this,mywallarray[i],i);
 			//ceiling
 			if(i==0){
-				int mag = Integer.parseInt(s.walls.get(0)[2]);
-				double scale = Math.pow(dist, Double.parseDouble(s.walls.get(0)[0]));
+				int mag = Integer.parseInt(f.walls.get(0)[2]);
+				double scale = Math.pow(dist, Double.parseDouble(f.walls.get(0)[0]));
 				
 				setForce(0, mag/scale);	
 			}
 			//floor
 			else if(i==1){
-				int mag = Integer.parseInt(s.walls.get(2)[2]);
-				double scale = Math.pow(dist, Double.parseDouble(s.walls.get(2)[0]));
+				int mag = Integer.parseInt(f.walls.get(2)[2]);
+				double scale = Math.pow(dist, Double.parseDouble(f.walls.get(2)[0]));
 				
 				setForce(0, -mag/scale);	
 			}
 			//left
 			else if(i==2){
-				int mag = Integer.parseInt(s.walls.get(3)[2]);
-				double scale = Math.pow(dist, Double.parseDouble(s.walls.get(3)[0]));
+				int mag = Integer.parseInt(f.walls.get(3)[2]);
+				double scale = Math.pow(dist, Double.parseDouble(f.walls.get(3)[0]));
 				
 				setForce(mag/scale,0);	
 			}
 			//right
 			else if(i==3){
-				int mag = Integer.parseInt(s.walls.get(1)[2]);
-				double scale = Math.pow(dist, Double.parseDouble(s.walls.get(1)[0]));
+				int mag = Integer.parseInt(f.walls.get(1)[2]);
+				double scale = Math.pow(dist, Double.parseDouble(f.walls.get(1)[0]));
 				setForce(-mag/scale,0);	
 			}
 		}

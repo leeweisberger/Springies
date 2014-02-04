@@ -20,10 +20,11 @@ public class Springies extends JGEngine
 {
 	PhysicalObject[] wallarray = new PhysicalObjectRect[4];
 	private HashMap<String,Mass> m = new HashMap<String,Mass>();
-	String[] grav;
-	String[] centermass;
-	String viscosity;
-	ArrayList<String[]> walls = new ArrayList<String[]>();
+	private String[] m2;
+	static String[] grav;
+	static String[] centermass;
+	static String viscosity;
+	static ArrayList<String[]> walls = new ArrayList<String[]>();
 	public Springies ()
 	{
 		// set the window size
@@ -71,42 +72,29 @@ public class Springies extends JGEngine
 	public void initGame ()
 	{
 		setFrameRate(60, 2);
-
 		WorldManager.initWorld(this);
 		//		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.2f));
 		XML_Parser p = new XML_Parser();
 		p.parse();
 		Walls w = new Walls(displayWidth(), displayHeight());
 		wallarray=w.addWalls();
-		getEnvironment(p);
+		Forces f = new Forces();
+		f.getEnvironment();
 		addMasses(p);
 		addSprings(p);
 	}
-		
-	public void getEnvironment(XML_Parser p){
-		
-		ArrayList<String[]> walllist = p.walls;
-		grav = p.mygrav;
-		centermass = p.mycentermass;
-		viscosity = p.myviscosity;	
-		walls = p.walls;
-		
-	}
+			
 	public void addMasses (XML_Parser p)
-	{
-		
+	{		
 		HashMap<String,Double[]> masseslist = new HashMap<String,Double[]>();
 		masseslist=p.masses;
-		for(String mass:masseslist.keySet()){   
-			
-			if(masseslist.get(mass)[5]!=null){
-				
+		for(String mass:masseslist.keySet()){   			
+			if(masseslist.get(mass)[5]!=null){				
 				m.put(mass, new FixedMass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1]));
 			}
 			else{
 				m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],wallarray,this));	
 			}
-			
 		}
 	}
 
@@ -127,14 +115,6 @@ public class Springies extends JGEngine
 			Mass m2 = m.get(muscle[2]);
 			PhysicalObject muscleObj = new Muscle(m1, m2, Double.parseDouble(muscle[3]), Double.parseDouble(muscle[4]), Double.parseDouble(muscle[1]));
 		}
-	}
-
-	public void addMusclesTest(){
-		PhysicalObject muscleone = new Muscle(m.get("m1"),m.get("m2"),100,1,10);
-	}
-
-	public void addFixedMassTest(){
-		FixedMass first = new FixedMass("m1",400,450);
 	}
 
 	@Override

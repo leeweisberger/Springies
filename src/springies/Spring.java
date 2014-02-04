@@ -47,7 +47,7 @@ public class Spring extends PhysicalObjectRect{
 		double force = (kValue *  displacement);
 		double angle = getAngleBetween(myM1,myM2);
 		//System.out.println(force + "force");
-		System.out.println(force);
+		//System.out.println(force);
 		double xvector = Math.sin(angle) * force;
 		double yvector = Math.cos(angle) * force;
 		myM1.setForce(-xvector,-yvector);
