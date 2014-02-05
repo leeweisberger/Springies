@@ -6,7 +6,6 @@ import jboxGlue.WorldManager;
 
 import org.jbox2d.common.Vec2;
 
-import forces.WallRepulsion;
 import jgame.JGColor;
 import jgame.JGObject;
 import jgame.platform.JGEngine;
@@ -55,9 +54,9 @@ public class Mass extends PhysicalObjectCircle{
 	public void move(){
 		setJGamePosition();
 		doWallRepulsion();
-		doViscosity();	
-		doCenterOfMass();		
-		if(!isFixed)
+		if(Springies.viscToggle==1)doViscosity();	
+		if(Springies.massToggle==1)doCenterOfMass();		
+		if(!isFixed && Springies.gravToggle==1)
 			doGravity();
 	}
 
@@ -75,13 +74,7 @@ public class Mass extends PhysicalObjectCircle{
 	private void doGravity() {
 		Gravity grav = new Gravity();
 		setForce(grav.gravity()[0]*Math.cos(grav.gravity()[1]),grav.gravity()[0]*Math.sin(grav.gravity()[1]));
-	}
-	
-//	private void toggleForces(){
-//		if (getKey(key_up) && y>0) 	{
-//			ydir=-1;yfacing=-1;xfacing=0;
-//		}
-//	}
+	}	
 
 	private void setJGamePosition() {
 		if (myBody.m_world != WorldManager.getWorld()) {
@@ -97,7 +90,7 @@ public class Mass extends PhysicalObjectCircle{
 	}
 
 	private void doWallRepulsion() {
-		WallRepulsion wr = new WallRepulsion(mywallarray, this.x, this.y, Forces.walls);
+		WallRepulsion wr = new WallRepulsion(mywallarray, x, y, Forces.walls);
 		ArrayList<double[]> wallForces = wr.wallRepulsion();
 		for(double[] wallForce : wallForces){
 			setForce(wallForce[0],wallForce[1]);
@@ -127,8 +120,6 @@ public class Mass extends PhysicalObjectCircle{
 		Vec2 startpos = start.getBody().getPosition();
 		return Math.sqrt(Math.pow(centerOfMass[0] - startpos.x, 2) + Math.pow(centerOfMass[1] - startpos.y,2));
 	}
-
-
 
 
 }

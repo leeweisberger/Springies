@@ -1,4 +1,4 @@
-package forces;
+package springies;
 
 import java.util.ArrayList;
 
@@ -19,12 +19,14 @@ public class WallRepulsion{
 	public ArrayList<double[]> wallRepulsion(){
 		//		System.out.println("hi");
 		ArrayList<double[]> forces = new ArrayList<double[]>();
+		
 		for(int i=0;i<myWallArray.length;i++){
+			int mag=0;
 			double[] force = new double[2];
 			double dist = getDistanceBetween(myWallArray[i],i);
 			//ceiling
 			if(i==0){
-				int mag = Integer.parseInt(myWalls.get(0)[2]);
+				if(Springies.wallToggle[0]==1) mag = Integer.parseInt(myWalls.get(0)[2]);
 				double scale = Math.pow(dist, Double.parseDouble(myWalls.get(0)[0]));
 				force[0]=0; force[1]=mag/scale;
 				forces.add(force);
@@ -32,7 +34,7 @@ public class WallRepulsion{
 			}
 			//floor
 			else if(i==1){
-				int mag = Integer.parseInt(myWalls.get(2)[2]);
+				if(Springies.wallToggle[2]==1)mag = Integer.parseInt(myWalls.get(2)[2]);
 				//System.out.println("mag : " + mag);
 				double scale = Math.pow(dist, Double.parseDouble(myWalls.get(2)[0]));
 				force[0]=0; force[1]=-mag/scale;
@@ -43,7 +45,7 @@ public class WallRepulsion{
 			}
 			//left
 			else if(i==2){
-				int mag = Integer.parseInt(myWalls.get(3)[2]);
+				if(Springies.wallToggle[3]==1)mag = Integer.parseInt(myWalls.get(3)[2]);
 				double scale = Math.pow(dist, Double.parseDouble(myWalls.get(3)[0]));
 				force[0]=mag/scale; force[1]=0;
 				forces.add(force);
@@ -51,7 +53,7 @@ public class WallRepulsion{
 			}
 			//right
 			else if(i==3){
-				int mag = Integer.parseInt(myWalls.get(1)[2]);
+				if(Springies.wallToggle[1]==1)mag = Integer.parseInt(myWalls.get(1)[2]);
 				double scale = Math.pow(dist, Double.parseDouble(myWalls.get(1)[0]));
 				force[0]=-mag/scale; force[1]=0;
 				forces.add(force);

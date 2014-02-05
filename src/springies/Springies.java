@@ -18,13 +18,12 @@ import org.jbox2d.common.Vec2;
 public class Springies extends JGEngine
 
 {
+	static int gravToggle=1;
+	static int viscToggle=1;
+	static int massToggle=1;
+	static int[] wallToggle = new int[] {1,1,1,1};
 	PhysicalObject[] wallarray = new PhysicalObjectRect[4];
 	static HashMap<String,Mass> m = new HashMap<String,Mass>();
-	private String[] m2;
-	static String[] grav;
-	static String[] centermass;
-	static String viscosity;
-	static ArrayList<String[]> walls = new ArrayList<String[]>();
 	public Springies ()
 	{
 		// set the window size
@@ -119,12 +118,61 @@ public class Springies extends JGEngine
 		WorldManager.getWorld().step(1f, 1);
 		moveObjects();
 		checkCollision(2,1);		
-		//if(this.getKey(KeyDown))
+		toggleForces();
+		
+	}
+
+	private void toggleForces() {
+		if(getKey(KeyDown)){
+			clearKey(KeyDown);
+			gravToggle*=-1;
+		}
+		if(getKey(KeyUp)){
+			clearKey(KeyUp);
+			viscToggle*=-1;
+		}
+		if(getKey(KeyRight)){
+			clearKey(KeyRight);
+			massToggle*=-1;
+		}
+		//bottom wall
+		if(this.getKey(KeyAlt)){
+			clearKey(KeyAlt);
+			wallToggle[2]*=-1;
+		}
+		//left wall
+		if(this.getKey(KeyCtrl)){
+			clearKey(KeyCtrl);
+			wallToggle[3]*=-1;
+		}
+		//top wall
+		if(this.getKey(KeyShift)){
+			clearKey(KeyShift);
+			wallToggle[0]*=-1;
+		}
+		//right wall
+		if(this.getKey(KeyEnter)){
+			clearKey(KeyEnter);
+			wallToggle[1]*=-1;
+		}
 	}
 
 	@Override
 	public void paintFrame ()
 	{
+		paintToggles();
+	}
 
+	private void paintToggles() {
+		if(gravToggle==1)drawString("Gravity On",displayWidth()/18, displayHeight()/15, -1);
+		if(viscToggle==1)drawString("Viscosity On",displayWidth()/18, displayHeight()/9, -1);
+		if(massToggle==1)drawString("Center of Mass On",displayWidth()/18, displayHeight()/6, -1);
+		drawString("Walls that Repel: ", displayWidth()/18, displayHeight()/4.5,-1);
+		for(int i=0;i<wallToggle.length;i++){
+			if(wallToggle[i]==1){
+				System.out.println("on");
+				drawString(i+", ", displayWidth()/18+350 + i*50,displayHeight()/4.5,-1);
+			}
+		}
 	}
 }
