@@ -22,6 +22,7 @@ public class Springies extends JGEngine
 	static int viscToggle=1;
 	static int massToggle=1;
 	static int[] wallToggle = new int[] {1,1,1,1};
+	static int muscleToggle=1;
 	PhysicalObject[] wallarray = new PhysicalObjectRect[4];
 	static HashMap<String,Mass> m = new HashMap<String,Mass>();
 	public Springies ()
@@ -72,7 +73,7 @@ public class Springies extends JGEngine
 		p.parse();
 		Walls w = new Walls(displayWidth(), displayHeight());
 		wallarray=w.addWalls();
-		Forces f = new Forces();
+		GetForces f = new GetForces();
 		f.getEnvironment();
 		addMasses(p);
 		addSprings(p);
@@ -154,6 +155,9 @@ public class Springies extends JGEngine
 		if(this.getKey(KeyEnter)){
 			clearKey(KeyEnter);
 			wallToggle[1]*=-1;
+		}
+		if(this.getKey(KeyBackspace)){
+			
 		}
 	}
 

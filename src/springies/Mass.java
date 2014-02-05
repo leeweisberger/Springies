@@ -46,56 +46,25 @@ public class Mass extends PhysicalObjectCircle{
 	protected double getMass(){
 		return myMass;
 	}
-	public void setForceKey(int key){
-		force=key;
-	}
 
 	@Override
 	public void move(){
 		setJGamePosition();
-		doWallRepulsion();
-		if(Springies.viscToggle==1)doViscosity();	
-		if(Springies.massToggle==1)doCenterOfMass();		
-		if(!isFixed && Springies.gravToggle==1)
-			doGravity();
+		DoForces f = new DoForces(x,y,this,mywallarray);
+		f.doForces();
 	}
-
-	private void doCenterOfMass() {
-		CenterOfMass c = new CenterOfMass();
-		setForce(c.centerOfMass(x, y)[0],c.centerOfMass(x, y)[1]);
-	}
-
-	private void doViscosity() {
-		Viscosity v = new Viscosity();
-		Vec2 velocity = myBody.getLinearVelocity();	
-		setForce(v.viscosity(velocity.x, velocity.y)[0],v.viscosity(velocity.x, velocity.y)[1]);
-	}
-
-	private void doGravity() {
-		Gravity grav = new Gravity();
-		setForce(grav.gravity()[0]*Math.cos(grav.gravity()[1]),grav.gravity()[0]*Math.sin(grav.gravity()[1]));
-	}	
 
 	private void setJGamePosition() {
 		if (myBody.m_world != WorldManager.getWorld()) {
 			remove();
 			return;
 		}
-		
-		// copy the position and rotation from the JBox world to the JGame world
 		Vec2 position = myBody.getPosition();
 		x = position.x;
 		y = position.y;
 		myRotation = -myBody.getAngle();
 	}
 
-	private void doWallRepulsion() {
-		WallRepulsion wr = new WallRepulsion(mywallarray, x, y, Forces.walls);
-		ArrayList<double[]> wallForces = wr.wallRepulsion();
-		for(double[] wallForce : wallForces){
-			setForce(wallForce[0],wallForce[1]);
-		}
-	}
 	
 	public void setIsFixed(boolean fixed){
 		isFixed = fixed;
@@ -114,12 +83,5 @@ public class Mass extends PhysicalObjectCircle{
 
 		myBody.setLinearVelocity(velocity);
 	}
-
-
-	protected double getDistanceBetween(Mass start, double[] centerOfMass){
-		Vec2 startpos = start.getBody().getPosition();
-		return Math.sqrt(Math.pow(centerOfMass[0] - startpos.x, 2) + Math.pow(centerOfMass[1] - startpos.y,2));
-	}
-
 
 }

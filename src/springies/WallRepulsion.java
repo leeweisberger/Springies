@@ -3,7 +3,6 @@ package springies;
 import java.util.ArrayList;
 
 import jboxGlue.PhysicalObject;
-import jboxGlue.PhysicalObjectCircle;
 
 public class WallRepulsion{
 	PhysicalObject[] myWallArray;
@@ -16,7 +15,7 @@ public class WallRepulsion{
 		myMassY = massY;
 		myWalls=walls;
 	}
-	public ArrayList<double[]> wallRepulsion(){
+	public void doWallRepulsion(PhysicalObject mass){
 		//		System.out.println("hi");
 		ArrayList<double[]> forces = new ArrayList<double[]>();
 		
@@ -30,7 +29,7 @@ public class WallRepulsion{
 				double scale = Math.pow(dist, Double.parseDouble(myWalls.get(0)[0]));
 				force[0]=0; force[1]=mag/scale;
 				forces.add(force);
-				//setForce(0, mag/scale);	
+				mass.setForce(0, mag/scale);	
 			}
 			//floor
 			else if(i==1){
@@ -41,7 +40,7 @@ public class WallRepulsion{
 				forces.add(force);
 				//System.out.println(force[1]);
 				//System.out.println("floor   " + force[1]);
-				//setForce(0, -mag/scale);	
+				mass.setForce(0, -mag/scale);	
 			}
 			//left
 			else if(i==2){
@@ -49,7 +48,7 @@ public class WallRepulsion{
 				double scale = Math.pow(dist, Double.parseDouble(myWalls.get(3)[0]));
 				force[0]=mag/scale; force[1]=0;
 				forces.add(force);
-				//setForce(mag/scale,0);	
+				mass.setForce(mag/scale,0);	
 			}
 			//right
 			else if(i==3){
@@ -57,10 +56,9 @@ public class WallRepulsion{
 				double scale = Math.pow(dist, Double.parseDouble(myWalls.get(1)[0]));
 				force[0]=-mag/scale; force[1]=0;
 				forces.add(force);
-				//setForce(-mag/scale,0);	
+				mass.setForce(-mag/scale,0);	
 			}
 		}
-		return forces;
 
 	}
 	protected double getDistanceBetween(PhysicalObject end,int whichwall){

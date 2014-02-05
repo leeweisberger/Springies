@@ -3,7 +3,7 @@ package springies;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Forces {
+public class GetForces {
 	static String[] grav;
 	static String[] centermass;
 	static String viscosity;
