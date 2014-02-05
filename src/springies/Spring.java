@@ -25,7 +25,10 @@ public class Spring extends PhysicalObjectRect{
 		springLength = rlength;
 		kValue = springiness;
 	}
-	
+	public Spring(Mass m1,double[] mousePos, double rlength){
+		super(m1.getID() + "mouse",3,JGColor.red,1,rlength);
+		
+	}
 	@Override
 	public void move(){
 		springForces();
@@ -38,6 +41,7 @@ public class Spring extends PhysicalObjectRect{
 		double xvector = Math.sin(angle) * force;
 		double yvector = Math.cos(angle) * force;
 		myM1.setForce(-xvector,-yvector);
+	//	System.out.println(force);
 	}
 
 	protected double getDistanceBetween(Mass start, Mass end){	
