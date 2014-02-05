@@ -124,36 +124,36 @@ public class Springies extends JGEngine
 	}
 
 	private void toggleForces() {
-		if(getKey(KeyDown)){
-			clearKey(KeyDown);
+		if(getKey('G')){
+			clearKey('G');
 			gravToggle*=-1;
 		}
-		if(getKey(KeyUp)){
-			clearKey(KeyUp);
+		if(getKey('V')){
+			clearKey('V');
 			viscToggle*=-1;
 		}
-		if(getKey(KeyRight)){
-			clearKey(KeyRight);
+		if(getKey('M')){
+			clearKey('M');
 			massToggle*=-1;
 		}
 		//bottom wall
-		if(this.getKey(KeyAlt)){
-			clearKey(KeyAlt);
+		if(this.getKey('3')){
+			clearKey('3');
 			wallToggle[2]*=-1;
 		}
 		//left wall
-		if(this.getKey(KeyCtrl)){
-			clearKey(KeyCtrl);
+		if(this.getKey('4')){
+			clearKey('4');
 			wallToggle[3]*=-1;
 		}
 		//top wall
-		if(this.getKey(KeyShift)){
-			clearKey(KeyShift);
+		if(this.getKey('1')){
+			clearKey('1');
 			wallToggle[0]*=-1;
 		}
 		//right wall
-		if(this.getKey(KeyEnter)){
-			clearKey(KeyEnter);
+		if(this.getKey('2')){
+			clearKey('2');
 			wallToggle[1]*=-1;
 		}
 		if(this.getKey(KeyBackspace)){
@@ -175,7 +175,7 @@ public class Springies extends JGEngine
 		for(int i=0;i<wallToggle.length;i++){
 			if(wallToggle[i]==1){
 				System.out.println("on");
-				drawString(i+", ", displayWidth()/18+350 + i*50,displayHeight()/4.5,-1);
+				drawString((i+1)+", ", displayWidth()/18+350 + i*50,displayHeight()/4.5,-1);
 			}
 		}
 	}
