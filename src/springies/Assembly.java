@@ -16,35 +16,42 @@ public class Assembly extends JComponent{
 	public static HashMap<String,Mass> m = new HashMap<String,Mass>();
 	//Need to find a way to not make this public static
 	private PhysicalObject[] myWallArray;
+	public static int assemblyNumber=100;
 	
 	public Assembly(PhysicalObject[] wallarray){
 		myWallArray = wallarray;
 	}
 	public void addAssembly(){
-		XML_Parser p = new XML_Parser(new File("ball.xml"));
+		assemblyNumber++;
+		System.out.println(assemblyNumber);
+		XML_Parser p = new XML_Parser(getNewFile());
 		p.parse();
 		addMasses(p);
+		System.out.println("spring");
 		addSprings(p);
 		addMuscles(p);
 	}
 	
 	private void addMasses (XML_Parser p)
 	{		
+		
+		
 		Map<String,Double[]> masseslist = p.masses;
-		System.out.println("aa" + masseslist.size());
-		for(String mass:masseslist.keySet()){   			
+		int c = 0;
+		for(String mass:masseslist.keySet()){   
+			System.out.println(m.size());
 			if(masseslist.get(mass)[5]!=null)				
-				m.put(mass, new FixedMass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1]));
+				m.put(mass + assemblyNumber, new FixedMass(mass+assemblyNumber,masseslist.get(mass)[0],masseslist.get(mass)[1]));
 			else
-				m.put(mass, new Mass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],myWallArray));	
-		}
+				m.put(mass+assemblyNumber, new Mass(mass+assemblyNumber,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],myWallArray));		
+		}	
 	}
 
 	private void addSprings(XML_Parser p){
 		Collection<String[]> springslist=p.springs;  
 		for(String[] spring:springslist){  
-			Mass m1 = m.get(spring[0]);
-			Mass m2 = m.get(spring[1]);			
+			Mass m1 = m.get(spring[0]+assemblyNumber);
+			Mass m2 = m.get(spring[1]+assemblyNumber);			
 			PhysicalObject sp = new Spring(m1, m2, Double.parseDouble(spring[3]), Double.parseDouble(spring[2]));
 		}
 	}

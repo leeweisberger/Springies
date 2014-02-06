@@ -26,14 +26,14 @@ public class Mass extends PhysicalObjectCircle{
 
 	public Mass(String id, double xpos, double ypos,double xvel,double yvel,double mass,PhysicalObject[] wallarray){
 		super(id, 1, myColor, 5,mass);
-		x=(int)xpos;
+		x=(int)xpos+500;
 		y=(int)ypos;
 		setPos(x, y);
 		this.setSpeed(xvel, yvel);
 		myID = id;
 		mywallarray=wallarray;
 		myMass = mass;
-		System.out.println(x);
+		System.out.println(id);
 	}
 
 	public Mass(String id, double xpos, double ypos){

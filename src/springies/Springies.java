@@ -53,8 +53,10 @@ public class Springies extends JGEngine{
 	@Override
 	public void doFrame ()
 	{
-		if(getKey('N'))
+		if(getKey('N')){
+			clearKey('N');
 			addAssembly(myWalls.getWalls());
+		}
 		new Mouse(this).makeMouseMass();
 		new ToggleForces(this).toggleForces();	
 		WorldManager.getWorld().step(1f, 1);

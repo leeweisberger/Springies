@@ -15,24 +15,21 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class XML_Parser {
-	Map<String,Double[]> masses;
-	Collection<String[]> springs;
-	Collection<String[]> muscles;
+	Map<String,Double[]> masses = new HashMap<String,Double[]>();
+	Collection<String[]> springs= new ArrayList<String[]>();
+	Collection<String[]> muscles= new ArrayList<String[]>();
 	ArrayList<String[]> walls = new ArrayList<String[]>();
-	String[] mygrav;
-	String[] mycentermass;
+	String[] mygrav= new String[2];
+	String[] mycentermass= new String[2];
 	static String myviscosity;
 	private File myFile;
+	
 	public XML_Parser(File f){
 		myFile=f;
 	}
 
 	public void parse() {
-		masses = new HashMap<String,Double[]>();
-		springs = new ArrayList<String[]>();
-		mygrav = new String[2];
-		mycentermass = new String[2];
-		muscles = new ArrayList<String[]>();
+	
 		try {
 			//File file = myFile;
 			//			File file = new File("test.xml");
