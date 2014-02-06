@@ -33,6 +33,7 @@ public class Mass extends PhysicalObjectCircle{
 		myID = id;
 		mywallarray=wallarray;
 		myMass = mass;
+		System.out.println(x);
 	}
 
 	public Mass(String id, double xpos, double ypos){

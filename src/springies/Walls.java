@@ -8,15 +8,15 @@ import jgame.platform.JGEngine;
 public class Walls{
 	double myWidth;
 	double myHeight;
+	private PhysicalObject[] wallarray = new PhysicalObjectRect[4];
 	
 	public Walls(double width, double height ){
 		myWidth=width;
 		myHeight=height;
 	}
 	
-	public PhysicalObject[] addWalls()
+	public void addWalls()
 	{
-		PhysicalObject[] wallarray = new PhysicalObjectRect[4];
 		// add walls to bounce off of
 		// NOTE: immovable objects must have no mass
 
@@ -44,6 +44,9 @@ public class Walls{
 				WALL_THICKNESS, WALL_myHeight);
 		wall.setPos(myWidth - WALL_MARGIN, myHeight / 2);
 		wallarray[3]=wall;
+	}
+	
+	public PhysicalObject[] getWalls(){
 		return wallarray;
 	}
 }

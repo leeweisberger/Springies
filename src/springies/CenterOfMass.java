@@ -7,10 +7,10 @@ public class CenterOfMass {
 		double totalx = 0;
 		double totaly = 0;
 		double totalMass = 0;
-		for (String l: Springies.m.keySet()){
-			totalMass += Springies.m.get(l).getMass();
-			totalx += (Springies.m.get(l).x * Springies.m.get(l).getMass());
-			totaly += (Springies.m.get(l).y * Springies.m.get(l).getMass());
+		for (String l: Assembly.m.keySet()){
+			totalMass += Assembly.m.get(l).getMass();
+			totalx += (Assembly.m.get(l).x * Assembly.m.get(l).getMass());
+			totaly += (Assembly.m.get(l).y * Assembly.m.get(l).getMass());
 		}
 		double[] myCenter = {(totalx /(totalMass)), (totaly /(totalMass))};
 		return myCenter;
