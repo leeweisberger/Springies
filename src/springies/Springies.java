@@ -1,19 +1,18 @@
 package springies;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.File;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import jboxGlue.PhysicalObject;
-import jboxGlue.PhysicalObjectRect;
 import jboxGlue.WorldManager;
 import jgame.platform.JGEngine;
 
 
 @SuppressWarnings("serial")
 public class Springies extends JGEngine{
-
+	private Walls myWalls;
 	public Springies ()
 	{
 		// set the window size
@@ -41,10 +40,10 @@ public class Springies extends JGEngine{
 		setFrameRate(60, 2);
 		WorldManager.initWorld(this);
 		//		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.2f));
-		Walls w = new Walls(displayWidth(), displayHeight());
-		w.addWalls();
-		new GetForces().getEnvironment();;
-		addAssembly(w.getWalls());	
+		myWalls = new Walls(displayWidth(), displayHeight());
+		myWalls.addWalls();
+		new GetForces().getEnvironment();
+		addAssembly(myWalls.getWalls());	
 	}
 
 	public void addAssembly(PhysicalObject[] wallarray){
@@ -54,16 +53,20 @@ public class Springies extends JGEngine{
 	@Override
 	public void doFrame ()
 	{
+		if(getKey('N'))
+			addAssembly(myWalls.getWalls());
 		new Mouse(this).makeMouseMass();
 		new ToggleForces(this).toggleForces();	
 		WorldManager.getWorld().step(1f, 1);
 		moveObjects();
-		checkCollision(2,1);			
+		checkCollision(2,1);	
+		 
 	}
 
 	@Override
 	public void paintFrame ()
 	{
+		
 		paintToggles();
 	}
 	

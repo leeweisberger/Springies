@@ -1,5 +1,6 @@
 package springies;
 
+
 public class Mouse {
 
 	private Springies mySpringies;

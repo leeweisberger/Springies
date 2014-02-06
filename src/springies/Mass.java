@@ -44,15 +44,15 @@ public class Mass extends PhysicalObjectCircle{
 		return myID;
 	}
 
-	protected double getMass(){
+	public double getMass(){
 		return myMass;
 	}
 
 	@Override
 	public void move(){
 		setJGamePosition();
-		DoForces f = new DoForces(x,y,this,mywallarray);
-		f.doForces();
+		new DoForces(x,y,this,mywallarray).doForces();
+	
 	}
 
 	private void setJGamePosition() {

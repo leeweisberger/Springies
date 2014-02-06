@@ -1,6 +1,7 @@
 package springies;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import jboxGlue.PhysicalObject;
 
@@ -16,9 +17,7 @@ public class WallRepulsion{
 		myWalls=walls;
 	}
 	public void doWallRepulsion(PhysicalObject mass){
-		//		System.out.println("hi");
-		ArrayList<double[]> forces = new ArrayList<double[]>();
-		
+		ArrayList<double[]> forces = new ArrayList<double[]>();		
 		for(int i=0;i<myWallArray.length;i++){
 			int mag=0;
 			double[] force = new double[2];

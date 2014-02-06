@@ -1,11 +1,18 @@
 package springies;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import jboxGlue.PhysicalObject;
 
-public class Assembly {
+public class Assembly extends JComponent{
 	public static HashMap<String,Mass> m = new HashMap<String,Mass>();
 	//Need to find a way to not make this public static
 	private PhysicalObject[] myWallArray;
@@ -14,7 +21,7 @@ public class Assembly {
 		myWallArray = wallarray;
 	}
 	public void addAssembly(){
-		XML_Parser p = new XML_Parser();
+		XML_Parser p = new XML_Parser(new File("ball.xml"));
 		p.parse();
 		addMasses(p);
 		addSprings(p);
@@ -23,8 +30,8 @@ public class Assembly {
 	
 	private void addMasses (XML_Parser p)
 	{		
-		System.out.println("new");
-		HashMap<String,Double[]> masseslist = p.masses;
+		Map<String,Double[]> masseslist = p.masses;
+		System.out.println("aa" + masseslist.size());
 		for(String mass:masseslist.keySet()){   			
 			if(masseslist.get(mass)[5]!=null)				
 				m.put(mass, new FixedMass(mass,masseslist.get(mass)[0],masseslist.get(mass)[1]));
@@ -34,8 +41,7 @@ public class Assembly {
 	}
 
 	private void addSprings(XML_Parser p){
-
-		ArrayList<String[]> springslist=p.springs;  
+		Collection<String[]> springslist=p.springs;  
 		for(String[] spring:springslist){  
 			Mass m1 = m.get(spring[0]);
 			Mass m2 = m.get(spring[1]);			
@@ -44,13 +50,23 @@ public class Assembly {
 	}
 	
 	private void addMuscles(XML_Parser p){		
-		ArrayList<String[]> muscleslist=p.muscles;
+		Collection<String[]> muscleslist=p.muscles;
 		for(String[] muscle: muscleslist){
 			Mass m1 = m.get(muscle[0]);			
 			Mass m2 = m.get(muscle[2]);
 			PhysicalObject muscleObj = new Muscle(m1, m2, Double.parseDouble(muscle[3]), Double.parseDouble(muscle[4]), Double.parseDouble(muscle[1]));
 		}
 	}
-
-
+	public File getNewFile() {
+		JFileChooser chooser = new JFileChooser();
+	    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+	        "XML Files", "xml");
+	    chooser.setFileFilter(filter);
+	    int returnVal = chooser.showOpenDialog(getParent());
+	    if(returnVal == JFileChooser.APPROVE_OPTION) {
+	       System.out.println("You chose to open this file: " +
+	            chooser.getSelectedFile().getName());
+	    }
+	    return chooser.getSelectedFile();	
+	}
 }

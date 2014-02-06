@@ -29,7 +29,7 @@ public class DoForces {
 		CenterOfMass c = new CenterOfMass();
 		c.doCenterOfMass(myX, myY, myMass);
 	}
-	public void doForces(){
+	public void doForces(){	
 		doGravity();
 		doViscosity();
 		doWallRepulsion();

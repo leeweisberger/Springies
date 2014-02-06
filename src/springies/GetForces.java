@@ -1,22 +1,27 @@
 package springies;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
-public class GetForces {
-	static String[] grav;
-	static String[] centermass;
-	static String viscosity;
-	static ArrayList<String[]> walls = new ArrayList<String[]>();
+import javax.swing.JComponent;
+
+public class GetForces extends JComponent {
+	public static String[] grav;
+	public static String[]centermass;
+	public static String viscosity;
+	public static ArrayList<String[]> walls;
 	public void getEnvironment(){
-		XML_Parser p = new XML_Parser();
+		File file = new File("environment.xml");
+		XML_Parser p = new XML_Parser(file);
 		p.parse();
-		ArrayList<String[]> walllist = p.walls;
 		grav = p.mygrav;
 		centermass = p.mycentermass;
 		viscosity = p.myviscosity;	
 		walls = p.walls;
 	}
+	
 	public double[] centerOfMass(HashMap<String,Mass> m){
 		double totalx = 0;
 		double totaly = 0;
@@ -29,4 +34,6 @@ public class GetForces {
 		double[] myCenter = {(totalx /(totalMass)), (totaly /(totalMass))};
 		return myCenter;
 	}
+	
+	
 }

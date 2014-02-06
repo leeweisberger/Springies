@@ -10,7 +10,7 @@
     </nodes>
 
     <links>
-        <spring a="m0" b="m1" restlength="50" constant="1"/>
-        <spring a="m0" b="m2" restlength="50" constant="1"/>
+        <spring a="m0" b="m1" restlength="100" constant="1"/>
+        <spring a="m0" b="m2" restlength="100" constant="1"/>
     </links>
 </model>

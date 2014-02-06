@@ -8,6 +8,7 @@ import jboxGlue.PhysicalObjectRect;
 import jgame.JGColor;
 import jgame.JGObject;
 import jgame.platform.JGEngine;
+
 import org.jbox2d.common.Vec2;
 
 public class Spring extends PhysicalObjectRect{

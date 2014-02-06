@@ -13,6 +13,7 @@ public class Muscle extends Spring {
 		myAmplitude = amplitude * ToggleForces.muscleToggle;
 		myRestLength = originalRLength;
 		
+		
 	}
 	
 	@Override

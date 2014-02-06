@@ -3,12 +3,13 @@ package springies;
 import jgame.platform.JGEngine;
 
 public class ToggleForces{
-	static int gravToggle=1;
-	static int viscToggle=1;
-	static int massToggle=1;
-	static int[] wallToggle = new int[] {1,1,1,1};
-	static double muscleToggle=1;
+	public static int gravToggle=1;
+	public static int viscToggle=1;
+	public static int massToggle=1;
+	public static int[] wallToggle = new int[] {1,1,1,1};
+	public static double muscleToggle=1;
 	private Springies mySpringies;
+	
 	public ToggleForces(Springies springies){
 		mySpringies = springies;
 	}
@@ -51,11 +52,11 @@ public class ToggleForces{
 		if(mySpringies.getKey('-')){
 			if(muscleToggle>0)muscleToggle-=.01;
 		}
-		
-		
+
+
 	}
 
-	
-	
+
+
 
 }
