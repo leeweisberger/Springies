@@ -6,6 +6,8 @@ import java.util.HashMap;
 import jboxGlue.PhysicalObject;
 
 public class Assembly {
+	public static HashMap<String,Mass> m = new HashMap<String,Mass>();
+	//Need to find a way to not make this public static
 	private PhysicalObject[] myWallArray;
 	
 	public Assembly(PhysicalObject[] wallarray){
@@ -18,8 +20,8 @@ public class Assembly {
 		addSprings(p);
 		addMuscles(p);
 	}
-	public static HashMap<String,Mass> m = new HashMap<String,Mass>();
-	public void addMasses (XML_Parser p)
+	
+	private void addMasses (XML_Parser p)
 	{		
 		System.out.println("new");
 		HashMap<String,Double[]> masseslist = p.masses;
@@ -31,7 +33,7 @@ public class Assembly {
 		}
 	}
 
-	public void addSprings(XML_Parser p){
+	private void addSprings(XML_Parser p){
 
 		ArrayList<String[]> springslist=p.springs;  
 		for(String[] spring:springslist){  
@@ -41,7 +43,7 @@ public class Assembly {
 		}
 	}
 	
-	public void addMuscles(XML_Parser p){		
+	private void addMuscles(XML_Parser p){		
 		ArrayList<String[]> muscleslist=p.muscles;
 		for(String[] muscle: muscleslist){
 			Mass m1 = m.get(muscle[0]);			

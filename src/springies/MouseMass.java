@@ -7,8 +7,8 @@ public class MouseMass extends FixedMass{
 		// TODO Auto-generated constructor stub
 	}
 	public void move(){
-		x=Springies.myMouseX;
-		y=Springies.myMouseY;
+		x=Mouse.myMouseX;
+		y=Mouse.myMouseY;
 	}
 	
 

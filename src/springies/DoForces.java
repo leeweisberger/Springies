@@ -15,7 +15,7 @@ public class DoForces {
 	}
 	private void doGravity() {
 		Gravity grav = new Gravity();
-		if(Springies.gravToggle==1)grav.doGravity(myMass);
+		if(ToggleForces.gravToggle==1)grav.doGravity(myMass);
 	}	
 	private void doViscosity() {
 		Viscosity v = new Viscosity();

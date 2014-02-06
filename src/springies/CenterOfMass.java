@@ -17,7 +17,7 @@ public class CenterOfMass {
 	}
 
 	public void doCenterOfMass(double xpos, double ypos,PhysicalObject mass){
-		if(Springies.massToggle==1){
+		if(ToggleForces.massToggle==1){
 			double[] center = getCenterOfMass();
 			double centerX = center[0];
 			double centerY = center[1];
