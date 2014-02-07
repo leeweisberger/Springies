@@ -19,11 +19,12 @@ public class Mouse {
 		if(mySpringies.getMouseButton(1) && (mouseMass==null || !mouseMass.isAlive())){
 			//mySpringies.clearMouseButton(1);
 			mouseMass = new MouseMass("mouse", myMouseX, myMouseY);
-			Mass h = getClosestMass(myMouseX,myMouseY);
-			double d = getDist(h,myMouseX,myMouseY);
-			springMass=new Spring(h, mouseMass, d, .1);
-			mouse=true;
-
+			if (!Assembly.m.isEmpty()) {
+				Mass h = getClosestMass(myMouseX, myMouseY);
+				double d = getDist(h, myMouseX, myMouseY);
+				springMass = new Spring(h, mouseMass, d, 1);
+				mouse = true;
+			}
 
 		}
 		if(mouse && !mySpringies.getMouseButton(1) && mouseMass.isAlive()){

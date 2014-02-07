@@ -1,6 +1,9 @@
 package forces;
 
+import org.jbox2d.common.Vec2;
+
 import springies.GetForces;
+import springies.Mass;
 import jboxGlue.PhysicalObject;
 
 public class DoForces {
@@ -17,12 +20,13 @@ public class DoForces {
 	
 	private void doGravity() {
 		Gravity grav = new Gravity();
-		if(ToggleForces.gravToggle==1)grav.doForce(myX,myY,myMass);
+		if(ToggleForces.gravToggle == 1)grav.doForce(myX, myY, myMass);
 	}	
 	
 	private void doViscosity() {
 		Viscosity v = new Viscosity();
-		v.doForce(myX, myY, myMass);
+		Vec2 currentVector = ((Mass)myMass).getVec();
+		v.doForce(currentVector.x, currentVector.y, myMass);
 	}
 	
 	private void doWallRepulsion() {

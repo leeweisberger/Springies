@@ -68,6 +68,11 @@ public class Mass extends PhysicalObjectCircle{
 	public void setIsFixed(boolean fixed){
 		isFixed = fixed;
 	}
+	
+	public Vec2 getVec(){
+		Vec2 vel = myBody.getLinearVelocity();
+		return vel;
+	}
 
 	@Override
 	public void hit (JGObject other) {

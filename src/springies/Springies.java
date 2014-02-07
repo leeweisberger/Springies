@@ -59,10 +59,12 @@ public class Springies extends JGEngine{
 			clearKey('N');
 			addAssembly(myWalls.getWalls());
 		}
+		
 		if(getKey('Y')){
 			clearKey('Y');
 			myWalls.moveLeft();
 		}
+		
 		new Mouse(this).makeMouseMass();
 		new ToggleForces(this).toggleForces();	
 		WorldManager.getWorld().step(1f, 1);
@@ -77,6 +79,7 @@ public class Springies extends JGEngine{
 	}
 	
 	private void paintToggles() {
+		drawString("Click 'N' to add an assembly",displayWidth()/18, displayHeight()/4.5 + 200, -1);
 		if(ToggleForces.gravToggle == 1)drawString("Gravity On",displayWidth()/18, displayHeight()/15, -1);
 		if(ToggleForces.viscToggle == 1)drawString("Viscosity On",displayWidth()/18, displayHeight()/9, -1);
 		if(ToggleForces.massToggle == 1)drawString("Center of Mass On",displayWidth()/18, displayHeight()/6, -1);
