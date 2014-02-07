@@ -5,6 +5,8 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import forces.ToggleForces;
+
 import jboxGlue.PhysicalObject;
 import jboxGlue.WorldManager;
 import jgame.platform.JGEngine;
@@ -68,17 +70,16 @@ public class Springies extends JGEngine{
 	@Override
 	public void paintFrame ()
 	{
-		
 		paintToggles();
 	}
 	
 	private void paintToggles() {
-		if(ToggleForces.gravToggle==1)drawString("Gravity On",displayWidth()/18, displayHeight()/15, -1);
-		if(ToggleForces.viscToggle==1)drawString("Viscosity On",displayWidth()/18, displayHeight()/9, -1);
-		if(ToggleForces.massToggle==1)drawString("Center of Mass On",displayWidth()/18, displayHeight()/6, -1);
+		if(ToggleForces.gravToggle == 1)drawString("Gravity On",displayWidth()/18, displayHeight()/15, -1);
+		if(ToggleForces.viscToggle == 1)drawString("Viscosity On",displayWidth()/18, displayHeight()/9, -1);
+		if(ToggleForces.massToggle == 1)drawString("Center of Mass On",displayWidth()/18, displayHeight()/6, -1);
 		drawString("Walls that Repel: ", displayWidth()/18, displayHeight()/4.5,-1);
 		for(int i=0;i<ToggleForces.wallToggle.length;i++){
-			if(ToggleForces.wallToggle[i]==1){
+			if(ToggleForces.wallToggle[i] == 1){
 				drawString((i+1)+", ", displayWidth()/18+350 + i*50,displayHeight()/4.5,-1);
 			}
 		}

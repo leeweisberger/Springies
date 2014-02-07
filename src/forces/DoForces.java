@@ -1,5 +1,7 @@
-package springies;
+package forces;
 
+import springies.GetForces;
+import springies.Gravity;
 import jboxGlue.PhysicalObject;
 
 public class DoForces {
@@ -13,22 +15,27 @@ public class DoForces {
 		myMass=mass;
 		myWallArray=wallarray;
 	}
+	
 	private void doGravity() {
 		Gravity grav = new Gravity();
-		if(ToggleForces.gravToggle==1)grav.doGravity(myMass);
+		if(ToggleForces.gravToggle==1)grav.doForce(myX,myY,myMass);
 	}	
+	
 	private void doViscosity() {
 		Viscosity v = new Viscosity();
-		v.doViscosity(myX, myY, myMass);
+		v.doForce(myX, myY, myMass);
 	}
+	
 	private void doWallRepulsion() {
 		WallRepulsion wr = new WallRepulsion(myWallArray, myX, myY, GetForces.walls);
-		wr.doWallRepulsion(myMass);
+		wr.doForce(myX, myY, myMass);
 	}
+	
 	private void doCenterOfMass() {
 		CenterOfMass c = new CenterOfMass();
-		c.doCenterOfMass(myX, myY, myMass);
+		c.doForce(myX, myY, myMass);
 	}
+	
 	public void doForces(){	
 		doGravity();
 		doViscosity();

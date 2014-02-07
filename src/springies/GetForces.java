@@ -7,11 +7,13 @@ import java.util.HashMap;
 
 import javax.swing.JComponent;
 
+
 public class GetForces extends JComponent {
 	public static String[] grav;
 	public static String[]centermass;
 	public static String viscosity;
 	public static ArrayList<String[]> walls;
+	
 	public void getEnvironment(){
 		File file = new File("environment.xml");
 		XML_Parser p = new XML_Parser(file);

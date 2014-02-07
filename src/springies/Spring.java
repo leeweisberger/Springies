@@ -26,10 +26,12 @@ public class Spring extends PhysicalObjectRect{
 		springLength = rlength;
 		kValue = springiness;
 	}
+	
 	public Spring(Mass m1,double[] mousePos, double rlength){
 		super(m1.getID() + "mouse",3,JGColor.red,1,rlength);
 		
 	}
+	
 	@Override
 	public void move(){
 		springForces();

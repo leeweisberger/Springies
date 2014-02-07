@@ -6,6 +6,8 @@ import jboxGlue.WorldManager;
 
 import org.jbox2d.common.Vec2;
 
+import forces.DoForces;
+
 import jgame.JGColor;
 import jgame.JGObject;
 import jgame.platform.JGEngine;
@@ -21,8 +23,6 @@ public class Mass extends PhysicalObjectCircle{
 	private PhysicalObject[] mywallarray;
 	private double myMass;
 	private boolean isFixed;
-	private int force;
-
 
 	public Mass(String id, double xpos, double ypos,double xvel,double yvel,double mass,PhysicalObject[] wallarray){
 		super(id, 1, myColor, 5,mass);
@@ -52,7 +52,6 @@ public class Mass extends PhysicalObjectCircle{
 	public void move(){
 		setJGamePosition();
 		new DoForces(x,y,this,mywallarray).doForces();
-	
 	}
 
 	private void setJGamePosition() {
@@ -65,7 +64,6 @@ public class Mass extends PhysicalObjectCircle{
 		y = position.y;
 		myRotation = -myBody.getAngle();
 	}
-
 	
 	public void setIsFixed(boolean fixed){
 		isFixed = fixed;

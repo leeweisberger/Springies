@@ -1,5 +1,6 @@
-package springies;
+package forces;
 
+import springies.Springies;
 import jgame.platform.JGEngine;
 
 public class ToggleForces{
@@ -13,6 +14,7 @@ public class ToggleForces{
 	public ToggleForces(Springies springies){
 		mySpringies = springies;
 	}
+	
 	public void toggleForces() {
 		if(mySpringies.getKey('G')){
 			mySpringies.clearKey('G');

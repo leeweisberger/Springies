@@ -33,6 +33,7 @@ public class Mouse {
 			
 		}
 	}
+	
 	public Mass getClosestMass(int xpos, int ypos){
 		String closest = "";
 		double minDist = 10000;
@@ -46,6 +47,7 @@ public class Mouse {
 		}
 		return Assembly.m.get(closest);
 	}
+	
 	public double getDist(Mass m, int xpos, int ypos){
 		return Math.sqrt(Math.pow(xpos - m.x, 2) + Math.pow(ypos - m.y,2));
 	}

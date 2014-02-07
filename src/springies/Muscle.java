@@ -1,5 +1,6 @@
 package springies;
 
+import forces.ToggleForces;
 import jgame.JGColor;
 
 public class Muscle extends Spring {
@@ -12,8 +13,6 @@ public class Muscle extends Spring {
 		setColor(myColor);
 		myAmplitude = amplitude * ToggleForces.muscleToggle;
 		myRestLength = originalRLength;
-		
-		
 	}
 	
 	@Override

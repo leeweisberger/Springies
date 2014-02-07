@@ -21,21 +21,19 @@ public class Assembly extends JComponent{
 	public Assembly(PhysicalObject[] wallarray){
 		myWallArray = wallarray;
 	}
+	
 	public void addAssembly(){
 		assemblyNumber++;
-		System.out.println(assemblyNumber);
+//		System.out.println(assemblyNumber);
 		XML_Parser p = new XML_Parser(getNewFile());
 		p.parse();
 		addMasses(p);
-		System.out.println("spring");
 		addSprings(p);
 		addMuscles(p);
 	}
 	
 	private void addMasses (XML_Parser p)
 	{		
-		
-		
 		Map<String,Double[]> masseslist = p.masses;
 		int c = 0;
 		for(String mass:masseslist.keySet()){   
