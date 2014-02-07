@@ -11,7 +11,7 @@ public class Gravity extends GlobalForce {
 		mass.setForce(GRAVITY*Math.cos(ANGLE),GRAVITY*Math.sin(ANGLE));
 	}
 	
-	public double toRadians(double ANGLE){
+	private double toRadians(double ANGLE){
 		return ANGLE * (Math.PI/180);
 	}
 	

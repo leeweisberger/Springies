@@ -6,7 +6,7 @@ import jgame.JGColor;
 import jgame.platform.JGEngine;
 
 public class Walls{
-	double myWidth;
+	private double myWidth;
 	double myHeight;
 	private PhysicalObject[] wallarray = new PhysicalObjectRect[4];
 	private PhysicalObject wallt;

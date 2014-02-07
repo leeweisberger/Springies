@@ -1,5 +1,6 @@
 package springies;
 
+import java.util.List;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,7 +19,7 @@ public class XML_Parser {
 	Map<String,Double[]> masses = new HashMap<String,Double[]>();
 	Collection<String[]> springs= new ArrayList<String[]>();
 	Collection<String[]> muscles= new ArrayList<String[]>();
-	ArrayList<String[]> walls = new ArrayList<String[]>();
+	List<String[]> walls = new ArrayList<String[]>();
 	String[] mygrav= new String[2];
 	String[] mycentermass= new String[2];
 	static String myviscosity;

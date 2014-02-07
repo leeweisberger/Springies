@@ -1,7 +1,6 @@
 package springies;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,8 +12,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import jboxGlue.PhysicalObject;
 
 public class Assembly extends JComponent{
-	public static HashMap<String,Mass> m = new HashMap<String,Mass>();
-	//Need to find a way to not make this public static
+	private static Map<String,Mass> m = new HashMap<String,Mass>();
 	private PhysicalObject[] myWallArray;
 	public static int assemblyNumber=100;
 	
@@ -22,9 +20,8 @@ public class Assembly extends JComponent{
 		myWallArray = wallarray;
 	}
 	
-	public void addAssembly(){
+	protected void addAssembly(){
 		assemblyNumber++;
-//		System.out.println(assemblyNumber);
 		XML_Parser p = new XML_Parser(getNewFile());
 		p.parse();
 		addMasses(p);
@@ -62,7 +59,7 @@ public class Assembly extends JComponent{
 		}
 	}
 	
-	public File getNewFile() {
+	private File getNewFile() {
 		JFileChooser chooser = new JFileChooser();
 	    FileNameExtensionFilter filter = new FileNameExtensionFilter(
 	        "XML Files", "xml");
@@ -73,5 +70,8 @@ public class Assembly extends JComponent{
 	            chooser.getSelectedFile().getName());
 	    }
 	    return chooser.getSelectedFile();	
+	}
+	public static Map<String,Mass> getMap(){
+		return m;
 	}
 }

@@ -7,12 +7,12 @@ import java.util.List;
 import jboxGlue.PhysicalObject;
 
 public class WallRepulsion extends GlobalForce{
-	PhysicalObject[] myWallArray;
-	double myMassX;
-	double myMassY;
-	ArrayList<String[]> myWalls;
+	private PhysicalObject[] myWallArray;
+	private double myMassX;
+	private double myMassY;
+	private List<String[]> myWalls;
 	
-	public WallRepulsion(PhysicalObject[] wallarray, double massX, double massY,ArrayList<String[]> walls){
+	protected WallRepulsion(PhysicalObject[] wallarray, double massX, double massY,List<String[]> walls){
 		myWallArray = wallarray;
 		myMassX = massX;
 		myMassY = massY;
@@ -38,12 +38,9 @@ public class WallRepulsion extends GlobalForce{
 			//floor
 			else if(i == 1){
 				if(ToggleForces.wallToggle[2]==1)mag = Integer.parseInt(myWalls.get(2)[2]);
-				//System.out.println("mag : " + mag);
 				double scale = Math.pow(dist, Double.parseDouble(myWalls.get(2)[0]));
 				force[0] = 0; force[1] = -mag/scale;
 				forces.add(force);
-				//System.out.println(force[1]);
-				//System.out.println("floor   " + force[1]);
 				mass.setForce(0, -mag/scale);	
 			}
 			
@@ -67,17 +64,15 @@ public class WallRepulsion extends GlobalForce{
 		}
 	}
 	
-	protected double getDistanceBetween(PhysicalObject end,int whichwall){
+	private double getDistanceBetween(PhysicalObject end,int whichwall){
 		double wallpos=0;
-		double masspos=0;
-		
+		double masspos=0;	
 		if(whichwall == 1) wallpos = end.getBody().getPosition().y - 15;
 		else if(whichwall == 0)wallpos = end.getBody().getPosition().y + 15;
 		if(whichwall < 2)masspos = myMassY;
 		if(whichwall == 2)wallpos = end.getBody().getPosition().x + 15;
 		if(whichwall == 3)wallpos = end.getBody().getPosition().x - 15;
 		if(whichwall > 1)masspos = myMassX;
-		//System.out.println(wally-massy);
 		double diff = Math.abs(wallpos - masspos);
 		if((diff) < 1)return 1;
 		return diff;

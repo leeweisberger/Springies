@@ -5,16 +5,17 @@ import springies.GetForces;
 import jboxGlue.PhysicalObject;
 
 public class CenterOfMass extends GlobalForce {
-	public double[] getCenterOfMass(){
+	private double[] getCenterOfMass(){
 		double totalx = 0;
 		double totaly = 0;
 		double totalMass = 0;
-		for (String l: Assembly.m.keySet()){
-			totalMass += Assembly.m.get(l).getMass();
-			totalx += (Assembly.m.get(l).x * Assembly.m.get(l).getMass());
-			totaly += (Assembly.m.get(l).y * Assembly.m.get(l).getMass());
+		for (String l: Assembly.getMap().keySet()){
+			totalMass += Assembly.getMap().get(l).getMass();
+			totalx += (Assembly.getMap().get(l).x * Assembly.getMap().get(l).getMass());
+			totaly += (Assembly.getMap().get(l).y * Assembly.getMap().get(l).getMass());
 		}
 		double[] myCenter = {(totalx /(totalMass)), (totaly /(totalMass))};
+		System.out.println(myCenter[0]);
 		return myCenter;
 	}
 

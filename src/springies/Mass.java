@@ -29,11 +29,10 @@ public class Mass extends PhysicalObjectCircle{
 		x=(int)xpos+500;
 		y=(int)ypos;
 		setPos(x, y);
-		this.setSpeed(xvel, yvel);
+		setSpeed(xvel, yvel);
 		myID = id;
 		mywallarray=wallarray;
 		myMass = mass;
-		System.out.println(id);
 	}
 
 	public Mass(String id, double xpos, double ypos){

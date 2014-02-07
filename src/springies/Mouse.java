@@ -19,10 +19,10 @@ public class Mouse {
 		if(mySpringies.getMouseButton(1) && (mouseMass==null || !mouseMass.isAlive())){
 			//mySpringies.clearMouseButton(1);
 			mouseMass = new MouseMass("mouse", myMouseX, myMouseY);
-			if (!Assembly.m.isEmpty()) {
+			if (!Assembly.getMap().isEmpty()) {
 				Mass h = getClosestMass(myMouseX, myMouseY);
 				double d = getDist(h, myMouseX, myMouseY);
-				springMass = new Spring(h, mouseMass, d, 1);
+				springMass = new Spring(h, mouseMass, d, .1);
 				mouse = true;
 			}
 
@@ -35,24 +35,24 @@ public class Mouse {
 		}
 	}
 	
-	public Mass getClosestMass(int xpos, int ypos){
+	private Mass getClosestMass(int xpos, int ypos){
 		String closest = "";
 		double minDist = 10000;
 		double dist;
-		for(String mass:Assembly.m.keySet()){
-			dist=Math.sqrt(Math.pow(xpos - Assembly.m.get(mass).x, 2) + Math.pow(ypos - Assembly.m.get(mass).y,2));
+		for(String mass:Assembly.getMap().keySet()){
+			dist=Math.sqrt(Math.pow(xpos - Assembly.getMap().get(mass).x, 2) + Math.pow(ypos - Assembly.getMap().get(mass).y,2));
 			if(dist<minDist){
 				minDist=dist;
 				closest=mass;
 			}
 		}
-		return Assembly.m.get(closest);
+		return Assembly.getMap().get(closest);
 	}
 	
-	public double getDist(Mass m, int xpos, int ypos){
+	private double getDist(Mass m, int xpos, int ypos){
 		return Math.sqrt(Math.pow(xpos - m.x, 2) + Math.pow(ypos - m.y,2));
 	}
-	public void getMouse(){
+	private void getMouse(){
 		myMouseX = mySpringies.getMousePos().x;
 		myMouseY = mySpringies.getMousePos().y;
 	}
