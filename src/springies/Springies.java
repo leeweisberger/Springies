@@ -37,7 +37,7 @@ public class Springies extends JGEngine{
 	@Override
 	public void initGame ()
 	{
-		setFrameRate(60, 2);
+		setFrameRate(60, 4);
 		WorldManager.initWorld(this);
 		//		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.2f));
 		myWalls = new Walls(displayWidth(), displayHeight());
@@ -57,12 +57,15 @@ public class Springies extends JGEngine{
 			clearKey('N');
 			addAssembly(myWalls.getWalls());
 		}
+		if(getKey('Y')){
+			clearKey('Y');
+			myWalls.moveLeft();
+		}
 		new Mouse(this).makeMouseMass();
 		new ToggleForces(this).toggleForces();	
 		WorldManager.getWorld().step(1f, 1);
 		moveObjects();
-		checkCollision(2,1);	
-		 
+		checkCollision(2,1);	 
 	}
 
 	@Override

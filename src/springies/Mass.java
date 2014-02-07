@@ -52,7 +52,6 @@ public class Mass extends PhysicalObjectCircle{
 	public void move(){
 		setJGamePosition();
 		new DoForces(x,y,this,mywallarray).doForces();
-	
 	}
 
 	private void setJGamePosition() {

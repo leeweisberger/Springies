@@ -23,11 +23,10 @@ public class Assembly extends JComponent{
 	}
 	public void addAssembly(){
 		assemblyNumber++;
-		System.out.println(assemblyNumber);
-		XML_Parser p = new XML_Parser(getNewFile());
+		//XML_Parser p = new XML_Parser(getNewFile());
+		XML_Parser p = new XML_Parser(new File("ball.xml"));
 		p.parse();
 		addMasses(p);
-		System.out.println("spring");
 		addSprings(p);
 		addMuscles(p);
 	}
@@ -39,7 +38,6 @@ public class Assembly extends JComponent{
 		Map<String,Double[]> masseslist = p.masses;
 		int c = 0;
 		for(String mass:masseslist.keySet()){   
-			System.out.println(m.size());
 			if(masseslist.get(mass)[5]!=null)				
 				m.put(mass + assemblyNumber, new FixedMass(mass+assemblyNumber,masseslist.get(mass)[0],masseslist.get(mass)[1]));
 			else

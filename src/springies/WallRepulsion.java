@@ -64,10 +64,10 @@ public class WallRepulsion{
 		double wallpos=0;
 		double masspos=0;
 		if(whichwall==1) 
-			wallpos = end.getBody().getPosition().y-15;
+			wallpos = end.getBody().getPosition().y+15;
 		else if(whichwall==0)wallpos = end.getBody().getPosition().y+15;
 		if(whichwall<2)masspos = myMassY;
-		if(whichwall==2)wallpos = end.getBody().getPosition().x+15;
+		if(whichwall==2)wallpos = end.getBody().getPosition().x-15;
 		if(whichwall==3)wallpos = end.getBody().getPosition().x-15;
 		if(whichwall>1)masspos = myMassX;
 		//System.out.println(wally-massy);

@@ -9,7 +9,7 @@ public class Walls{
 	double myWidth;
 	double myHeight;
 	private PhysicalObject[] wallarray = new PhysicalObjectRect[4];
-	
+	private PhysicalObject wallt;
 	public Walls(double width, double height ){
 		myWidth=width;
 		myHeight=height;
@@ -25,28 +25,39 @@ public class Walls{
 		final double WALL_myWidth = myWidth - WALL_MARGIN * 2 + WALL_THICKNESS;
 		final double WALL_myHeight = myHeight - WALL_MARGIN * 2 + WALL_THICKNESS;
 		//top wall
-		PhysicalObject wall = new PhysicalObjectRect("wall", 2, JGColor.green,
+		wallt = new PhysicalObjectRect("wall", 2, JGColor.green,
 				WALL_myWidth, WALL_THICKNESS);
-		wall.setPos(myWidth / 2, WALL_MARGIN);
-		wallarray[0]=wall;
+		wallt.setPos(myWidth / 2, WALL_MARGIN);
+		wallarray[0]=wallt;
 		//bottom wall
-		wall = new PhysicalObjectRect("wall", 2, JGColor.green,
+		PhysicalObject wallb = new PhysicalObjectRect("wall", 2, JGColor.green,
 				WALL_myWidth, WALL_THICKNESS);
-		wall.setPos(myWidth / 2, myHeight - WALL_MARGIN);
-		wallarray[1]=wall;
+		wallb.setPos(myWidth / 2, myHeight - WALL_MARGIN);
+		wallarray[1]=wallb;
 		//left wall
-		wall = new PhysicalObjectRect("wall", 2, JGColor.green,
+		PhysicalObject walll = new PhysicalObjectRect("wall", 2, JGColor.green,
 				WALL_THICKNESS, WALL_myHeight);
-		wall.setPos(WALL_MARGIN, myHeight / 2);
-		wallarray[2]=wall;
+		walll.setPos(WALL_MARGIN, myHeight / 2);
+		wallarray[2]=walll;
 		//right wall
-		wall = new PhysicalObjectRect("wall", 2, JGColor.green,
+		PhysicalObject wallr = new PhysicalObjectRect("wall", 2, JGColor.green,
 				WALL_THICKNESS, WALL_myHeight);
-		wall.setPos(myWidth - WALL_MARGIN, myHeight / 2);
-		wallarray[3]=wall;
+		wallr.setPos(myWidth - WALL_MARGIN, myHeight / 2);
+		wallarray[3]=wallr;
 	}
 	
 	public PhysicalObject[] getWalls(){
 		return wallarray;
+	}
+	
+	public void moveLeft(){
+		System.out.println(wallt.x);
+		wallarray[0].setPos(wallarray[0].x, wallarray[0].y+1);
+		wallarray[1].setPos(wallarray[1].x, wallarray[1].y-1);
+		wallarray[2].setPos(wallarray[2].x+1, wallarray[2].y);
+		wallarray[3].setPos(wallarray[3].x-1, wallarray[3].y);
+		
+		
+		
 	}
 }
