@@ -2,8 +2,8 @@ package forces;
 
 import org.jbox2d.common.Vec2;
 
+import Objects.Mass;
 import springies.GetForces;
-import springies.Mass;
 import jboxGlue.PhysicalObject;
 
 public class DoForces {

@@ -9,6 +9,10 @@ import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import Objects.FixedMass;
+import Objects.Mass;
+import Objects.Muscle;
+import Objects.Spring;
 import jboxGlue.PhysicalObject;
 
 public class Assembly extends JComponent{

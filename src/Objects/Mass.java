@@ -1,4 +1,4 @@
-package springies;
+package Objects;
 
 import jboxGlue.PhysicalObject;
 import jboxGlue.PhysicalObjectCircle;
@@ -39,7 +39,7 @@ public class Mass extends PhysicalObjectCircle{
 		super(id, 1, myColor, 5,1);
 	}
 
-	protected String getID(){
+	public String getID(){
 		return myID;
 	}
 

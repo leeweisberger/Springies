@@ -1,4 +1,4 @@
-package springies;
+package Objects;
 
 import forces.ToggleForces;
 import jgame.JGColor;

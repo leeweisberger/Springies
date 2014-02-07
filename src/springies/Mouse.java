@@ -1,5 +1,9 @@
 package springies;
 
+import Objects.Mass;
+import Objects.MouseMass;
+import Objects.Spring;
+
 
 public class Mouse {
 

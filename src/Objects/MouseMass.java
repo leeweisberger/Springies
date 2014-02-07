@@ -1,4 +1,6 @@
-package springies;
+package Objects;
+
+import springies.Mouse;
 
 
 public class MouseMass extends FixedMass{
