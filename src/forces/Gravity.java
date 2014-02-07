@@ -1,6 +1,6 @@
-package springies;
+package forces;
 
-import forces.GlobalForce;
+import springies.GetForces;
 import jboxGlue.PhysicalObject;
 
 public class Gravity extends GlobalForce {

@@ -1,7 +1,6 @@
 package forces;
 
 import springies.GetForces;
-import springies.Gravity;
 import jboxGlue.PhysicalObject;
 
 public class DoForces {
