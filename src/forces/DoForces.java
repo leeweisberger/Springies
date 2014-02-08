@@ -11,39 +11,44 @@ import springies.Walls;
 import Objects.Mass;
 
 public class DoForces {
-	private Springies mySpringies;
-	private Assembly myAssembly;
 
-	public DoForces(Springies springies, Assembly assembly){
-		mySpringies = springies;
+	private Assembly myAssembly;
+	private Springies mySpringy;
+
+	public DoForces(Springies springy, Assembly assembly){
+
+		mySpringy = springy;
+
 		myAssembly = assembly;
 	}
 
 	private void doGravity(Mass mass) {
 		Gravity grav = new Gravity();
-
-		if(mySpringies.gravToggle)grav.doForce(mass);
-
-
+		if(mySpringy.getGravToggle())grav.doForce(mass);
 	}	
 
 	private void doViscosity(Mass mass) {
 		Viscosity v = new Viscosity();
 		Vec2 currentVector = mass.getVec();
-		if(mySpringies.viscToggle)v.doForce(mass);
+		if(mySpringy.getViscToggle())v.doForce(mass);
 	}
 
 	private void doWallRepulsion(Mass mass) {
+
 		WallRepulsion wr = new WallRepulsion(Walls.wallarray,mass,GetForces.walls);
-		wr.doForce(mass);
+		for(int i=0; i<4;i++){
+			if(mySpringy.getWallToggles()[i])
+				wr.doForce(mass, i);
+		}
 	}
 
 	private void doCenterOfMass(Mass mass) {
 		CenterOfMass c = new CenterOfMass();
-		if(mySpringies.massToggle)c.doForce(mass);
+		if(mySpringy.getMassToggle())c.doForce(mass);
 	}
 
 	public void doForces(){	
+
 		List<Mass> myMasses = myAssembly.getMassList();
 		for(Mass mass:myMasses){
 			doGravity(mass);

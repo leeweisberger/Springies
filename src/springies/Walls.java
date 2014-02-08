@@ -33,17 +33,17 @@ public class Walls{
 		PhysicalObject wallb = new PhysicalObjectRect("wall", 2, JGColor.green,
 				WALL_myWidth, WALL_THICKNESS);
 		wallb.setPos(myWidth / 2, myHeight - WALL_MARGIN);
-		wallarray[1]=wallb;
+		wallarray[2]=wallb;
 		//left wall
 		PhysicalObject walll = new PhysicalObjectRect("wall", 2, JGColor.green,
 				WALL_THICKNESS, WALL_myHeight);
 		walll.setPos(WALL_MARGIN, myHeight / 2);
-		wallarray[2]=walll;
+		wallarray[3]=walll;
 		//right wall
 		PhysicalObject wallr = new PhysicalObjectRect("wall", 2, JGColor.green,
 				WALL_THICKNESS, WALL_myHeight);
 		wallr.setPos(myWidth - WALL_MARGIN, myHeight / 2);
-		wallarray[3]=wallr;
+		wallarray[1]=wallr;
 	}
 	
 	public PhysicalObject[] getWalls(){

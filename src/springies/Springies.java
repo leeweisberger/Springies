@@ -13,13 +13,14 @@ import forces.DoForces;
 @SuppressWarnings("serial")
 public class Springies extends JGEngine{
 	private Walls myWalls;
-	public static boolean gravToggle=true;
-	public static boolean viscToggle=true;
-	public static boolean massToggle=true;
-	public static boolean[] wallToggle = new boolean[] {true,true,true,true};
+	private boolean gravToggle=true;
+	private boolean viscToggle=true;
+	private boolean massToggle=true;
+	private boolean[] wallToggle = new boolean[] {true,true,true,true};
 	public static double muscleToggle=1;
 	private Assembly myAssembly;
-	private List<Mass> myMassList;
+	private boolean[] toggles;
+	
 	public Springies ()
 	{
 		// set the window size
@@ -51,6 +52,7 @@ public class Springies extends JGEngine{
 		myWalls.addWalls();
 		new GetForces().getEnvironment();
 		addAssembly(myWalls.getWalls());	
+		toggles = new boolean[]{gravToggle,viscToggle,massToggle};
 	}
 
 	public void addAssembly(PhysicalObject[] wallarray){
@@ -126,5 +128,20 @@ public class Springies extends JGEngine{
 		if(getKey('-')){
 			if(muscleToggle>0)muscleToggle-=.01;
 		}		
+	}
+	public boolean getGravToggle(){
+		return gravToggle;
+	}
+	public boolean getMassToggle(){
+		return massToggle;
+	}
+	public boolean getViscToggle(){
+		return viscToggle;
+	}
+	public double getMuscleToggle(){
+		return muscleToggle;
+	}
+	public boolean[] getWallToggles(){
+		return wallToggle;
 	}
 }
