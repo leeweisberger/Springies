@@ -19,8 +19,10 @@ public class CenterOfMass extends GlobalForce {
 	}
 
 	@Override
+
 	public void doForce(PhysicalObject mass){
 	
+
 			double[] center = getCenterOfMass();
 			double centerX = center[0];
 			double centerY = center[1];

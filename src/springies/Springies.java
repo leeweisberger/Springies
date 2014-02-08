@@ -90,12 +90,14 @@ public class Springies extends JGEngine{
 	
 	private void paintToggles() {
 		drawString("Click 'N' to add an assembly",displayWidth()/18, displayHeight()/4.5 + 200, -1);
+
 		if(gravToggle)drawString("Gravity On",displayWidth()/18, displayHeight()/15, -1);
 		if(viscToggle)drawString("Viscosity On",displayWidth()/18, displayHeight()/9, -1);
 		if(massToggle)drawString("Center of Mass On",displayWidth()/18, displayHeight()/6, -1);
 		drawString("Walls that Repel: ", displayWidth()/18, displayHeight()/4.5,-1);
 		for(int i=0;i<wallToggle.length;i++){
 			if(wallToggle[i]){
+
 				drawString((i+1)+", ", displayWidth()/18+350 + i*50,displayHeight()/4.5,-1);
 			}
 		}

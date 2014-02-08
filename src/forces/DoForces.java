@@ -21,7 +21,10 @@ public class DoForces {
 
 	private void doGravity(Mass mass) {
 		Gravity grav = new Gravity();
+
 		if(mySpringies.gravToggle)grav.doForce(mass);
+
+
 	}	
 
 	private void doViscosity(Mass mass) {
