@@ -28,7 +28,7 @@ public class WallRepulsion extends GlobalForce{
 			//ceiling
 			
 			if(i == 0){
-				if(ToggleForces.wallToggle[0] == 1) mag = Integer.parseInt(myWalls.get(0)[2]);
+				if(ToggleForces.getWallToggle()[0] == true) mag = Integer.parseInt(myWalls.get(0)[2]);
 				double scale = Math.pow(dist, Double.parseDouble(myWalls.get(0)[0]));
 				force[0] = 0; force[1] = mag/scale;
 				forces.add(force);
@@ -37,7 +37,7 @@ public class WallRepulsion extends GlobalForce{
 			
 			//floor
 			else if(i == 1){
-				if(ToggleForces.wallToggle[2]==1)mag = Integer.parseInt(myWalls.get(2)[2]);
+				if(ToggleForces.getWallToggle()[2] == true)mag = Integer.parseInt(myWalls.get(2)[2]);
 				double scale = Math.pow(dist, Double.parseDouble(myWalls.get(2)[0]));
 				force[0] = 0; force[1] = -mag/scale;
 				forces.add(force);
@@ -46,7 +46,7 @@ public class WallRepulsion extends GlobalForce{
 			
 			//left
 			else if(i == 2){
-				if(ToggleForces.wallToggle[3] == 1) mag = Integer.parseInt(myWalls.get(3)[2]);
+				if(ToggleForces.getWallToggle()[3] == true) mag = Integer.parseInt(myWalls.get(3)[2]);
 				double scale = Math.pow(dist, Double.parseDouble(myWalls.get(3)[0]));
 				force[0] = mag/scale; force[1] = 0;
 				forces.add(force);
@@ -55,7 +55,7 @@ public class WallRepulsion extends GlobalForce{
 			
 			//right
 			else if(i == 3){
-				if(ToggleForces.wallToggle[1] == 1)mag = Integer.parseInt(myWalls.get(1)[2]);
+				if(ToggleForces.getWallToggle()[1] == true)mag = Integer.parseInt(myWalls.get(1)[2]);
 				double scale = Math.pow(dist, Double.parseDouble(myWalls.get(1)[0]));
 				force[0] = -mag/scale; force[1] = 0;
 				forces.add(force);

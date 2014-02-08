@@ -20,7 +20,7 @@ public class DoForces {
 	
 	private void doGravity() {
 		Gravity grav = new Gravity();
-		if(ToggleForces.gravToggle == 1)grav.doForce(myX, myY, myMass);
+		if(ToggleForces.getGravityToggle() == true)grav.doForce(myX, myY, myMass);
 	}	
 	
 	private void doViscosity() {

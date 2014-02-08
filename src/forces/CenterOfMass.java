@@ -21,7 +21,7 @@ public class CenterOfMass extends GlobalForce {
 
 	@Override
 	public void doForce(double xpos, double ypos, PhysicalObject mass){
-		if(ToggleForces.massToggle==1){
+		if(ToggleForces.getMassToggle()==true){
 			double[] center = getCenterOfMass();
 			double centerX = center[0];
 			double centerY = center[1];
