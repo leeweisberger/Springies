@@ -23,6 +23,7 @@ public class CenterOfMass extends GlobalForce {
 			totaly += mass.y * mass.getMass();
 		}
 		double[] myCenter = {(totalx /(totalMass)), (totaly /(totalMass))};
+		System.out.println(myCenter[1]);
 		return myCenter;
 	}
 

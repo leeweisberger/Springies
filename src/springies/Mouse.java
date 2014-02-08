@@ -62,6 +62,4 @@ public class Mouse {
 		setMouse();
 		return new int[] {myMouseX, myMouseY};
 	}
-
-
 }

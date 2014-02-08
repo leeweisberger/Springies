@@ -1,11 +1,11 @@
 package springies;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jboxGlue.PhysicalObject;
 import jboxGlue.WorldManager;
 import jgame.platform.JGEngine;
-import Objects.Mass;
 import forces.DoForces;
 
 
@@ -18,9 +18,9 @@ public class Springies extends JGEngine{
 	private boolean massToggle=true;
 	private boolean[] wallToggle = new boolean[] {true,true,true,true};
 	public static double muscleToggle=1;
-	private Assembly myAssembly;
+	private List<Assembly> myAssemblyList = new ArrayList<Assembly>();
 	private boolean[] toggles;
-	
+
 	public Springies ()
 	{
 		// set the window size
@@ -56,29 +56,31 @@ public class Springies extends JGEngine{
 	}
 
 	public void addAssembly(PhysicalObject[] wallarray){
-		myAssembly = new Assembly(wallarray);
-		myAssembly.addAssembly();
-		
+		Assembly a = new Assembly(wallarray);
+		System.out.println("dd");
+		myAssemblyList.add(a);
+		a.addAssembly();
+
 	}
 
 	@Override
 	public void doFrame ()
 	{
-		new DoForces(this,myAssembly).doForces();
+		for(Assembly a: myAssemblyList){
+			new DoForces(this,a).doForces();
+			new Mouse(this, a).makeMouseMass();
+		}
 		doToggle();
-		
+
 		if(getKey('N')){
 			clearKey('N');
 			addAssembly(myWalls.getWalls());
 		}
-		
+
 		if(getKey('Y')){
 			clearKey('Y');
 			myWalls.moveLeft();
 		}
-		
-		new Mouse(this, myAssembly).makeMouseMass();
-		doToggle();
 		WorldManager.getWorld().step(1f, 1);
 		moveObjects();
 		checkCollision(2,1);	 
@@ -89,7 +91,7 @@ public class Springies extends JGEngine{
 	{
 		paintToggles();
 	}
-	
+
 	private void paintToggles() {
 		drawString("Click 'N' to add an assembly",displayWidth()/18, displayHeight()/4.5 + 200, -1);
 
@@ -107,8 +109,8 @@ public class Springies extends JGEngine{
 	}
 	public boolean toggleForces(int togglekey, boolean force){
 		if(getKey(togglekey)){
-			
-			
+
+
 			clearKey(togglekey);
 			force=!force;
 			System.out.println(force);
@@ -116,7 +118,7 @@ public class Springies extends JGEngine{
 		return force;
 	}
 	public void doToggle(){
-		
+
 		gravToggle = toggleForces('G',gravToggle);
 		viscToggle = toggleForces('V',viscToggle);
 		massToggle = toggleForces('M',massToggle);
