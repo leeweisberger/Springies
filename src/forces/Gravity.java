@@ -4,7 +4,7 @@ import springies.GetForces;
 import jboxGlue.PhysicalObject;
 
 public class Gravity extends GlobalForce {
-	public void doForce(double x, double y, PhysicalObject mass){
+	public void doForce(PhysicalObject mass){
 	    double GRAVITY = Integer.parseInt(GetForces.grav[1]);
 		double ANGLE = Integer.parseInt(GetForces.grav[0]);
 		ANGLE = toRadians(ANGLE);			

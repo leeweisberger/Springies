@@ -1,24 +1,27 @@
 package springies;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import jboxGlue.PhysicalObject;
 import Objects.FixedMass;
 import Objects.Mass;
 import Objects.Muscle;
 import Objects.Spring;
-import jboxGlue.PhysicalObject;
 
 public class Assembly extends JComponent{
 	private static Map<String,Mass> m = new HashMap<String,Mass>();
 	private PhysicalObject[] myWallArray;
 	public static int assemblyNumber=100;
+	private List<Mass> myMassList = new ArrayList<Mass>();
 	
 	public Assembly(PhysicalObject[] wallarray){
 		myWallArray = wallarray;
@@ -26,7 +29,7 @@ public class Assembly extends JComponent{
 	
 	protected void addAssembly(){
 		assemblyNumber++;
-		XML_Parser p = new XML_Parser(getNewFile());
+		XML_Parser p = new XML_Parser(new File("ball.xml"));
 		p.parse();
 		addMasses(p);
 		addSprings(p);
@@ -40,11 +43,16 @@ public class Assembly extends JComponent{
 		for(String mass:masseslist.keySet()){   
 			if(masseslist.get(mass)[5]!=null)				
 				m.put(mass + assemblyNumber, new FixedMass(mass+assemblyNumber,masseslist.get(mass)[0],masseslist.get(mass)[1]));
-			else
-				m.put(mass+assemblyNumber, new Mass(mass+assemblyNumber,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],myWallArray));		
-		}	
+			else{
+				Mass newmass = new Mass(mass+assemblyNumber,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],myWallArray);
+				m.put(mass+assemblyNumber, newmass);
+				myMassList.add(newmass);				
+			}
+		}
 	}
-
+	public List<Mass> getMassList(){
+		return myMassList;
+	}
 	private void addSprings(XML_Parser p){
 		Collection<String[]> springslist=p.springs;  
 		for(String[] spring:springslist){  

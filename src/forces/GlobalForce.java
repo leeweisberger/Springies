@@ -8,5 +8,5 @@ abstract public class GlobalForce{
 	protected void setToggle(int newToggle){
 		toggle = newToggle;
 	}
-	public abstract void doForce(double x, double y, PhysicalObject Mass);
+	public abstract void doForce(PhysicalObject Mass);
 }

@@ -1,48 +1,53 @@
 package forces;
 
+import java.util.List;
+
 import org.jbox2d.common.Vec2;
 
-import Objects.Mass;
+import springies.Assembly;
 import springies.GetForces;
-import jboxGlue.PhysicalObject;
+import springies.Springies;
+import springies.Walls;
+import Objects.Mass;
 
 public class DoForces {
-	private double myX;
-	private double myY;
-	private PhysicalObject myMass;
-	PhysicalObject[] myWallArray;
-	public DoForces(double xpos, double ypos, PhysicalObject mass,PhysicalObject[] wallarray){
-		myX=xpos;
-		myY=ypos;
-		myMass=mass;
-		myWallArray=wallarray;
+	private Springies mySpringies;
+	private Assembly myAssembly;
+
+	public DoForces(Springies springies, Assembly assembly){
+		mySpringies = springies;
+		myAssembly = assembly;
 	}
-	
-	private void doGravity() {
+
+	private void doGravity(Mass mass) {
 		Gravity grav = new Gravity();
-		if(ToggleForces.gravToggle == 1)grav.doForce(myX, myY, myMass);
+		if(mySpringies.gravToggle)grav.doForce(mass);
 	}	
-	
-	private void doViscosity() {
+
+	private void doViscosity(Mass mass) {
 		Viscosity v = new Viscosity();
-		Vec2 currentVector = ((Mass)myMass).getVec();
-		v.doForce(currentVector.x, currentVector.y, myMass);
+		Vec2 currentVector = mass.getVec();
+		if(mySpringies.viscToggle)v.doForce(mass);
 	}
-	
-	private void doWallRepulsion() {
-		WallRepulsion wr = new WallRepulsion(myWallArray, myX, myY, GetForces.walls);
-		wr.doForce(myX, myY, myMass);
+
+	private void doWallRepulsion(Mass mass) {
+		WallRepulsion wr = new WallRepulsion(Walls.wallarray,mass,GetForces.walls);
+		wr.doForce(mass);
 	}
-	
-	private void doCenterOfMass() {
+
+	private void doCenterOfMass(Mass mass) {
 		CenterOfMass c = new CenterOfMass();
-		c.doForce(myX, myY, myMass);
+		if(mySpringies.massToggle)c.doForce(mass);
 	}
-	
+
 	public void doForces(){	
-		doGravity();
-		doViscosity();
-		doWallRepulsion();
-		doCenterOfMass();
+		List<Mass> myMasses = myAssembly.getMassList();
+		for(Mass mass:myMasses){
+			doGravity(mass);
+			doViscosity(mass);
+			doWallRepulsion(mass);
+			doCenterOfMass(mass);
+		}
 	}
+
 }

@@ -15,18 +15,17 @@ public class CenterOfMass extends GlobalForce {
 			totaly += (Assembly.getMap().get(l).y * Assembly.getMap().get(l).getMass());
 		}
 		double[] myCenter = {(totalx /(totalMass)), (totaly /(totalMass))};
-		System.out.println(myCenter[0]);
 		return myCenter;
 	}
 
 	@Override
-	public void doForce(double xpos, double ypos, PhysicalObject mass){
-		if(ToggleForces.massToggle==1){
+	public void doForce(PhysicalObject mass){
+	
 			double[] center = getCenterOfMass();
 			double centerX = center[0];
 			double centerY = center[1];
-			double xDist = xpos - centerX;
-			double yDist = ypos - centerY;
+			double xDist = mass.x - centerX;
+			double yDist = mass.y - centerY;
 			//System.out.println("asdf " + s.centermass[1]);
 			double xForce = Integer.parseInt(GetForces.centermass[1])/(Math.pow(xDist, Double.parseDouble(GetForces.centermass[0])));
 			double yForce = Integer.parseInt(GetForces.centermass[1])/(Math.pow(yDist, Double.parseDouble(GetForces.centermass[0])));
@@ -44,6 +43,6 @@ public class CenterOfMass extends GlobalForce {
 			if(xDist < 0) mass.setForce(xForce,0);
 			if(yDist > 0) mass.setForce(0,-yForce);
 			if(yDist < 0) mass.setForce(0,yForce);
-		}
+		
 	}
 }
