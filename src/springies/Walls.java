@@ -51,11 +51,10 @@ public class Walls{
 	}
 	
 	public void moveLeft(){
-		System.out.println(wallt.x);
 		wallarray[0].setPos(wallarray[0].x, wallarray[0].y+1);
-		wallarray[1].setPos(wallarray[1].x, wallarray[1].y-1);
-		wallarray[2].setPos(wallarray[2].x+1, wallarray[2].y);
-		wallarray[3].setPos(wallarray[3].x-1, wallarray[3].y);
+		wallarray[1].setPos(wallarray[1].x-1, wallarray[1].y);
+		wallarray[2].setPos(wallarray[2].x, wallarray[2].y-1);
+		wallarray[3].setPos(wallarray[3].x+1, wallarray[3].y);
 		
 		
 		

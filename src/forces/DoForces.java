@@ -42,19 +42,19 @@ public class DoForces {
 		}
 	}
 
-	private void doCenterOfMass(Mass mass) {
-		CenterOfMass c = new CenterOfMass();
+	private void doCenterOfMass(Mass mass, List<Mass> masses) {
+		CenterOfMass c = new CenterOfMass(masses);
 		if(mySpringy.getMassToggle())c.doForce(mass);
 	}
 
 	public void doForces(){	
 
-		List<Mass> myMasses = myAssembly.getMassList();
-		for(Mass mass:myMasses){
+		List<Mass> Masses = myAssembly.getMassList();
+		for(Mass mass:Masses){
 			doGravity(mass);
 			doViscosity(mass);
 			doWallRepulsion(mass);
-			doCenterOfMass(mass);
+			doCenterOfMass(mass, Masses);
 		}
 	}
 

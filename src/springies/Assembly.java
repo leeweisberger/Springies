@@ -18,9 +18,9 @@ import Objects.Muscle;
 import Objects.Spring;
 
 public class Assembly extends JComponent{
-	private static Map<String,Mass> m = new HashMap<String,Mass>();
+	private Map<String,Mass> m = new HashMap<String,Mass>();
 	private PhysicalObject[] myWallArray;
-	public static int assemblyNumber=100;
+	private static int assemblyNumber=100;
 	private List<Mass> myMassList = new ArrayList<Mass>();
 	
 	public Assembly(PhysicalObject[] wallarray){
@@ -29,7 +29,7 @@ public class Assembly extends JComponent{
 	
 	protected void addAssembly(){
 		assemblyNumber++;
-		XML_Parser p = new XML_Parser(new File("example.xml"));
+		XML_Parser p = new XML_Parser(new File("ball.xml"));
 		p.parse();
 		addMasses(p);
 		addSprings(p);
@@ -49,6 +49,7 @@ public class Assembly extends JComponent{
 				myMassList.add(newmass);				
 			}
 		}
+		
 	}
 	public List<Mass> getMassList(){
 		return myMassList;
@@ -83,7 +84,5 @@ public class Assembly extends JComponent{
 	    }
 	    return chooser.getSelectedFile();	
 	}
-	public static Map<String,Mass> getMap(){
-		return m;
-	}
+	
 }

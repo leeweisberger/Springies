@@ -23,7 +23,6 @@ public class WallRepulsion{
 		double[] vector = setVector(i);			
 		double dist = getDistanceBetween(myWallArray[i],i);
 		double scale = Math.pow(dist, exp);
-		System.out.println(dist);
 		mass.setForce(vector[0] * mag/scale, vector[1] * mag/scale);
 	}
 	

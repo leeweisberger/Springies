@@ -77,7 +77,7 @@ public class Springies extends JGEngine{
 			myWalls.moveLeft();
 		}
 		
-		new Mouse(this).makeMouseMass();
+		new Mouse(this, myAssembly).makeMouseMass();
 		doToggle();
 		WorldManager.getWorld().step(1f, 1);
 		moveObjects();
