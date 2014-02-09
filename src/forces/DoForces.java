@@ -16,9 +16,7 @@ public class DoForces {
 	private Springies mySpringy;
 
 	public DoForces(Springies springy, Assembly assembly){
-
 		mySpringy = springy;
-
 		myAssembly = assembly;
 	}
 
@@ -35,7 +33,7 @@ public class DoForces {
 
 	private void doWallRepulsion(Mass mass) {
 
-		WallRepulsion wr = new WallRepulsion(Walls.wallarray,mass,GetForces.walls);
+		WallRepulsion wr = new WallRepulsion(Walls.myWallArray,mass,GetForces.walls);
 		for(int i=0; i<4;i++){
 			if(mySpringy.getWallToggles()[i])
 				wr.doForce(mass, i);

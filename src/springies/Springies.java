@@ -57,7 +57,6 @@ public class Springies extends JGEngine{
 
 	public void addAssembly(PhysicalObject[] wallarray){
 		Assembly a = new Assembly(wallarray);
-		System.out.println("dd");
 		myAssemblyList.add(a);
 		a.addAssembly();
 
@@ -77,9 +76,13 @@ public class Springies extends JGEngine{
 			addAssembly(myWalls.getWalls());
 		}
 
-		if(getKey('Y')){
-			clearKey('Y');
-			myWalls.moveLeft();
+		if(getKey(KeyDown)){
+			clearKey(KeyDown);
+			myWalls.moveWalls(true);
+		}
+		if(getKey(KeyUp)){
+			clearKey(KeyUp);
+			myWalls.moveWalls(false);
 		}
 		WorldManager.getWorld().step(1f, 1);
 		moveObjects();

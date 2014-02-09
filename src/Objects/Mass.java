@@ -46,18 +46,6 @@ public class Mass extends PhysicalObjectCircle{
 	public double getMass(){
 		return myMass;
 	}
-
-
-	private void setJGamePosition() {
-		if (myBody.m_world != WorldManager.getWorld()) {
-			remove();
-			return;
-		}
-		Vec2 position = myBody.getPosition();
-		x = position.x;
-		y = position.y;
-		myRotation = -myBody.getAngle();
-	}
 	
 	public void setIsFixed(boolean fixed){
 		isFixed = fixed;

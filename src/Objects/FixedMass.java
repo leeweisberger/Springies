@@ -11,13 +11,11 @@ public class FixedMass extends Mass{
 	
 	public FixedMass(String id, double xpos, double ypos){
 		super(id, xpos,ypos);
-		//System.out.println("fiex");
 		x=(int)xpos;
 		y=(int)ypos;
 		setPos(x, y);
 		myID = id;
-		setIsFixed(true);
-		
+		setIsFixed(true);		
 	}
 		
 	

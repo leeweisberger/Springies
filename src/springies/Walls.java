@@ -8,7 +8,7 @@ import jgame.platform.JGEngine;
 public class Walls{
 	private double myWidth;
 	private double myHeight;
-	public static PhysicalObject[] wallarray = new PhysicalObjectRect[4];
+	private static PhysicalObject[] myWallArray = new PhysicalObjectRect[4];
 	private PhysicalObject wallt;
 	public Walls(double width, double height ){
 		myWidth=width;
@@ -25,38 +25,37 @@ public class Walls{
 		final double WALL_myWidth = myWidth - WALL_MARGIN * 2 + WALL_THICKNESS;
 		final double WALL_myHeight = myHeight - WALL_MARGIN * 2 + WALL_THICKNESS;
 		//top wall
-		wallt = new PhysicalObjectRect("wall", 2, JGColor.green,
+		wallt = new PhysicalObjectRect("wall", 2, JGColor.magenta,
 				WALL_myWidth, WALL_THICKNESS);
 		wallt.setPos(myWidth / 2, WALL_MARGIN);
-		wallarray[0]=wallt;
+		myWallArray[0]=wallt;
 		//bottom wall
-		PhysicalObject wallb = new PhysicalObjectRect("wall", 2, JGColor.green,
+		PhysicalObject wallb = new PhysicalObjectRect("wall", 2, JGColor.magenta,
 				WALL_myWidth, WALL_THICKNESS);
 		wallb.setPos(myWidth / 2, myHeight - WALL_MARGIN);
-		wallarray[2]=wallb;
+		myWallArray[2]=wallb;
 		//left wall
-		PhysicalObject walll = new PhysicalObjectRect("wall", 2, JGColor.green,
+		PhysicalObject walll = new PhysicalObjectRect("wall", 2, JGColor.magenta,
 				WALL_THICKNESS, WALL_myHeight);
 		walll.setPos(WALL_MARGIN, myHeight / 2);
-		wallarray[3]=walll;
+		myWallArray[3]=walll;
 		//right wall
-		PhysicalObject wallr = new PhysicalObjectRect("wall", 2, JGColor.green,
+		PhysicalObject wallr = new PhysicalObjectRect("wall", 2, JGColor.magenta,
 				WALL_THICKNESS, WALL_myHeight);
 		wallr.setPos(myWidth - WALL_MARGIN, myHeight / 2);
-		wallarray[1]=wallr;
+		myWallArray[1]=wallr;
 	}
 	
 	public PhysicalObject[] getWalls(){
-		return wallarray;
+		return myWallArray;
 	}
 	
-	public void moveLeft(){
-		wallarray[0].setPos(wallarray[0].x, wallarray[0].y+1);
-		wallarray[1].setPos(wallarray[1].x-1, wallarray[1].y);
-		wallarray[2].setPos(wallarray[2].x, wallarray[2].y-1);
-		wallarray[3].setPos(wallarray[3].x+1, wallarray[3].y);
-		
-		
-		
+	public void moveWalls(boolean smaller){
+		int scale = -1;
+		if(smaller) scale=1;
+		myWallArray[0].setPos(myWallArray[0].x, myWallArray[0].y+1*scale);
+		myWallArray[1].setPos(myWallArray[1].x-1*scale, myWallArray[1].y);
+		myWallArray[2].setPos(myWallArray[2].x, myWallArray[2].y-1*scale);
+		myWallArray[3].setPos(myWallArray[3].x+1*scale, myWallArray[3].y);
 	}
 }
