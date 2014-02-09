@@ -23,6 +23,23 @@ public class XML_Parser {
 	String[] mygrav= new String[2];
 	String[] mycentermass= new String[2];
 	static String myviscosity;
+	
+	public String[] getGravity() {
+		return mygrav;
+	}
+
+	public String[] getCenterMass() {
+		return mycentermass;
+	}
+
+	public String getViscosity() {
+		return myviscosity;
+	}
+	
+	public List<String[]> getWalls(){
+		return walls;
+	}
+
 	private File myFile;
 	
 	public XML_Parser(File f){

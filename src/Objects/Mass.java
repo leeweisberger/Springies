@@ -6,7 +6,7 @@ import jboxGlue.WorldManager;
 
 import org.jbox2d.common.Vec2;
 
-import forces.DoForces;
+
 
 import jgame.JGColor;
 import jgame.JGObject;
@@ -46,6 +46,7 @@ public class Mass extends PhysicalObjectCircle{
 	public double getMass(){
 		return myMass;
 	}
+
 	
 	public void setIsFixed(boolean fixed){
 		isFixed = fixed;
