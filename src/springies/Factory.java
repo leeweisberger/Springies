@@ -17,13 +17,13 @@ import Objects.Mass;
 import Objects.Muscle;
 import Objects.Spring;
 
-public class Assembly extends JComponent{
+public class Factory extends JComponent{
 	private Map<String,Mass> m = new HashMap<String,Mass>();
 	private PhysicalObject[] myWallArray;
 	private static int assemblyNumber=100;
 	private List<Mass> myMassList = new ArrayList<Mass>();
 	
-	public Assembly(PhysicalObject[] wallarray){
+	public Factory(PhysicalObject[] wallarray){
 		myWallArray = wallarray;
 	}
 	

@@ -7,18 +7,19 @@ import jboxGlue.PhysicalObject;
 import jboxGlue.WorldManager;
 import jgame.platform.JGEngine;
 import forces.DoForces;
+import forces.Environment;
 
 
 
 @SuppressWarnings("serial")
 public class Springies extends JGEngine{
 	private Walls myWalls;
-	private boolean gravToggle=true;
-	private boolean viscToggle=true;
-	private boolean massToggle=true;
-	private boolean[] wallToggle = new boolean[] {true,true,true,true};
+//	private boolean gravToggle=true;
+//	private boolean viscToggle=true;
+//	private boolean massToggle=true;
+//	private boolean[] wallToggle = new boolean[] {true,true,true,true};
 	public static double muscleToggle=1;
-	private List<Assembly> myAssemblyList = new ArrayList<Assembly>();
+	private List<Factory> myAssemblyList = new ArrayList<Factory>();
 	private boolean[] toggles;
 
 	public Springies ()
@@ -50,13 +51,14 @@ public class Springies extends JGEngine{
 		//		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.2f));
 		myWalls = new Walls(displayWidth(), displayHeight());
 		myWalls.addWalls();
-		new GetForces().getEnvironment();
+		Environment myEnvironment = new Environment(this);
+		myEnvironment.initEnvironment();
 		addAssembly(myWalls.getWalls());	
-		toggles = new boolean[]{gravToggle,viscToggle,massToggle};
+//		toggles = new boolean[]{gravToggle,viscToggle,massToggle};
 	}
 
 	public void addAssembly(PhysicalObject[] wallarray){
-		Assembly a = new Assembly(wallarray);
+		Factory a = new Factory(wallarray);
 		System.out.println("dd");
 		myAssemblyList.add(a);
 		a.addAssembly();
@@ -66,11 +68,11 @@ public class Springies extends JGEngine{
 	@Override
 	public void doFrame ()
 	{
-		for(Assembly a: myAssemblyList){
-			new DoForces(this,a).doForces();
+		for(Factory a: myAssemblyList){
+			Environment.update();
 			new Mouse(this, a).makeMouseMass();
 		}
-		doToggle();
+//		doToggle();
 
 		if(getKey('N')){
 			clearKey('N');
@@ -86,64 +88,42 @@ public class Springies extends JGEngine{
 		checkCollision(2,1);	 
 	}
 
-	@Override
-	public void paintFrame ()
-	{
-		paintToggles();
-	}
+//	@Override
+//	public void paintFrame ()
+//	{
+//		paintToggles();
+//	}
 
-	private void paintToggles() {
-		drawString("Click 'N' to add an assembly",displayWidth()/18, displayHeight()/4.5 + 200, -1);
-
-		if(gravToggle)drawString("Gravity On",displayWidth()/18, displayHeight()/15, -1);
-		if(viscToggle)drawString("Viscosity On",displayWidth()/18, displayHeight()/9, -1);
-		if(massToggle)drawString("Center of Mass On",displayWidth()/18, displayHeight()/6, -1);
-		drawString("Walls that Repel: ", displayWidth()/18, displayHeight()/4.5,-1);
-		for(int i=0;i<wallToggle.length;i++){
-			if(wallToggle[i]){
-
-				drawString((i+1)+", ", displayWidth()/18+350 + i*50,displayHeight()/4.5,-1);
-			}
-		}
-		drawString("Muscles at " + muscleToggle + " times original power",displayWidth()/18,displayHeight()/3.5,-1);
-	}
-	public boolean toggleForces(int togglekey, boolean force){
-		if(getKey(togglekey)){
-
-
-			clearKey(togglekey);
-			force=!force;
-			System.out.println(force);
-		}
-		return force;
-	}
-	public void doToggle(){
-
-		gravToggle = toggleForces('G',gravToggle);
-		viscToggle = toggleForces('V',viscToggle);
-		massToggle = toggleForces('M',massToggle);
-		wallToggle[2] = toggleForces('3',wallToggle[2]);
-		wallToggle[3] = toggleForces('4',wallToggle[3]);
-		wallToggle[0] = toggleForces('1',wallToggle[0]);
-		wallToggle[1] = toggleForces('2',wallToggle[1]);
-		if(getKey('='))muscleToggle+=.01;
-		if(getKey('-')){
-			if(muscleToggle>0)muscleToggle-=.01;
-		}		
-	}
-	public boolean getGravToggle(){
-		return gravToggle;
-	}
-	public boolean getMassToggle(){
-		return massToggle;
-	}
-	public boolean getViscToggle(){
-		return viscToggle;
-	}
-	public double getMuscleToggle(){
-		return muscleToggle;
-	}
-	public boolean[] getWallToggles(){
-		return wallToggle;
-	}
+//	private void paintToggles() {
+//		drawString("Click 'N' to add an assembly",displayWidth()/18, displayHeight()/4.5 + 200, -1);
+//
+//		if(gravToggle)drawString("Gravity On",displayWidth()/18, displayHeight()/15, -1);
+//		if(viscToggle)drawString("Viscosity On",displayWidth()/18, displayHeight()/9, -1);
+//		if(massToggle)drawString("Center of Mass On",displayWidth()/18, displayHeight()/6, -1);
+//		drawString("Walls that Repel: ", displayWidth()/18, displayHeight()/4.5,-1);
+//		for(int i=0;i<wallToggle.length;i++){
+//			if(wallToggle[i]){
+//
+//				drawString((i+1)+", ", displayWidth()/18+350 + i*50,displayHeight()/4.5,-1);
+//			}
+//		}
+//		drawString("Muscles at " + muscleToggle + " times original power",displayWidth()/18,displayHeight()/3.5,-1);
+//	}
+	
+	
+//	public boolean getGravToggle(){
+//		return gravToggle;
+//	}
+//	public boolean getMassToggle(){
+//		return massToggle;
+//	}
+//	public boolean getViscToggle(){
+//		return viscToggle;
+//	}
+//	public double getMuscleToggle(){
+//		return muscleToggle;
+//	}
+//	public boolean[] getWallToggles(){
+//		return wallToggle;
+//	}
 }

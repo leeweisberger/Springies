@@ -13,9 +13,9 @@ public class Mouse {
 	private static boolean mouse;
 	private int myMouseX;
 	private int myMouseY;
-	private static Assembly myAssembly;
+	private static Factory myAssembly;
 
-	public Mouse(Springies springies, Assembly assembly){
+	public Mouse(Springies springies, Factory assembly){
 		mySpringies = springies;
 		myAssembly = assembly;
 	}

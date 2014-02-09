@@ -47,7 +47,6 @@ public class Mass extends PhysicalObjectCircle{
 		return myMass;
 	}
 
-
 	private void setJGamePosition() {
 		if (myBody.m_world != WorldManager.getWorld()) {
 			remove();
