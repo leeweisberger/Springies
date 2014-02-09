@@ -8,6 +8,7 @@ public class Gravity extends GlobalForce {
 		myGravity = readInGravityConstant;
 	}
 	public void doForce(PhysicalObject mass){
+		System.out.println(getToggle());
 	    if (getToggle()) {
 			double GRAVITY = Integer.parseInt(myGravity[1]);
 			double ANGLE = Integer.parseInt(myGravity[0]);

@@ -50,9 +50,9 @@ public class Walls{
 		return myWallArray;
 	}
 	
-	public void moveWalls(boolean smaller){
+	public void moveWalls(boolean isSmaller){
 		int scale = -1;
-		if(smaller) scale=1;
+		if(isSmaller) scale=1;
 		myWallArray[0].setPos(myWallArray[0].x, myWallArray[0].y+1*scale);
 		myWallArray[1].setPos(myWallArray[1].x-1*scale, myWallArray[1].y);
 		myWallArray[2].setPos(myWallArray[2].x, myWallArray[2].y-1*scale);

@@ -1,4 +1,4 @@
-import springies.Springies;
+import springies.Model;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -27,7 +27,7 @@ public class Main
     public static void main (String args[])
     {
         // view of user's content
-        final Springies sp = new Springies();
+        final Model sp = new Model();
         JButton jb = new JButton("Make new Ball");
         jb.addActionListener(new ActionListener() {
             @Override

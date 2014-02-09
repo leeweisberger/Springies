@@ -7,7 +7,7 @@ import Objects.Spring;
 
 public class Mouse {
 
-	private Springies mySpringies;
+	private Model mySpringies;
 	private  static MouseMass mouseMass;
 	private  static Spring springMass;
 	private static boolean mouse;
@@ -15,7 +15,7 @@ public class Mouse {
 	private int myMouseY;
 	private static Factory myAssembly;
 
-	public Mouse(Springies springies, Factory assembly){
+	public Mouse(Model springies, Factory assembly){
 		mySpringies = springies;
 		myAssembly = assembly;
 	}

@@ -7,12 +7,14 @@ import springies.Factory;
 import jboxGlue.PhysicalObject;
 
 public class CenterOfMass extends GlobalForce {
+	private List<Mass> myMasses;
 	private String[] myCenterOfMass;
+	
 	public CenterOfMass(String[] readInCenterOfMass){
 		myCenterOfMass = readInCenterOfMass;
 	}
 	
-	private List<Mass> myMasses;
+	
 	
 	public CenterOfMass(List<Mass> masses) {
 		myMasses=masses;

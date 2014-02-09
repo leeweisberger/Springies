@@ -5,14 +5,14 @@ import java.util.List;
 
 import jboxGlue.PhysicalObject;
 import jboxGlue.WorldManager;
+import jgame.JGColor;
 import jgame.platform.JGEngine;
-
 import forces.Environment;
 
 
 
 @SuppressWarnings("serial")
-public class Springies extends JGEngine{
+public class Model extends JGEngine{
 	private Walls myWalls;
 	private Environment myEnvironment;
 //	private boolean gravToggle=true;
@@ -23,7 +23,7 @@ public class Springies extends JGEngine{
 	private List<Factory> myAssemblyList = new ArrayList<Factory>();
 	private boolean[] toggles;
 
-	public Springies ()
+	public Model ()
 	{
 		// set the window size
 		int height = 800;
@@ -40,7 +40,7 @@ public class Springies extends JGEngine{
 				displayWidth(), // width of one tile
 				displayHeight(), // height of one tile
 				null,// foreground colour -> use default colour white
-				null,// background colour -> use default colour black
+				JGColor.orange,// background colour -> use default colour black
 				null); // standard font -> use default font
 	}
 
@@ -90,7 +90,7 @@ public class Springies extends JGEngine{
 		}
 		WorldManager.getWorld().step(1f, 1);
 		moveObjects();
-		checkCollision(2,1);	 
+		checkCollision(1,2);	 
 	}
 
 //	@Override

@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import springies.Factory;
-import springies.Springies;
+import springies.Model;
 import springies.XML_Parser;
 import Objects.Mass;
 
@@ -14,9 +14,9 @@ public class Environment {
 	private Viscosity viscosityEnvironment;
 	private CenterOfMass centerOfMassEnvironment;
 	private Factory myAssembly;
-	private Springies mySpringy;
+	private Model mySpringy;
 	
-	public Environment(Springies mySpringiesClass, Factory factory){
+	public Environment(Model mySpringiesClass, Factory factory){
 		super();
 		mySpringy = mySpringiesClass;
 		myAssembly = factory;
@@ -51,6 +51,7 @@ public class Environment {
 	
 	public void toggleForces(int togglekey, GlobalForce toggledForce){
 		if(mySpringy.getKey(togglekey)){
+			System.out.println("toggle");
 			mySpringy.clearKey(togglekey);
 			toggledForce.changeToggle();
 		}
@@ -62,7 +63,7 @@ public class Environment {
 	}
 	
 	public void update(Factory factory){
-		
+		doToggle();
 		for(Mass mass:factory.getMassList()){
 			
 			gravityEnvironment.doForce(mass);
