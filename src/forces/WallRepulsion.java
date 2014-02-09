@@ -3,26 +3,24 @@ import java.util.List;
 import jboxGlue.PhysicalObject;
 import Objects.Mass;
 
-public class WallRepulsion{
+public class WallRepulsion extends GlobalForce{
 	private PhysicalObject[] myWallArray;
-	private Mass myMass;
-	private List<String[]> myWalls;
-
-	protected WallRepulsion(PhysicalObject[] wallarray, Mass mass,List<String[]> walls){
+	private int myWhichWall;
+	protected WallRepulsion(PhysicalObject[] wallarray,int whichWall){
 		myWallArray = wallarray;
-		myMass = mass;
-		myWalls = walls;
+		myWhichWall=whichWall;
 	}
 
-	public void doForce(PhysicalObject mass, int i){
-		int mag = Integer.parseInt(Environment.walls.get(i)[2]);
-		double exp = Double.parseDouble(Environment.walls.get(i)[0]);
-		double[] vector = setVector(i);
-		double dist = getDistanceBetween(myWallArray[i], i);
-		double scale = Math.pow(dist, exp);
-		mass.setForce(vector[0] * mag / scale, vector[1] * mag / scale);
+	public void doForce(PhysicalObject mass){
+		if(getToggle()){
+			int mag = Integer.parseInt(Environment.walls.get(myWhichWall)[2]);
+			double exp = Double.parseDouble(Environment.walls.get(myWhichWall)[0]);
+			double[] vector = setVector(myWhichWall);
+			double dist = getDistanceBetween(myWallArray[myWhichWall], myWhichWall,mass);
+			double scale = Math.pow(dist, exp);
+			mass.setForce(vector[0] * mag / scale, vector[1] * mag / scale);
+		}
 	}
-
 
 	public double[] setVector(int wall){	
 		if(wall==0)return new double[] {0,1};
@@ -33,15 +31,15 @@ public class WallRepulsion{
 	}
 
 
-	private double getDistanceBetween(PhysicalObject wall,int whichwall){
+	private double getDistanceBetween(PhysicalObject wall,int whichwall, PhysicalObject mass){
 		double wallpos=0;
 		double masspos=0;	
 
-		if(whichwall == 0 || whichwall==2)masspos = myMass.y;
+		if(whichwall == 0 || whichwall==2)masspos = mass.y;
 		if(whichwall == 2) wallpos = wall.getBody().getPosition().y - 15;
 		if(whichwall == 0)wallpos = wall.getBody().getPosition().y + 15;
 
-		if(whichwall ==1 || whichwall==3)masspos = myMass.x;
+		if(whichwall ==1 || whichwall==3)masspos = mass.x;
 		if(whichwall == 1)wallpos = wall.getBody().getPosition().x - 15;
 		if(whichwall == 3)wallpos = wall.getBody().getPosition().x + 15;
 

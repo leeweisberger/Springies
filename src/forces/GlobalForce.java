@@ -9,6 +9,7 @@ abstract public class GlobalForce{
 		toggle = !toggle;
 	}
 	
+	
 	protected boolean getToggle(){
 		return toggle;
 	}

@@ -54,7 +54,7 @@ public class Model extends JGEngine{
 		myWalls.addWalls();
 		
 		addAssembly(myWalls.getWalls());
-		myEnvironment = new Environment(this,myAssemblyList.get(0));
+		myEnvironment = new Environment(this);
 		myEnvironment.initEnvironment();
 //		toggles = new boolean[]{gravToggle,viscToggle,massToggle};
 	}
@@ -93,11 +93,11 @@ public class Model extends JGEngine{
 		checkCollision(1,2);	 
 	}
 
-//	@Override
-//	public void paintFrame ()
-//	{
-//		paintToggles();
-//	}
+	@Override
+	public void paintFrame ()
+	{
+		myEnvironment.paintToggles();
+	}
 
 //	private void paintToggles() {
 //		drawString("Click 'N' to add an assembly",displayWidth()/18, displayHeight()/4.5 + 200, -1);
