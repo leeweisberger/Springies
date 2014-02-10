@@ -10,9 +10,11 @@ public class Muscle extends Spring {
 	private int time;
 	private static JGColor myColor = JGColor.green;
 	public Muscle(Mass m1, Mass m2, double originalRLength, double springiness, double amplitude){
+		
 		super(m1,m2,originalRLength,springiness);
+		System.out.println(springiness);
 		setColor(myColor);
-		myAmplitude = amplitude * Model.muscleToggle;
+		myAmplitude = amplitude;
 		myRestLength = originalRLength;
 	}
 	

@@ -16,6 +16,7 @@ public class Spring extends PhysicalObjectRect{
 	private Mass myM2;
 	private double kValue;
 	private double springLength;
+	private double displacement;
 
 	public Spring(Mass m1, Mass m2, double rlength, double springiness){
 		super(m1.toString()+m2.toString(), 3, JGColor.red, 1, rlength);
@@ -36,7 +37,8 @@ public class Spring extends PhysicalObjectRect{
 	}
 	
 	protected void springForces(){
-		double displacement = (springLength - getDistanceBetween(myM1,myM2));		
+		displacement = (springLength - getDistanceBetween(myM1,myM2));
+		
 		double force = (kValue *  displacement);
 		double angle = getAngleBetween(myM1,myM2);
 		double xvector = Math.sin(angle) * force;
@@ -65,7 +67,13 @@ public class Spring extends PhysicalObjectRect{
 	
 	@Override
 	public void paintShape(){
-		myEngine.setColor(JGColor.blue);
+		if(displacement<0)
+			myEngine.setColor(JGColor.green);
+		else{
+			myEngine.setColor(JGColor.blue);
+		}
+		
+		//myEngine.setColor(JGColor.blue);
 		myEngine.drawLine(myM1.x, myM1.y, myM2.x, myM2.y);
 	}
 }

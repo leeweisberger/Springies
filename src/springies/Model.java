@@ -15,10 +15,6 @@ import forces.Environment;
 public class Model extends JGEngine{
 	private Walls myWalls;
 	private Environment myEnvironment;
-//	private boolean gravToggle=true;
-//	private boolean viscToggle=true;
-//	private boolean massToggle=true;
-//	private boolean[] wallToggle = new boolean[] {true,true,true,true};
 	public static double muscleToggle=1;
 	private List<Factory> myAssemblyList = new ArrayList<Factory>();
 	private boolean[] toggles;
@@ -40,7 +36,7 @@ public class Model extends JGEngine{
 				displayWidth(), // width of one tile
 				displayHeight(), // height of one tile
 				null,// foreground colour -> use default colour white
-				JGColor.orange,// background colour -> use default colour black
+				null,// background colour -> use default colour black
 				null); // standard font -> use default font
 	}
 
@@ -73,7 +69,6 @@ public class Model extends JGEngine{
 			myEnvironment.update(a);
 			new Mouse(this, a).makeMouseMass();
 		}
-//		doToggle();
 
 		if(getKey('N')){
 			clearKey('N');
@@ -98,37 +93,4 @@ public class Model extends JGEngine{
 	{
 		myEnvironment.paintToggles();
 	}
-
-//	private void paintToggles() {
-//		drawString("Click 'N' to add an assembly",displayWidth()/18, displayHeight()/4.5 + 200, -1);
-//
-//		if(gravToggle)drawString("Gravity On",displayWidth()/18, displayHeight()/15, -1);
-//		if(viscToggle)drawString("Viscosity On",displayWidth()/18, displayHeight()/9, -1);
-//		if(massToggle)drawString("Center of Mass On",displayWidth()/18, displayHeight()/6, -1);
-//		drawString("Walls that Repel: ", displayWidth()/18, displayHeight()/4.5,-1);
-//		for(int i=0;i<wallToggle.length;i++){
-//			if(wallToggle[i]){
-//
-//				drawString((i+1)+", ", displayWidth()/18+350 + i*50,displayHeight()/4.5,-1);
-//			}
-//		}
-//		drawString("Muscles at " + muscleToggle + " times original power",displayWidth()/18,displayHeight()/3.5,-1);
-//	}
-	
-	
-//	public boolean getGravToggle(){
-//		return gravToggle;
-//	}
-//	public boolean getMassToggle(){
-//		return massToggle;
-//	}
-//	public boolean getViscToggle(){
-//		return viscToggle;
-//	}
-//	public double getMuscleToggle(){
-//		return muscleToggle;
-//	}
-//	public boolean[] getWallToggles(){
-//		return wallToggle;
-//	}
 }

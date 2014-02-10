@@ -124,6 +124,7 @@ public class XML_Parser {
 						}
 						else if(tempNode.getNodeName().equals("muscle")){
 							m[i]=node.getNodeValue();
+							System.out.println(i + " " + node.getNodeValue());
 						}
 						if(tempNode.getNodeName().equals("gravity") ){							
 							mygrav[i] = node.getNodeValue();

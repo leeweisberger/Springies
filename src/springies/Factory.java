@@ -6,12 +6,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import jboxGlue.PhysicalObject;
+import jgame.JGColor;
 import Objects.FixedMass;
 import Objects.Mass;
 import Objects.Muscle;
@@ -22,6 +24,7 @@ public class Factory extends JComponent{
 	private PhysicalObject[] myWallArray;
 	private static int assemblyNumber=100;
 	private List<Mass> myMassList = new ArrayList<Mass>();
+	private JGColor[] myColors = new JGColor[]{JGColor.yellow,JGColor.red,JGColor.pink,JGColor.green,JGColor.cyan}; 
 	
 	public Factory(PhysicalObject[] wallarray){
 		myWallArray = wallarray;
@@ -38,13 +41,14 @@ public class Factory extends JComponent{
 	
 	private void addMasses (XML_Parser p)
 	{		
+		JGColor color = myColors[new Random().nextInt(myColors.length)];
 		Map<String,Double[]> masseslist = p.masses;
 		int c = 0;
 		for(String mass:masseslist.keySet()){   
 			if(masseslist.get(mass)[5]!=null)				
 				m.put(mass + assemblyNumber, new FixedMass(mass+assemblyNumber,masseslist.get(mass)[0],masseslist.get(mass)[1]));
 			else{
-				Mass newmass = new Mass(mass+assemblyNumber,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],myWallArray);
+				Mass newmass = new Mass(mass+assemblyNumber,masseslist.get(mass)[0],masseslist.get(mass)[1],masseslist.get(mass)[2],masseslist.get(mass)[3],masseslist.get(mass)[4],color);
 				m.put(mass+assemblyNumber, newmass);
 				myMassList.add(newmass);				
 			}
@@ -66,9 +70,10 @@ public class Factory extends JComponent{
 	private void addMuscles(XML_Parser p){		
 		Collection<String[]> muscleslist=p.muscles;
 		for(String[] muscle: muscleslist){
-			Mass m1 = m.get(muscle[0]);			
-			Mass m2 = m.get(muscle[2]);
-			PhysicalObject muscleObj = new Muscle(m1, m2, Double.parseDouble(muscle[3]), Double.parseDouble(muscle[4]), Double.parseDouble(muscle[1]));
+			Mass m1 = m.get(muscle[0]+assemblyNumber);			
+			Mass m2 = m.get(muscle[2]+assemblyNumber);
+			System.out.println(m2);
+			new Muscle(m1, m2, Double.parseDouble(muscle[3]), Double.parseDouble(muscle[4]), Double.parseDouble(muscle[1]));
 		}
 	}
 	

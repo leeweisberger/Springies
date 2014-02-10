@@ -19,19 +19,18 @@ import java.util.HashMap;
 
 public class Mass extends PhysicalObjectCircle{
 	private String myID;
-	private static JGColor myColor = JGColor.red;
-	private PhysicalObject[] mywallarray;
+	private static JGColor myColor = JGColor.yellow;
 	private double myMass;
 	private boolean isFixed;
 
-	public Mass(String id, double xpos, double ypos,double xvel,double yvel,double mass,PhysicalObject[] wallarray){
+	public Mass(String id, double xpos, double ypos,double xvel,double yvel,double mass, JGColor color){
 		super(id, 1, myColor, 5,mass);
+		setColor(color);
 		x=(int)xpos+200;
 		y=(int)ypos;
 		setPos(x, y);
-		setSpeed(xvel, yvel);
+		//setSpeed(xvel, yvel);
 		myID = id;
-		mywallarray=wallarray;
 		myMass = mass;
 	}
 
