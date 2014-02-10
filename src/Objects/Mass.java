@@ -29,7 +29,7 @@ public class Mass extends PhysicalObjectCircle{
 		x=(int)xpos+200;
 		y=(int)ypos;
 		setPos(x, y);
-		//setSpeed(xvel, yvel);
+		setSpeed(xvel, yvel);
 		myID = id;
 		myMass = mass;
 	}

@@ -12,7 +12,6 @@ public class Muscle extends Spring {
 	public Muscle(Mass m1, Mass m2, double originalRLength, double springiness, double amplitude){
 		
 		super(m1,m2,originalRLength,springiness);
-		System.out.println(springiness);
 		setColor(myColor);
 		myAmplitude = amplitude;
 		myRestLength = originalRLength;

@@ -32,7 +32,7 @@ public class Factory extends JComponent{
 	
 	protected void addAssembly(){
 		assemblyNumber++;
-		XML_Parser p = new XML_Parser(new File("ball.xml"));
+		XML_Parser p = new XML_Parser(new File("daintywalker.xml"));
 		p.parse();
 		addMasses(p);
 		addSprings(p);
@@ -62,8 +62,9 @@ public class Factory extends JComponent{
 		Collection<String[]> springslist=p.getSprings();  
 		for(String[] spring:springslist){  
 			Mass m1 = m.get(spring[0]+assemblyNumber);
-			Mass m2 = m.get(spring[1]+assemblyNumber);			
-			PhysicalObject sp = new Spring(m1, m2, Double.parseDouble(spring[3]), Double.parseDouble(spring[2]));
+			Mass m2 = m.get(spring[1]+assemblyNumber);	
+
+			PhysicalObject sp = new Spring(m1, m2, Double.parseDouble(spring[2]), Double.parseDouble(spring[3]));
 		}
 	}
 	
@@ -71,9 +72,9 @@ public class Factory extends JComponent{
 		Collection<String[]> muscleslist=p.getMuscles();
 		for(String[] muscle: muscleslist){
 			Mass m1 = m.get(muscle[0]+assemblyNumber);			
-			Mass m2 = m.get(muscle[2]+assemblyNumber);
-			System.out.println(m2);
-			new Muscle(m1, m2, Double.parseDouble(muscle[3]), Double.parseDouble(muscle[4]), Double.parseDouble(muscle[1]));
+			Mass m2 = m.get(muscle[1]+assemblyNumber);
+			System.out.println("m2" + muscle[4]);
+			new Muscle(m1, m2, Double.parseDouble(muscle[2]), Double.parseDouble(muscle[3]), Double.parseDouble(muscle[4]));
 		}
 	}
 	

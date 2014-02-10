@@ -17,6 +17,7 @@ public class Environment {
 	private Model mySpringy;
 	private WallRepulsion[] wallEnvironments = new WallRepulsion[4];
 	private Walls myWalls;
+	
 
 	public Environment(Model mySpringiesClass, Walls walls){
 		super();
@@ -84,7 +85,7 @@ public class Environment {
 
 
 	public void paintToggles() {
-		System.out.println("paint");
+
 		mySpringy.drawString("Click 'N' to add an assembly",mySpringy.displayWidth()/18, mySpringy.displayHeight()/4.5 + 200, -1);
 
 		if(gravityEnvironment.getToggle())mySpringy.drawString("Gravity On",mySpringy.displayWidth()/18, mySpringy.displayHeight()/15, -1);

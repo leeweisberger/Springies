@@ -7,14 +7,14 @@ import jboxGlue.WorldManager;
 import jgame.JGColor;
 
 public class FixedMass extends Mass{
-	private String myID;
+
 	
 	public FixedMass(String id, double xpos, double ypos){
 		super(id, xpos,ypos);
 		x=(int)xpos;
 		y=(int)ypos;
 		setPos(x, y);
-		myID = id;
+		
 		setIsFixed(true);		
 	}
 		
@@ -22,11 +22,9 @@ public class FixedMass extends Mass{
 	@Override
 	public void setForce(double x, double y){
 		
-		//if(myID.equals("m1"))System.out.println(this.y);
+		//Do Nothing
 	}
-	public String getID(){
-		return myID;
-	}
+	
 	
 
 }
