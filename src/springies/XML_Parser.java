@@ -42,7 +42,7 @@ public class XML_Parser {
 	public String[] getGravity() {
 		if(mygrav==null){
 			return DEFAULT_GRAV;
-			
+
 		}
 		return mygrav;
 	}
@@ -90,7 +90,7 @@ public class XML_Parser {
 			System.out.println(e.getMessage());
 		}
 	}
-	public void putAttribute(String name, int position, String value){
+	public void putMassAttribute(String name, int position, String value){
 		Double[] temp = masses.get(name);
 		temp[position] = Double.parseDouble(value);
 		masses.put(name, temp);
@@ -152,37 +152,31 @@ public class XML_Parser {
 			wall[i] = node.getNodeValue();
 	}
 
+	private void putSpringAttributes(String name, int index){
+
+	}
 	private void storeSpringInfo(Node tempNode, String[] s, String[] m, int i,
 			Node node) {
+		String[] springAttributes = {"a","b","restlength","constant"};
+
 		if(tempNode.getNodeName().equals("spring")){
-			if(node.getNodeName().equals("restlength"))
-				s[2]=node.getNodeValue();
-			if(node.getNodeName().equals("constant")){
-				s[3]=node.getNodeValue();
-				System.out.println("val " + node.getNodeValue());
+			for(int u=0;u<springAttributes.length;u++){
+				if(node.getNodeName().equals(springAttributes[u])){
+					s[u]=node.getNodeValue();
+				}
 			}
-			if(node.getNodeName().equals("a"))
-				s[0]=node.getNodeValue();
-			if(node.getNodeName().equals("b"))
-				s[1]=node.getNodeValue();
-			
 		}
 
-
+		String[] muscleAttributes = {"a","b","restlength","constant","amplitude"};
 		if(tempNode.getNodeName().equals("muscle")){
-			if(node.getNodeName().equals("restlength"))
-				m[2]=node.getNodeValue();
-			if(node.getNodeName().equals("constant")){
-				m[3]=node.getNodeValue();
-				System.out.println("val " + node.getNodeValue());
+			for(int u=0;u<muscleAttributes.length;u++){
+				if(node.getNodeName().equals(muscleAttributes[u])){
+					m[u]=node.getNodeValue();
+				}
 			}
-			if(node.getNodeName().equals("a"))
-				m[0]=node.getNodeValue();
-			if(node.getNodeName().equals("b"))
-				m[1]=node.getNodeValue();
-			if(node.getNodeName().equals("amplitude"))
-				m[4]=node.getNodeValue();
 		}
+
+
 	}
 
 	private String storeMassInfo(String name, String[] massAttributes,
@@ -194,7 +188,7 @@ public class XML_Parser {
 		}
 		for(int j=0;j<massAttributes.length;j++){
 			if(node.getNodeName().equals(massAttributes[j]))
-				putAttribute(name,j,node.getNodeValue());
+				putMassAttribute(name,j,node.getNodeValue());
 		}
 
 		if(tempNode.getNodeName().equals("fixed")){
@@ -203,11 +197,11 @@ public class XML_Parser {
 			masses.put(name, temp);
 		}	
 		if(masses.get(name)[2]==null){
-			putAttribute(name,2,"0.0");
-			putAttribute(name,3,"0.0");
+			putMassAttribute(name,2,"0.0");
+			putMassAttribute(name,3,"0.0");
 		}
 		if(masses.get(name)[4]==null)
-			putAttribute(name,4,"1.0");
+			putMassAttribute(name,4,"1.0");
 		return name;
 	}
 }
