@@ -1,20 +1,23 @@
 package forces;
 import java.util.List;
+
 import jboxGlue.PhysicalObject;
 import Objects.Mass;
 
 public class WallRepulsion extends GlobalForce{
 	private PhysicalObject[] myWallArray;
 	private int myWhichWall;
-	protected WallRepulsion(PhysicalObject[] wallarray,int whichWall){
+	private List<String[]> myWallForces;
+	protected WallRepulsion(PhysicalObject[] wallarray,int whichWall, List<String[]> wallForces){
 		myWallArray = wallarray;
 		myWhichWall=whichWall;
+		myWallForces = wallForces;
 	}
 
 	public void doForce(PhysicalObject mass){
 		if(getToggle()){
-			int mag = Integer.parseInt(Environment.walls.get(myWhichWall)[2]);
-			double exp = Double.parseDouble(Environment.walls.get(myWhichWall)[0]);
+			int mag = Integer.parseInt(myWallForces.get(myWhichWall)[2]);
+			double exp = Double.parseDouble(myWallForces.get(myWhichWall)[0]);
 			double[] vector = setVector(myWhichWall);
 			double dist = getDistanceBetween(myWallArray[myWhichWall], myWhichWall,mass);
 			double scale = Math.pow(dist, exp);

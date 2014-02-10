@@ -42,7 +42,7 @@ public class Factory extends JComponent{
 	private void addMasses (XML_Parser p)
 	{		
 		JGColor color = myColors[new Random().nextInt(myColors.length)];
-		Map<String,Double[]> masseslist = p.masses;
+		Map<String,Double[]> masseslist = p.getMasses();
 		int c = 0;
 		for(String mass:masseslist.keySet()){   
 			if(masseslist.get(mass)[5]!=null)				
@@ -59,7 +59,7 @@ public class Factory extends JComponent{
 		return myMassList;
 	}
 	private void addSprings(XML_Parser p){
-		Collection<String[]> springslist=p.springs;  
+		Collection<String[]> springslist=p.getSprings();  
 		for(String[] spring:springslist){  
 			Mass m1 = m.get(spring[0]+assemblyNumber);
 			Mass m2 = m.get(spring[1]+assemblyNumber);			
@@ -68,7 +68,7 @@ public class Factory extends JComponent{
 	}
 	
 	private void addMuscles(XML_Parser p){		
-		Collection<String[]> muscleslist=p.muscles;
+		Collection<String[]> muscleslist=p.getMuscles();
 		for(String[] muscle: muscleslist){
 			Mass m1 = m.get(muscle[0]+assemblyNumber);			
 			Mass m2 = m.get(muscle[2]+assemblyNumber);

@@ -10,28 +10,30 @@ import springies.XML_Parser;
 import Objects.Mass;
 
 public class Environment {
-	public static List<String[]> walls;
+	private List<String[]> wallForces;
 	private Gravity gravityEnvironment;
 	private Viscosity viscosityEnvironment;
 	private CenterOfMass centerOfMassEnvironment;
 	private Model mySpringy;
 	private WallRepulsion[] wallEnvironments = new WallRepulsion[4];
+	private Walls myWalls;
 
-	public Environment(Model mySpringiesClass){
+	public Environment(Model mySpringiesClass, Walls walls){
 		super();
 		mySpringy = mySpringiesClass;
+		myWalls=walls;
 	}
 
 	private void readInEnvironment(){
 		File file = new File("environment.xml");
 		XML_Parser p = new XML_Parser(file);
 		p.parse();
-		walls = p.getWalls();
+		wallForces = p.getWalls();
 		gravityEnvironment  = new Gravity(p.getGravity());
 		viscosityEnvironment = new Viscosity(p.getViscosity());
 		centerOfMassEnvironment = new CenterOfMass(p.getCenterMass());
 		for(int i=0;i<wallEnvironments.length;i++){
-			wallEnvironments[i] = new WallRepulsion(Walls.myWallArray,i);
+			wallEnvironments[i] = new WallRepulsion(myWalls.getWalls(),i,wallForces);
 		}
 	}
 

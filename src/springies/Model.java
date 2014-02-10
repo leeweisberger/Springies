@@ -30,11 +30,12 @@ public class Model extends JGEngine{
 	@Override
 	public void initCanvas ()
 	{	
+		
 		// I have no idea what tiles do...
 		setCanvasSettings(1, // width of the canvas in tiles
 				1, // height of the canvas in tiles
-				displayWidth(), // width of one tile
-				displayHeight(), // height of one tile
+				displayWidth()-100, // width of one tile
+				displayHeight()-100, // height of one tile
 				null,// foreground colour -> use default colour white
 				null,// background colour -> use default colour black
 				null); // standard font -> use default font
@@ -46,13 +47,11 @@ public class Model extends JGEngine{
 		setFrameRate(60, 4);
 		WorldManager.initWorld(this);
 		//		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.2f));
-		myWalls = new Walls(displayWidth(), displayHeight());
-		myWalls.addWalls();
-		
+		myWalls = new Walls(displayWidth()-100, displayHeight()-100);
+		myWalls.addWalls();	
 		addAssembly(myWalls.getWalls());
-		myEnvironment = new Environment(this);
+		myEnvironment = new Environment(this,myWalls);
 		myEnvironment.initEnvironment();
-//		toggles = new boolean[]{gravToggle,viscToggle,massToggle};
 	}
 
 	public void addAssembly(PhysicalObject[] wallarray){
@@ -70,11 +69,22 @@ public class Model extends JGEngine{
 			new Mouse(this, a).makeMouseMass();
 		}
 
+		addNewAssembly();
+
+		moveWalls();
+		WorldManager.getWorld().step(1f, 1);
+		moveObjects();
+		checkCollision(1,2);	 
+	}
+
+	private void addNewAssembly() {
 		if(getKey('N')){
 			clearKey('N');
 			addAssembly(myWalls.getWalls());
 		}
+	}
 
+	private void moveWalls() {
 		if(getKey(KeyDown)){
 			clearKey(KeyDown);
 			myWalls.moveWalls(true);
@@ -83,9 +93,6 @@ public class Model extends JGEngine{
 			clearKey(KeyUp);
 			myWalls.moveWalls(false);
 		}
-		WorldManager.getWorld().step(1f, 1);
-		moveObjects();
-		checkCollision(1,2);	 
 	}
 
 	@Override

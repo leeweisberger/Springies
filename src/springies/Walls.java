@@ -8,7 +8,7 @@ import jgame.platform.JGEngine;
 public class Walls{
 	private double myWidth;
 	private double myHeight;
-	public static PhysicalObject[] myWallArray = new PhysicalObjectRect[4];
+	private PhysicalObject[] myWallArray = new PhysicalObjectRect[4];
 	private PhysicalObject wallt;
 	public Walls(double width, double height ){
 		myWidth=width;

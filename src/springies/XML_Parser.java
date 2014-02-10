@@ -16,14 +16,25 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class XML_Parser {
-	Map<String,Double[]> masses = new HashMap<String,Double[]>();
-	Collection<String[]> springs= new ArrayList<String[]>();
-	Collection<String[]> muscles= new ArrayList<String[]>();
-	List<String[]> walls = new ArrayList<String[]>();
-	String[] mygrav= new String[2];
-	String[] mycentermass= new String[2];
-	static String myviscosity;
+	private Map<String,Double[]> masses = new HashMap<String,Double[]>();
+	private Collection<String[]> springs= new ArrayList<String[]>();
+	private Collection<String[]> muscles= new ArrayList<String[]>();
+	private List<String[]> walls = new ArrayList<String[]>();
+	private String[] mygrav= new String[2];
+	private String[] mycentermass= new String[2];
+	private String myviscosity;
 	
+	public Map<String, Double[]> getMasses() {
+		return masses;
+	}
+
+	public Collection<String[]> getSprings() {
+		return springs;
+	}
+
+	public Collection<String[]> getMuscles() {
+		return muscles;
+	}
 	public String[] getGravity() {
 		return mygrav;
 	}
