@@ -28,7 +28,6 @@ public class Main
     {
         // view of user's content
         final Model sp = new Model();
-        
         // container that will work with user's OS
         JFrame frame = new JFrame(TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,5 +1,6 @@
 package forces;
 
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.List;
 
@@ -40,13 +41,13 @@ public class Environment {
 
 	public void doToggle(){
 
-		toggleForces('G', gravityEnvironment);
-		toggleForces('V', viscosityEnvironment);
-		toggleForces('M', centerOfMassEnvironment);
-		toggleForces('1',wallEnvironments[0]);
-		toggleForces('2',wallEnvironments[1]);
-		toggleForces('3',wallEnvironments[2]);
-		toggleForces('4',wallEnvironments[3]);
+		toggleForces(KeyEvent.VK_G, gravityEnvironment);
+		toggleForces(KeyEvent.VK_V, viscosityEnvironment);
+		toggleForces(KeyEvent.VK_M, centerOfMassEnvironment);
+		toggleForces(KeyEvent.VK_1,wallEnvironments[0]);
+		toggleForces(KeyEvent.VK_2,wallEnvironments[1]);
+		toggleForces(KeyEvent.VK_3,wallEnvironments[2]);
+		toggleForces(KeyEvent.VK_4,wallEnvironments[3]);
 		//		toggleForces('2');
 		//		if(mySpringy.getKey('='))muscleToggle+=.01;
 		//		if(mySpringy.getKey('-')){
@@ -75,8 +76,7 @@ public class Environment {
 			}
 			gravityEnvironment.doForce(mass);
 			viscosityEnvironment.doForce(mass);
-			
-			//centerOfMassEnvironment.doForce(mass);
+			centerOfMassEnvironment.doForce(mass,factory);
 		}
 		
 		
