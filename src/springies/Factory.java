@@ -55,9 +55,6 @@ public class Factory extends JComponent{
 		}
 		
 	}
-	public List<Mass> getMassList(){
-		return myMassList;
-	}
 	private void addSprings(XML_Parser p){
 		Collection<String[]> springslist=p.getSprings();  
 		for(String[] spring:springslist){  
@@ -78,6 +75,10 @@ public class Factory extends JComponent{
 		}
 	}
 	
+	public List<Mass> getMassList(){
+		return myMassList;
+	}
+
 	private File getNewFile() {
 		JFileChooser chooser = new JFileChooser();
 	    FileNameExtensionFilter filter = new FileNameExtensionFilter(
