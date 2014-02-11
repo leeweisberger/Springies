@@ -32,7 +32,7 @@ public class Factory extends JComponent{
 	
 	protected void addAssembly(){
 		assemblyNumber++;
-		XML_Parser p = new XML_Parser(new File("jello.xml"));
+		XML_Parser p = new XML_Parser(new File("ball.xml"));
 		p.parse();
 		addMasses(p);
 		addSprings(p);

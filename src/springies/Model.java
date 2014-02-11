@@ -44,7 +44,9 @@ public class Model extends JGEngine{
 				null,// foreground colour -> use default colour white
 				null,// background colour -> use default colour black
 				null); // standard font -> use default font
+
 	}
+	
 
 	@Override
 	public void initGame ()
@@ -52,7 +54,7 @@ public class Model extends JGEngine{
 		setFrameRate(60, 4);
 		WorldManager.initWorld(this);
 		//		WorldManager.getWorld().setGravity(new Vec2(0.0f, 0.2f));
-		myWalls = new Walls(displayWidth()-100, displayHeight()-100);
+		myWalls = new Walls(displayWidth(), displayHeight());
 		myWalls.addWalls();	
 		addAssembly(myWalls.getWalls());
 		myEnvironment = new Environment(this,myWalls);
