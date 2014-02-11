@@ -17,6 +17,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class XML_Parser {
+	public static final String SPRINGINESS = "1";
+	private static final String YVEL = "0.0";
+	private static final String XVEL = "0.0";
+	private static final double FIXED = 7.0;
+	public static final String MASS = "1.0";
 	private Map<String,Double[]> masses = new HashMap<String,Double[]>();
 	private Collection<String[]> springs= new ArrayList<String[]>();
 	private Collection<String[]> muscles= new ArrayList<String[]>();
@@ -123,8 +128,8 @@ public class XML_Parser {
 
 					}
 					if(wall[0]!=null)myWallForces.add(wall);
-					if(s[3]==null)s[3]=".005";
-					if(m[3]==null)m[3]=".005";
+					if(s[3]==null)s[3]=SPRINGINESS;
+					if(m[3]==null)m[3]=SPRINGINESS;
 					if(s[2]!=null)springs.add(s);
 					if(m[2]!=null)muscles.add(m);
 
@@ -193,15 +198,15 @@ public class XML_Parser {
 
 		if(tempNode.getNodeName().equals("fixed")){
 			Double[] temp = masses.get(name);
-			temp[5]=7.0;
+			temp[5]=FIXED;
 			masses.put(name, temp);
 		}	
 		if(masses.get(name)[2]==null){
-			putMassAttribute(name,2,"0.0");
-			putMassAttribute(name,3,"0.0");
+			putMassAttribute(name,2,XVEL);
+			putMassAttribute(name,3,YVEL);
 		}
 		if(masses.get(name)[4]==null)
-			putMassAttribute(name,4,"1.0");
+			putMassAttribute(name,4,MASS);
 		return name;
 	}
 }

@@ -17,12 +17,17 @@ public class Model extends JGEngine{
 	private Environment myEnvironment;
 	public static double muscleToggle=1;
 	private List<Factory> myAssemblyList = new ArrayList<Factory>();
+	
+	public List<Factory> getMyAssemblyList() {
+		return myAssemblyList;
+	}
+
 	private boolean[] toggles;
 
 	public Model ()
 	{
 		// set the window size
-		int height = 800;
+		int height = 1000;
 		double aspect = 16.0 / 9.0;
 		initEngineComponent((int) (height * aspect), height);
 	}
@@ -34,8 +39,8 @@ public class Model extends JGEngine{
 		// I have no idea what tiles do...
 		setCanvasSettings(1, // width of the canvas in tiles
 				1, // height of the canvas in tiles
-				displayWidth()-100, // width of one tile
-				displayHeight()-100, // height of one tile
+				displayWidth(), // width of one tile
+				displayHeight(), // height of one tile
 				null,// foreground colour -> use default colour white
 				null,// background colour -> use default colour black
 				null); // standard font -> use default font
