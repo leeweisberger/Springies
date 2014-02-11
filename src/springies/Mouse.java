@@ -26,7 +26,7 @@ public class Mouse {
 			mouseMass = new MouseMass("mouse", this);
 			Mass h = getClosestMass(myMouseX, myMouseY);
 			double d = getDist(h, myMouseX, myMouseY);
-			springMass = new Spring(h, mouseMass, d, 5);
+			springMass = new Spring(h, mouseMass, d, Double.parseDouble(XML_Parser.SPRINGINESS)*2);
 			mouse = true;
 		}
 		if(mouse && !mySpringies.getMouseButton(1) && mouseMass.isAlive()){
@@ -41,11 +41,13 @@ public class Mouse {
 		Mass closest = null;
 		double minDist = 10000;
 		double dist;
-		for(Mass mass:myAssembly.getMassList()){
-			dist=Math.sqrt(Math.pow(xpos - mass.x, 2) + Math.pow(ypos - mass.y,2));
-			if(dist<minDist){
-				minDist=dist;
-				closest=mass;
+		for(Factory model:mySpringies.getMyAssemblyList()){
+			for(Mass mass:model.getMassList()){
+				dist=Math.sqrt(Math.pow(xpos - mass.x, 2) + Math.pow(ypos - mass.y,2));
+				if(dist<minDist){
+					minDist=dist;
+					closest=mass;
+				}
 			}
 		}
 		return closest;

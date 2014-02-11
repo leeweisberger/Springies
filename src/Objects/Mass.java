@@ -18,6 +18,7 @@ import java.util.HashMap;
 
 
 public class Mass extends PhysicalObjectCircle{
+	private static final int MASSOFFSET = 500;
 	private String myID;
 	private static JGColor myColor = JGColor.yellow;
 	private double myMass;
@@ -26,7 +27,7 @@ public class Mass extends PhysicalObjectCircle{
 	public Mass(String id, double xpos, double ypos,double xvel,double yvel,double mass, JGColor color){
 		super(id, 1, myColor, 7,mass);
 		setColor(color);
-		x=(int)xpos+200;
+		x=(int)xpos+MASSOFFSET;
 		y=(int)ypos;
 		setPos(x, y);
 		setSpeed(xvel, yvel);
@@ -68,6 +69,7 @@ public class Mass extends PhysicalObjectCircle{
 			velocity.y *= -DAMPING_FACTOR;
 
 		myBody.setLinearVelocity(velocity);
+		System.out.println("hit");
 	}
 
 }

@@ -51,7 +51,7 @@ public class PhysicalObjectCircle extends PhysicalObject
         int intRadius = (int)radius;
         // make it a circle
         CircleDef shape = new CircleDef();
-//        shape.filter.groupIndex = -1;
+        shape.filter.groupIndex = -1;
         shape.radius = (float)radius;
         shape.density = (float)mass;
         createBody(shape);

@@ -17,6 +17,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class XML_Parser {
+	public static final String SPRINGINESS = "1";
+	private static final String YVEL = "0.0";
+	private static final String XVEL = "0.0";
+	private static final double FIXED = 7.0;
+	public static final String MASS = "1.0";
 	private Map<String,Double[]> masses = new HashMap<String,Double[]>();
 	private Collection<String[]> springs= new ArrayList<String[]>();
 	private Collection<String[]> muscles= new ArrayList<String[]>();
@@ -27,45 +32,6 @@ public class XML_Parser {
 	public static final String[] DEFAULT_GRAV = {"20","90"};
 	public static final String[] DEFAULT_CENTERMASS = {"50","2.0"};
 	public static final String DEFAULT_VISCOSITY = "0.8";
-
-	public Map<String, Double[]> getMasses() {
-		return masses;
-	}
-
-	public Collection<String[]> getSprings() {
-		return springs;
-	}
-
-	public Collection<String[]> getMuscles() {
-		return muscles;
-	}
-	public String[] getGravity() {
-		if(mygrav==null){
-			return DEFAULT_GRAV;
-
-		}
-		return mygrav;
-	}
-
-	public String[] getCenterMass() {
-		if(mycentermass==null)return DEFAULT_CENTERMASS;
-		return mycentermass;
-	}
-
-	public String getViscosity() {
-		if(myviscosity==null)return DEFAULT_VISCOSITY;
-		return myviscosity;
-	}
-
-	public List<String[]> getWalls(){
-		if(myWallForces==null){
-			List<String[]> wf = new ArrayList<String[]>();
-			for(int u=0;u<4;u++)
-				wf.add(new String[]{"40","1.5"});
-			return wf;
-		}
-		return myWallForces;
-	}
 
 	private File myFile;
 
@@ -90,12 +56,6 @@ public class XML_Parser {
 			System.out.println(e.getMessage());
 		}
 	}
-	public void putMassAttribute(String name, int position, String value){
-		Double[] temp = masses.get(name);
-		temp[position] = Double.parseDouble(value);
-		masses.put(name, temp);
-	}
-
 	public void getInfo(NodeList nodeList) {
 		String name ="";
 		String[] massAttributes = {"x","y","vx","vy","mass"};
@@ -123,8 +83,8 @@ public class XML_Parser {
 
 					}
 					if(wall[0]!=null)myWallForces.add(wall);
-					if(s[3]==null)s[3]=".005";
-					if(m[3]==null)m[3]=".005";
+					if(s[3]==null)s[3]=SPRINGINESS;
+					if(m[3]==null)m[3]=SPRINGINESS;
 					if(s[2]!=null)springs.add(s);
 					if(m[2]!=null)muscles.add(m);
 
@@ -138,23 +98,29 @@ public class XML_Parser {
 		}
 	}
 
-	private void storeForcesInfo(Node tempNode, String[] wall, int i, Node node) {
-		if(tempNode.getNodeName().equals("gravity") )						
-			mygrav[i] = node.getNodeValue();
-
-		else if(tempNode.getNodeName().equals("viscosity") )							
-			myviscosity = node.getNodeValue();
-
-		else if(tempNode.getNodeName().equals("centermass") )							
-			mycentermass[i] = node.getNodeValue();
-
-		else if(tempNode.getNodeName().equals("wall") )
-			wall[i] = node.getNodeValue();
+	public void putMassAttribute(String name, int position, String value){
+		Double[] temp = masses.get(name);
+		temp[position] = Double.parseDouble(value);
+		masses.put(name, temp);
 	}
 
 	private void putSpringAttributes(String name, int index){
 
 	}
+	private void storeForcesInfo(Node tempNode, String[] wall, int i, Node node) {
+		if(tempNode.getNodeName().equals("gravity") )						
+			mygrav[i] = node.getNodeValue();
+	
+		else if(tempNode.getNodeName().equals("viscosity") )							
+			myviscosity = node.getNodeValue();
+	
+		else if(tempNode.getNodeName().equals("centermass") )							
+			mycentermass[i] = node.getNodeValue();
+	
+		else if(tempNode.getNodeName().equals("wall") )
+			wall[i] = node.getNodeValue();
+	}
+
 	private void storeSpringInfo(Node tempNode, String[] s, String[] m, int i,
 			Node node) {
 		String[] springAttributes = {"a","b","restlength","constant"};
@@ -193,15 +159,55 @@ public class XML_Parser {
 
 		if(tempNode.getNodeName().equals("fixed")){
 			Double[] temp = masses.get(name);
-			temp[5]=7.0;
+			temp[5]=FIXED;
 			masses.put(name, temp);
 		}	
 		if(masses.get(name)[2]==null){
-			putMassAttribute(name,2,"0.0");
-			putMassAttribute(name,3,"0.0");
+			putMassAttribute(name,2,XVEL);
+			putMassAttribute(name,3,YVEL);
 		}
 		if(masses.get(name)[4]==null)
-			putMassAttribute(name,4,"1.0");
+			putMassAttribute(name,4,MASS);
 		return name;
+	}
+
+	public Map<String, Double[]> getMasses() {
+		return masses;
+	}
+
+	public Collection<String[]> getSprings() {
+		return springs;
+	}
+
+	public Collection<String[]> getMuscles() {
+		return muscles;
+	}
+
+	public String[] getGravity() {
+		if(mygrav==null){
+			return DEFAULT_GRAV;
+	
+		}
+		return mygrav;
+	}
+
+	public String[] getCenterMass() {
+		if(mycentermass==null)return DEFAULT_CENTERMASS;
+		return mycentermass;
+	}
+
+	public String getViscosity() {
+		if(myviscosity==null)return DEFAULT_VISCOSITY;
+		return myviscosity;
+	}
+
+	public List<String[]> getWalls(){
+		if(myWallForces==null){
+			List<String[]> wf = new ArrayList<String[]>();
+			for(int u=0;u<4;u++)
+				wf.add(new String[]{"40","1.5"});
+			return wf;
+		}
+		return myWallForces;
 	}
 }
