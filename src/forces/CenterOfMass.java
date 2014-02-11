@@ -14,8 +14,6 @@ public class CenterOfMass extends GlobalForce {
 		myCenterOfMass = readInCenterOfMass;
 	}
 	
-	
-	
 	public CenterOfMass(List<Mass> masses) {
 		myMasses=masses;
 	}

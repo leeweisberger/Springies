@@ -47,7 +47,7 @@ public class Spring extends PhysicalObjectRect{
 		myM1.setForce(-xvector,-yvector);
 		myM2.setForce(xvector, yvector);
 		
-		System.out.println("disp: " + displacement + " x: " + xvector + " y: " + yvector);
+//		System.out.println("disp: " + displacement + " x: " + xvector + " y: " + yvector);
 	}
 
 	protected double getDistanceBetween(Mass start, Mass end){	

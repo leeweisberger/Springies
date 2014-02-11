@@ -1,0 +1,15 @@
+<model>
+    <name>Test</name>
+    <author>Jimmy Fang</author>
+
+    <nodes>
+        <mass id="m1" x="400" y="300"/>
+        <mass id="m2" x="200" y="646"/>
+        <mass id="m3" x="600" y="646"/>
+    </nodes>
+    <links>
+        <spring a="m1" b="m2" restlength="300.0" constant="1"/>
+        <spring a="m2" b="m3" restlength="300.0" constant="1"/>
+        <spring a="m1" b="m3" restlength="300.0" constant="1"/>
+    </links>
+</model>
