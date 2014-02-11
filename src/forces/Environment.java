@@ -49,12 +49,6 @@ public class Environment {
 		toggleForces(KeyEvent.VK_2,wallEnvironments[1]);
 		toggleForces(KeyEvent.VK_3,wallEnvironments[2]);
 		toggleForces(KeyEvent.VK_4,wallEnvironments[3]);
-		//		toggleForces('2');
-		//		if(mySpringy.getKey('='))muscleToggle+=.01;
-		//		if(mySpringy.getKey('-')){
-		//			if(muscleToggle>0)muscleToggle-=.01;
-		//		}
-
 	}
 
 	public void toggleForces(int togglekey, GlobalForce toggledForce){
@@ -106,7 +100,7 @@ public class Environment {
 		mySpringy.drawString("Muscles at " + muscleToggle + " times original power",mySpringy.displayWidth()/18,mySpringy.displayHeight()/3.5,-1);
 		for(int i=0;i<wallEnvironments.length;i++){
 			if(wallEnvironments[i].getToggle()){
-				mySpringy.drawString((i+1)+" ", mySpringy.displayWidth()/18+300 + i*50,mySpringy.displayHeight()/4.5,-1);
+				mySpringy.drawString((i+1)+" ", mySpringy.displayWidth()/18+350 + i*50,mySpringy.displayHeight()/4.5,-1);
 			}
 		}
 	}

@@ -31,7 +31,6 @@ public class Muscle extends Spring {
 	
 	@Override
 	public void move(){
-		System.out.println(myAmplitude);
 		springForces();
 		timer++;
 		setLength((myRestLength * myAmplitude * Math.sin(timer * (30 + (Math.PI / 2)))));
