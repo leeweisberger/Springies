@@ -4,13 +4,13 @@
 
     <nodes>
         <mass id="m0" x="450" y="100" vx="0" vy="0" mass="5.0"/>
-        <mass id="m1" x="350" y="100" vx="0" vy="0" mass="5.0"/>
+        <mass id="m1" x="400" y="100" vx="0" vy="0" mass="5.0"/>
 
       
     </nodes>
     
 
     <links>
-	<muscle a="m1" b="m0" restlength="100" amplitude="0.5"/>
+	<spring a="m1" b="m0" restlength="100" constant="20.0"/>
     </links>
 </model>

@@ -26,7 +26,7 @@ public class Mouse {
 			mouseMass = new MouseMass("mouse", this);
 			Mass h = getClosestMass(myMouseX, myMouseY);
 			double d = getDist(h, myMouseX, myMouseY);
-			springMass = new Spring(h, mouseMass, d, .1);
+			springMass = new Spring(h, mouseMass, d, 5);
 			mouse = true;
 		}
 		if(mouse && !mySpringies.getMouseButton(1) && mouseMass.isAlive()){

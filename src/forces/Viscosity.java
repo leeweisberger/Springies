@@ -8,12 +8,14 @@ public class Viscosity extends GlobalForce {
 	}
 	public void doForce(PhysicalObject mass){
 		if (getToggle()) {
+			
 			double VISCOSITY = Double.parseDouble(viscosity);
 			double xvel = mass.xspeed;
 			double yvel = mass.yspeed;
 			
 			if (xvel > 0) {
 				mass.setForce(-VISCOSITY * xvel, 0);
+				
 			}
 			
 			if (xvel < 0) {

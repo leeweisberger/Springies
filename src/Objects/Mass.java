@@ -24,7 +24,7 @@ public class Mass extends PhysicalObjectCircle{
 	private boolean isFixed;
 
 	public Mass(String id, double xpos, double ypos,double xvel,double yvel,double mass, JGColor color){
-		super(id, 1, myColor, 5,mass);
+		super(id, 1, myColor, 7,mass);
 		setColor(color);
 		x=(int)xpos+200;
 		y=(int)ypos;

@@ -28,7 +28,7 @@ public class Muscle extends Spring {
 	}
 	@Override
 	public void paintShape(){
-		System.out.println(myRestLength + " , " + (myRestLength * myAmplitude  * Math.sin(30 + (Math.PI / 2))));
+		//System.out.println(myRestLength + " , " + (myRestLength * myAmplitude  * Math.sin(30 + (Math.PI / 2))));
 		if(myRestLength<(myRestLength * myAmplitude  * Math.sin(30 + (Math.PI / 2))))
 			myEngine.setColor(JGColor.green);
 		else{

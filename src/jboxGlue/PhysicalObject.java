@@ -90,6 +90,9 @@ public abstract class PhysicalObject extends JGObject
         }
         // copy the position and rotation from the JBox world to the JGame world
         Vec2 position = myBody.getPosition();
+        Vec2 linVel = myBody.m_linearVelocity;
+        xspeed = linVel.x;
+        yspeed = linVel.y;
         x = position.x;
         y = position.y;
         myRotation = -myBody.getAngle();
