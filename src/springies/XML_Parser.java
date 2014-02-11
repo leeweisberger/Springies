@@ -104,9 +104,6 @@ public class XML_Parser {
 		masses.put(name, temp);
 	}
 
-	private void putSpringAttributes(String name, int index){
-
-	}
 	private void storeForcesInfo(Node tempNode, String[] wall, int i, Node node) {
 		if(tempNode.getNodeName().equals("gravity") )						
 			mygrav[i] = node.getNodeValue();

@@ -1,6 +1,5 @@
 package Objects;
 
-import springies.Model;
 import jgame.JGColor;
 
 public class Muscle extends Spring {
@@ -20,8 +19,19 @@ public class Muscle extends Spring {
 		myM2=m2;
 	}
 	
+	public void increaseAmplitude(){
+		myAmplitude += 0.05;
+	}
+	
+	public void decreaseAmplitude(){
+		if(myAmplitude > 0){
+			myAmplitude -= 0.05;
+		}
+	}
+	
 	@Override
 	public void move(){
+		System.out.println(myAmplitude);
 		springForces();
 		timer++;
 		setLength((myRestLength * myAmplitude * Math.sin(timer * (30 + (Math.PI / 2)))));

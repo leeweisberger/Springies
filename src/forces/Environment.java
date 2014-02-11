@@ -9,6 +9,7 @@ import springies.Model;
 import springies.Walls;
 import springies.XML_Parser;
 import Objects.Mass;
+import Objects.Muscle;
 
 public class Environment {
 	private List<String[]> wallForces;
@@ -18,7 +19,7 @@ public class Environment {
 	private Model mySpringy;
 	private WallRepulsion[] wallEnvironments = new WallRepulsion[4];
 	private Walls myWalls;
-	
+	private double muscleToggle = 1;
 
 	public Environment(Model mySpringiesClass, Walls walls){
 		super();
@@ -70,6 +71,20 @@ public class Environment {
 
 	public void update(Factory factory){
 		doToggle();
+		if(mySpringy.getKey(KeyEvent.VK_EQUALS)){
+			muscleToggle += 0.05;
+			for (Muscle myMuscle: factory.getMuscleList()){
+				myMuscle.increaseAmplitude();
+			}
+		}
+		if(mySpringy.getKey(KeyEvent.VK_MINUS)){
+			if (muscleToggle > 0){
+				muscleToggle -= 0.05;
+			}
+			for (Muscle myMuscle: factory.getMuscleList()){
+				myMuscle.decreaseAmplitude();
+			}
+		}
 		for(Mass mass:factory.getMassList()){
 			for(WallRepulsion wall:wallEnvironments){
 				wall.doForce(mass);
@@ -78,11 +93,7 @@ public class Environment {
 			viscosityEnvironment.doForce(mass);
 			centerOfMassEnvironment.doForce(mass,factory);
 		}
-		
-		
 	}
-
-
 
 	public void paintToggles() {
 
@@ -90,15 +101,14 @@ public class Environment {
 
 		if(gravityEnvironment.getToggle())mySpringy.drawString("Gravity On",mySpringy.displayWidth()/18, mySpringy.displayHeight()/15, -1);
 		if(viscosityEnvironment.getToggle())mySpringy.drawString("Viscosity On",mySpringy.displayWidth()/18, mySpringy.displayHeight()/9, -1);
-		//if(massToggle)mySpringy.drawString("Center of Mass On",mySpringy.displayWidth()/18, mySpringy.displayHeight()/6, -1);
+		if(centerOfMassEnvironment.getToggle())mySpringy.drawString("Center of Mass On",mySpringy.displayWidth()/18, mySpringy.displayHeight()/6, -1);
 		mySpringy.drawString("Walls that Repel: ", mySpringy.displayWidth()/18, mySpringy.displayHeight()/4.5,-1);
+		mySpringy.drawString("Muscles at " + muscleToggle + " times original power",mySpringy.displayWidth()/18,mySpringy.displayHeight()/3.5,-1);
 		for(int i=0;i<wallEnvironments.length;i++){
 			if(wallEnvironments[i].getToggle()){
-
 				mySpringy.drawString((i+1)+" ", mySpringy.displayWidth()/18+300 + i*50,mySpringy.displayHeight()/4.5,-1);
 			}
 		}
-		//drawString("Muscles at " + muscleToggle + " times original power",mySpringy.displayWidth()/18,mySpringy.displayHeight()/3.5,-1);
 	}
 
 }

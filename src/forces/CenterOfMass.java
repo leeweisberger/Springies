@@ -18,7 +18,7 @@ public class CenterOfMass extends GlobalForce {
 		double totaly = 0;
 		double totalMass = 0;
 		for (Mass mass: masses){
-			System.out.println(mass.x);
+//			System.out.println(mass.x);
 			totalMass += mass.getMass();
 			totalx += mass.x * mass.getMass();
 			totaly += mass.y * mass.getMass();

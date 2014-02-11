@@ -1,5 +1,6 @@
 package springies;
-
+import Objects.Muscle;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +78,6 @@ public class Model extends JGEngine{
 		}
 
 		addNewAssembly();
-
 		moveWalls();
 		WorldManager.getWorld().step(1f, 1);
 		moveObjects();
@@ -106,5 +106,6 @@ public class Model extends JGEngine{
 	public void paintFrame ()
 	{
 		myEnvironment.paintToggles();
+
 	}
 }

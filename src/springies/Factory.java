@@ -24,6 +24,7 @@ public class Factory extends JComponent{
 	private PhysicalObject[] myWallArray;
 	private static int assemblyNumber=100;
 	private List<Mass> myMassList = new ArrayList<Mass>();
+	private List<Muscle> myMuscleList = new ArrayList<Muscle>();
 	private JGColor[] myColors = new JGColor[]{JGColor.yellow,JGColor.red,JGColor.pink,JGColor.green,JGColor.cyan}; 
 	
 	public Factory(PhysicalObject[] wallarray){
@@ -72,12 +73,17 @@ public class Factory extends JComponent{
 			Mass m1 = m.get(muscle[0]+assemblyNumber);			
 			Mass m2 = m.get(muscle[1]+assemblyNumber);
 			System.out.println("m2" + muscle[4]);
-			new Muscle(m1, m2, Double.parseDouble(muscle[2]), Double.parseDouble(muscle[3]), Double.parseDouble(muscle[4]));
+			Muscle myMuscle = new Muscle(m1, m2, Double.parseDouble(muscle[2]), Double.parseDouble(muscle[3]), Double.parseDouble(muscle[4]));
+			myMuscleList.add(myMuscle);
 		}
 	}
 	
 	public List<Mass> getMassList(){
 		return myMassList;
+	}
+	
+	public List<Muscle> getMuscleList(){
+		return myMuscleList;
 	}
 
 	private File getNewFile() {

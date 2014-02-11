@@ -25,7 +25,6 @@ public class Spring extends PhysicalObjectRect{
 		myM2=m2;
 		springLength = rlength;
 		kValue = springiness;
-
 	}
 	
 	public Spring(Mass m1,double[] mousePos, double rlength){
